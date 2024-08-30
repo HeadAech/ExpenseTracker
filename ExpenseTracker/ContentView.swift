@@ -136,7 +136,8 @@ struct ContentView: View {
         
         .sheet(isPresented: $settingsSheetPresented){
             SettingsView()
-            .presentationDetents([.fraction(0.3)])
+            .presentationDetents([.fraction(0.4)])
+            .presentationDragIndicator(.visible)
         }
     }
 
@@ -299,38 +300,51 @@ struct AllExpensesView: View {
         NavigationStack {
             List{
                 ForEach(expenses) { expense in
-                    NavigationLink(destination: {
-                        if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
-                            ImageViewer(image: uiImage)
-                        }
-                    }) {
-                        HStack{
-                            VStack(alignment: .leading){
-                                Text(expense.name)
-                                    .font(.headline)
-                                
-                                Text(expense.value, format: .currency(code: "PLN"))
-                                    .bold()
-                                
-                                Text(expense.date, style: .relative)
-                                    .font(.caption)
-                            }
-                            Spacer()
+                    if expense.image != nil {
+                        NavigationLink(destination: {
                             if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .frame(width: 60, height: 60, alignment: .trailing)
-                                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                                ImageViewer(image: uiImage)
                             }
+                        }) {
+                            ExpenseListItem(expense: expense)
                         }
+                        
+                    } else {
+                        ExpenseListItem(expense: expense)
                     }
-                    
-                    
                 }
             }
         }
         .navigationTitle("Wszystkie wydatki")
         .navigationBarTitleDisplayMode(.large)
+    }
+
+}
+
+struct ExpenseListItem: View {
+    
+    @State var expense: Expense
+    
+    var body: some View {
+        HStack{
+            VStack(alignment: .leading){
+                Text(expense.name)
+                    .font(.headline)
+                
+                Text(expense.value, format: .currency(code: "PLN"))
+                    .bold()
+                
+                Text(expense.date, style: .relative)
+                    .font(.caption)
+            }
+            Spacer()
+            if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
+                Image(uiImage: uiImage)
+                    .resizable()
+                    .frame(width: 60, height: 60, alignment: .trailing)
+                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+            }
+        }
     }
 }
 

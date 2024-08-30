@@ -9,7 +9,7 @@ import SwiftUI
 import SwiftData
 
 struct SettingsView: View {
-    
+    @Environment(\.dismiss) private var dismiss
 //    @State private var isSummingDaily: Bool = true
     @AppStorage("settings:isSummingDaily") private var isSummingDaily: Bool = true
     
@@ -24,9 +24,9 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack{
             Form{
-                Picker("Sumowanie", selection: $selectedSumming) {
-                    Text("Codzienne").tag(Summing.daily)
-                    Text("Miesięczne").tag(Summing.monthly)
+                Picker("Suma wydatków", selection: $selectedSumming) {
+                    Text("Dzisiaj").tag(Summing.daily)
+                    Text("Ten miesiąc").tag(Summing.monthly)
                 }.onChange(of: selectedSumming, initial: false){
                     isSummingDaily = selectedSumming == .daily ? true : false
                     UserDefaults.standard.set(isSummingDaily, forKey: "settings:isSummingDaily")
@@ -34,6 +34,16 @@ struct SettingsView: View {
                 .onAppear {
                     selectedSumming = isSummingDaily ? .daily : .monthly
                 }
+            }
+            .navigationTitle("Ustawienia")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                ToolbarItem(placement: .topBarTrailing){
+                    Button("Gotowe") {
+                        dismiss()
+                    }
+                }
+
             }
         }
     }
