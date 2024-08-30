@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct ContentView: View {
     @Environment(\.modelContext) private var modelContext
@@ -17,13 +18,25 @@ struct ContentView: View {
            sort: \Expense.date, order: .forward
     ) private var todaysExpenses: [Expense]
     
+    // Query to fetch today's expenses
+    @Query(filter: Expense.currentMonthPredicate(),
+           sort: \Expense.date, order: .forward
+    ) private var thisMonthExpenses: [Expense]
+    
     // Calculate the sum of today's expenses
     private var todaysTotal: Double {
         todaysExpenses.reduce(0) { $0 + $1.value }
     }
     
+    // Calculate the sum of today's expenses
+    private var thisMonthTotal: Double {
+        thisMonthExpenses.reduce(0) { $0 + $1.value }
+    }
     
     @State var newExpenseSheetPresented: Bool = false
+    @State var settingsSheetPresented: Bool = false
+    
+    @AppStorage("settings:isSummingDaily") var isSummingDaily: Bool = true
     
     var body: some View {
         NavigationStack{
@@ -38,15 +51,17 @@ struct ContentView: View {
                 VStack{
                     HStack{
                     
-                        Text(todaysTotal, format: .currency(code: "PLN"))
+                        Text(isSummingDaily ? todaysTotal : thisMonthTotal, format: .currency(code: "PLN"))
                             .contentTransition(.numericText())
                             .font(.largeTitle).bold()
-                            .animation(.easeInOut, value: todaysTotal)
+                            .animation(.easeInOut, value: isSummingDaily ? todaysTotal : thisMonthTotal)
                         
                     }
                     
-                    Text("Dziś")
+                    Text(isSummingDaily ? "Dziś" : "Ten miesiąc")
                         .font(.footnote)
+                        .contentTransition(.numericText())
+                        .animation(.easeInOut, value: isSummingDaily)
                     
                     HStack{
                         Button("Dodaj wydatek"){
@@ -69,8 +84,11 @@ struct ContentView: View {
                             .offset(y: -25)
                             
                             if !expenses.isEmpty{
-                                Button("Pokaż wszystkie"){
-                                    
+                                NavigationLink{
+                                    AllExpensesView()
+                                        .navigationTransition(.automatic)
+                                } label: {
+                                    Label("Pokaż wszystkie", systemImage: "dollarsign.arrow.circlepath")
                                 }
                             }
                         } label: {
@@ -92,21 +110,19 @@ struct ContentView: View {
                             }).animation(.easeInOut, value: expenses.isEmpty)
                         }
                     }
-                    .offset(y: 70)
-                    
-                    
+                    .offset(y: 70) 
                     
                 }.offset(y:20)
                                 
-                
-                
             }
-            
-            
-            
+
             .toolbar{
                 ToolbarItem(placement: .navigationBarTrailing) {
-                    
+                    Button{
+                        settingsSheetPresented.toggle()
+                    } label: {
+                        Label("", systemImage: "gear")
+                    }
                 }
             }
         }
@@ -116,15 +132,13 @@ struct ContentView: View {
             
             .presentationDetents([.medium])
         }
-    }
-    
-    private func addItem() {
-        withAnimation {
-            let newItem = Expense(name: "Name", date: Date(), value: 140.0)
-            modelContext.insert(newItem)
+        
+        .sheet(isPresented: $settingsSheetPresented){
+            SettingsView()
+            .presentationDetents([.fraction(0.3)])
         }
     }
-    
+
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
@@ -179,15 +193,61 @@ struct NewExpenseSheet: View {
     
     @State private var isErrorAlertPresent: Bool = false
     
+    @State var selectedPhoto: PhotosPickerItem?
+    @State var selectedPhotoData: Data?
+    
     var body: some View {
         NavigationStack{
             Form{
-                TextField("Nazwa", text: $name)
-                DatePicker(selection: $date, label: {
-                    Label("Data", systemImage: "calendar")
-                })
-                TextField("Kwota", value: $amount, format: .currency(code: "PLN"))
-                    .keyboardType(.decimalPad)
+                HStack{
+                    Text("Nazwa")
+                    TextField("Nazwa", text: $name)
+                        .multilineTextAlignment(.trailing)
+                }
+                HStack{
+//                    Label("Data", systemImage: "calendar")
+                    Text("Data")
+                    DatePicker("", selection: $date)
+                }
+                HStack{
+                    Text("Kwota")
+                    TextField("Kwota", value: $amount, format: .currency(code: "PLN"))
+                        .keyboardType(.decimalPad)
+                        .multilineTextAlignment(.trailing)
+                        .onTapGesture {
+                            
+                        }
+                }
+                Section("Zdjęcie"){
+
+                        if let selectedPhotoData,
+                           let uiImage = UIImage(data: selectedPhotoData) {
+                            HStack{
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(maxWidth: .infinity, maxHeight: 300)
+                            }
+                        }
+
+                            PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()){
+                                Label("Dodaj zdjęcie", systemImage: "photo")
+                            }
+
+                        if selectedPhotoData != nil {
+                            Button(role: .destructive){
+                                withAnimation{
+                                    selectedPhoto = nil
+                                    selectedPhotoData = nil
+                                    
+                                }
+                            } label: {
+                                Label("Usuń zdjęcie", systemImage: "trash")
+                                    .foregroundStyle(.red)
+                            }
+                        }
+
+                }
             }
             .navigationTitle("Nowy wydatek")
             .navigationBarTitleDisplayMode(.inline)
@@ -205,16 +265,64 @@ struct NewExpenseSheet: View {
                             return
                         }
                         let expense = Expense(name: name, date: date, value: amount)
-                        modelContext.insert(expense)
-                        dismiss()
+                        if selectedPhotoData != nil {
+                            expense.image = selectedPhotoData
+                        }
+                        withAnimation{
+                            modelContext.insert(expense)
+                            dismiss()
+                        }
                     }
                     .alert("Kwota musi być większa niż zero.", isPresented: $isErrorAlertPresent){
                         Button("OK", role: .cancel) { }
                     }
                 }
             }
+            .task(id: selectedPhoto){
+                if let data = try? await selectedPhoto?.loadTransferable(type: Data.self){
+                    selectedPhotoData = data
+                }
+            }
         }
         
         
+    }
+}
+
+struct AllExpensesView: View {
+    @Environment(\.modelContext) private var modelContext
+    
+    @Query(sort: \Expense.date, order: .reverse) private var expenses: [Expense]
+    
+    var body: some View {
+        NavigationStack {
+            List{
+                ForEach(expenses) { expense in
+                    
+                    HStack{
+                        VStack(alignment: .leading){
+                            Text(expense.name)
+                                .font(.headline)
+                            
+                            Text(expense.value, format: .currency(code: "PLN"))
+                                .bold()
+                            
+                            Text(expense.date, style: .relative)
+                                .font(.caption)
+                        }
+                        Spacer()
+                        if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .frame(width: 60, height: 60, alignment: .trailing)
+                                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                        }
+                    }
+                    
+                }
+            }
+        }
+        .navigationTitle("Wszystkie wydatki")
+        .navigationBarTitleDisplayMode(.large)
     }
 }
