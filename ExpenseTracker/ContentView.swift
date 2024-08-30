@@ -86,7 +86,7 @@ struct ContentView: View {
                             if !expenses.isEmpty{
                                 NavigationLink{
                                     AllExpensesView()
-                                        .navigationTransition(.automatic)
+//                                        .navigationTransition(.automatic)
                                 } label: {
                                     Label("Pokaż wszystkie", systemImage: "dollarsign.arrow.circlepath")
                                 }
@@ -108,6 +108,7 @@ struct ContentView: View {
                                     newExpenseSheetPresented.toggle()
                                 })
                             }).animation(.easeInOut, value: expenses.isEmpty)
+                                .offset(y:15)
                         }
                     }
                     .offset(y: 70) 
@@ -153,10 +154,10 @@ struct ContentView: View {
     ContentView()
         .modelContainer(for: Expense.self, inMemory: true)
 }
-
-#Preview{
-    NewExpenseSheet()
-}
+//
+//#Preview{
+//    NewExpenseSheet()
+//}
 
 struct LastExpenseView: View {
     
@@ -298,31 +299,73 @@ struct AllExpensesView: View {
         NavigationStack {
             List{
                 ForEach(expenses) { expense in
-                    
-                    HStack{
-                        VStack(alignment: .leading){
-                            Text(expense.name)
-                                .font(.headline)
-                            
-                            Text(expense.value, format: .currency(code: "PLN"))
-                                .bold()
-                            
-                            Text(expense.date, style: .relative)
-                                .font(.caption)
-                        }
-                        Spacer()
+                    NavigationLink(destination: {
                         if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .frame(width: 60, height: 60, alignment: .trailing)
-                                .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            ImageViewer(image: uiImage)
+                        }
+                    }) {
+                        HStack{
+                            VStack(alignment: .leading){
+                                Text(expense.name)
+                                    .font(.headline)
+                                
+                                Text(expense.value, format: .currency(code: "PLN"))
+                                    .bold()
+                                
+                                Text(expense.date, style: .relative)
+                                    .font(.caption)
+                            }
+                            Spacer()
+                            if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .frame(width: 60, height: 60, alignment: .trailing)
+                                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                            }
                         }
                     }
+                    
                     
                 }
             }
         }
         .navigationTitle("Wszystkie wydatki")
         .navigationBarTitleDisplayMode(.large)
+    }
+}
+
+struct ExpenseDetailsView: View {
+    @Environment(\.modelContext) private var modelContext
+    
+    @State var expense: Expense
+    
+    var body: some View {
+        NavigationStack{
+            ZStack(alignment: .top){
+                Color.clear.edgesIgnoringSafeArea(.all)
+                
+                if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
+                    
+                    Image(uiImage: uiImage)
+                        .resizable()
+                        .ignoresSafeArea(.all)
+                    //We can use the LinearGradient in the mask modifier to fade it top to bottom
+                    .mask(LinearGradient(gradient: Gradient(stops: [
+                        .init(color: .black, location: 0),
+                        .init(color: .clear, location: 1),
+                        .init(color: .black, location: 1),
+                        .init(color: .clear, location: 1)
+                    ]), startPoint: .top, endPoint: .bottom))
+                    .padding()
+                    .frame(width: .infinity, height: 250)
+                } else {
+                    LinearGradient(gradient: Gradient(colors: [Color.red.opacity(0.8), Color.clear]), startPoint: .top, endPoint: .bottom)
+                        .frame(height:250)
+                        .ignoresSafeArea(.all)
+                }
+                
+                
+            }.ignoresSafeArea(.all)
+        }
     }
 }
