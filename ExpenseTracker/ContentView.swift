@@ -191,12 +191,14 @@ struct NewExpenseSheet: View {
     
     @State private var name: String = "Wydatek"
     @State private var date: Date = .now
-    @State private var amount: Double = 0.00
+    @State private var amount: String = "0,00"
     
     @State private var isErrorAlertPresent: Bool = false
     
     @State var selectedPhoto: PhotosPickerItem?
     @State var selectedPhotoData: Data?
+    
+    @FocusState var amountFocused: Bool
     
     var body: some View {
         NavigationStack{
@@ -213,12 +215,18 @@ struct NewExpenseSheet: View {
                 }
                 HStack{
                     Text("Kwota")
-                    TextField("Kwota", value: $amount, format: .currency(code: "PLN"))
+                    TextField("Kwota", text: $amount)
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.trailing)
                         .onTapGesture {
                             
                         }
+                        .onChange(of: amount) { newValue in
+                            updateAmount(from: newValue)
+                        }
+                        .focused($amountFocused)
+                    Text("PLN")
+                        
                 }
                 Section("Zdjęcie"){
 
@@ -251,6 +259,9 @@ struct NewExpenseSheet: View {
 
                 }
             }
+            .onAppear {
+                amountFocused.toggle()
+            }
             .navigationTitle("Nowy wydatek")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
@@ -262,11 +273,12 @@ struct NewExpenseSheet: View {
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button("Dodaj") {
-                        if amount <= 0 {
+                        var doubleAmount = Double(amount.replacingOccurrences(of: ",", with: "."))
+                        if doubleAmount ?? 0 <= 0 {
                             isErrorAlertPresent.toggle()
                             return
                         }
-                        let expense = Expense(name: name, date: date, value: amount)
+                        let expense = Expense(name: name, date: date, value: doubleAmount ?? 0)
                         if selectedPhotoData != nil {
                             expense.image = selectedPhotoData
                         }
@@ -289,6 +301,29 @@ struct NewExpenseSheet: View {
         
         
     }
+    // Updates the amount by building up from the input string
+    private func updateAmount(from newValue: String) {
+        // Allow only digits
+        let filtered = newValue.filter { "0123456789".contains($0) }
+        
+        if let numericValue = Int(filtered) {
+            // Update amount as an integer to shift the decimal place
+            amount = String(numericValue)
+            amount = formattedAmount()
+        } else {
+            amount = "0,00"
+        }
+    }
+    
+    // Converts the current amount to a formatted string with 2 decimal places
+    private func formattedAmount() -> String {
+        if let value = Double(amount) {
+            return String(format: "%.2f", value / 100).replacingOccurrences(of: ".", with: ",")
+            
+        }
+        return "0,00"
+    }
+
 }
 
 struct AllExpensesView: View {
