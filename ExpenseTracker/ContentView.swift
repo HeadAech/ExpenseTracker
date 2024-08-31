@@ -38,15 +38,19 @@ struct ContentView: View {
     
     @AppStorage("settings:isSummingDaily") var isSummingDaily: Bool = true
     
+    private var gradientColors: [Int: Color] = Colors().gradientColors
+    @AppStorage("settings:gradientColorIndex") var gradientColorIndex: Int = 0
+    
     var body: some View {
         NavigationStack{
             ZStack(alignment: .top){
                 //                Background
                 Color.clear.edgesIgnoringSafeArea(.all)
                 
-                LinearGradient(gradient: Gradient(colors: [Color.blue.opacity(0.8), Color.clear]), startPoint: .top, endPoint: .bottom)
+                LinearGradient(gradient: Gradient(colors: [Colors().getColor(for: gradientColorIndex).opacity(0.8), Color.clear]), startPoint: .top, endPoint: .bottom)
                     .frame(height:250)
                     .ignoresSafeArea(.all)
+                    .animation(.easeInOut, value: gradientColorIndex)
                 
                 VStack{
                     HStack{
@@ -139,6 +143,8 @@ struct ContentView: View {
             .presentationDetents([.fraction(0.4)])
             .presentationDragIndicator(.visible)
         }
+        .tint(Colors().getColor(for: gradientColorIndex))
+        .animation(.easeInOut, value: gradientColorIndex)
     }
 
     private func deleteItems(offsets: IndexSet) {
@@ -200,6 +206,9 @@ struct NewExpenseSheet: View {
     
     @FocusState var amountFocused: Bool
     
+    @State private var showCameraPicker: Bool = false
+    @State private var showPhotosPicker: Bool = false
+    
     var body: some View {
         NavigationStack{
             Form{
@@ -240,9 +249,25 @@ struct NewExpenseSheet: View {
                             }
                         }
 
-                            PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()){
-                                Label("Dodaj zdjęcie", systemImage: "photo")
-                            }
+                            
+                    Menu{
+//                        PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()){
+//                            Label("Dodaj zdjęcie", systemImage: "photo")
+//                        }
+                        Button {
+                            showPhotosPicker.toggle()
+                        } label: {
+                            Label("Wybierz zdjęcie", systemImage: "photo")
+                        }
+                        
+                        Button {
+                            showCameraPicker.toggle()
+                        } label: {
+                            Label("Zrób zdjęcie", systemImage: "camera.fill")
+                        }
+                    } label: {
+                        Label("Dodaj zdjęcie", systemImage: "photo")
+                    }
 
                         if selectedPhotoData != nil {
                             Button(role: .destructive){
@@ -273,7 +298,7 @@ struct NewExpenseSheet: View {
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
                     Button("Dodaj") {
-                        var doubleAmount = Double(amount.replacingOccurrences(of: ",", with: "."))
+                        let doubleAmount = Double(amount.replacingOccurrences(of: ",", with: "."))
                         if doubleAmount ?? 0 <= 0 {
                             isErrorAlertPresent.toggle()
                             return
@@ -292,13 +317,19 @@ struct NewExpenseSheet: View {
                     }
                 }
             }
+            .photosPicker(isPresented: $showPhotosPicker, selection: $selectedPhoto, matching: .images, photoLibrary: .shared())
             .task(id: selectedPhoto){
                 if let data = try? await selectedPhoto?.loadTransferable(type: Data.self){
                     selectedPhotoData = data
                 }
             }
+            
         }
-        
+        .fullScreenCover(isPresented: $showCameraPicker) {
+            CameraPickerView() { image in
+                selectedPhotoData = image.jpegData(compressionQuality: 0.8)
+            }
+        }
         
     }
     // Updates the amount by building up from the input string
@@ -324,6 +355,56 @@ struct NewExpenseSheet: View {
         return "0,00"
     }
 
+}
+
+struct CameraPickerView: UIViewControllerRepresentable {
+    
+    private var sourceType: UIImagePickerController.SourceType = .camera
+    private let onImagePicked: (UIImage) -> Void
+    
+    @Environment(\.presentationMode) private var presentationMode
+    
+    public init(onImagePicked: @escaping (UIImage) -> Void) {
+        self.onImagePicked = onImagePicked
+    }
+    
+    public func makeUIViewController(context: Context) -> UIImagePickerController {
+        let picker = UIImagePickerController()
+        picker.sourceType = self.sourceType
+        picker.delegate = context.coordinator
+        return picker
+    }
+    
+    public func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
+    
+    public func makeCoordinator() -> Coordinator {
+        Coordinator(
+            onDismiss: { self.presentationMode.wrappedValue.dismiss() },
+            onImagePicked: self.onImagePicked
+        )
+    }
+    
+    final public class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+        
+        private let onDismiss: () -> Void
+        private let onImagePicked: (UIImage) -> Void
+        
+        init(onDismiss: @escaping () -> Void, onImagePicked: @escaping (UIImage) -> Void) {
+            self.onDismiss = onDismiss
+            self.onImagePicked = onImagePicked
+        }
+        
+        public func imagePickerController(_ picker: UIImagePickerController,
+                                          didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
+            if let image = info[.originalImage] as? UIImage {
+                self.onImagePicked(image)
+            }
+            self.onDismiss()
+        }
+        public func imagePickerControllerDidCancel(_: UIImagePickerController) {
+            self.onDismiss()
+        }
+    }
 }
 
 struct AllExpensesView: View {
@@ -377,7 +458,7 @@ struct ExpenseListItem: View {
                 Image(uiImage: uiImage)
                     .resizable()
                     .frame(width: 60, height: 60, alignment: .trailing)
-                    .clipShape(RoundedRectangle(cornerRadius: 20, style: .continuous))
+                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
         }
     }
