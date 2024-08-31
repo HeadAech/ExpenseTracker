@@ -52,11 +52,22 @@ extension Expense {
     
     static func currentMonthPredicate() -> Predicate<Expense> {
         let calendar = Calendar.current
-        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: Date.now))! // Start of the current month
-        let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)! // End of the current month
-        
-        return #Predicate<Expense> { expense in
-            expense.date >= startOfMonth && expense.date <= endOfMonth
-        }
+            let now = Date()
+            
+            // Get the start of the current month (00:00:00)
+            let startOfMonthComponents = calendar.dateComponents([.year, .month], from: now)
+            guard let startOfMonth = calendar.date(from: startOfMonthComponents) else {
+                fatalError("Failed to calculate start of the month")
+            }
+            
+            // Get the end of the current month (23:59:59)
+            let endOfMonthComponents = DateComponents(month: 1, day: -1, hour: 23, minute: 59, second: 59)
+            guard let endOfMonth = calendar.date(byAdding: endOfMonthComponents, to: startOfMonth) else {
+                fatalError("Failed to calculate end of the month")
+            }
+            
+            return #Predicate<Expense> { expense in
+                expense.date >= startOfMonth && expense.date <= endOfMonth
+            }
     }
 }
