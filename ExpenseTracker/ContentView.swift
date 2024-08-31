@@ -80,6 +80,15 @@ struct ContentView: View {
                             List{
                                 ForEach(expenses){ expense in
                                     LastExpenseView(date: expense.date, name: expense.name, amount: expense.value)
+                                        .contextMenu{
+                                            Button(role: .destructive){
+                                                withAnimation {
+                                                    modelContext.delete(expense)
+                                                }
+                                            } label: {
+                                                Label("Usuń", systemImage: "trash")
+                                            }
+                                        }
                                 }
                                 .onDelete(perform: deleteItems)
                             }
@@ -435,17 +444,28 @@ struct AllExpensesView: View {
                     } else {
                         ExpenseListItem(expense: expense)
                     }
+                        
                 }
+                .onDelete(perform: deleteItems)
+                
             }
+            
         }
         .navigationTitle("Wszystkie wydatki")
         .navigationBarTitleDisplayMode(.large)
     }
-
+    
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(expenses[index])
+            }
+        }
+    }
 }
 
 struct ExpenseListItem: View {
-    
+    @Environment(\.modelContext) private var modelContext
     @State var expense: Expense
     
     var body: some View {
@@ -466,6 +486,15 @@ struct ExpenseListItem: View {
                     .resizable()
                     .frame(width: 60, height: 60, alignment: .trailing)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
+            }
+        }
+        .contextMenu{
+            Button(role: .destructive){
+                withAnimation {
+                    modelContext.delete(expense)
+                }
+            } label: {
+                Label("Usuń", systemImage: "trash")
             }
         }
     }
