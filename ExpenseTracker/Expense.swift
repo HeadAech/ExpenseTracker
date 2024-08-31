@@ -10,26 +10,17 @@ import SwiftData
 
 @Model
 class Expense {
-    var id: String
     var name: String
     var date: Date
     var value: Double
     var image: Data?
     
-    init(id: String = UUID().uuidString, name: String, date: Date, value: Double) {
-        self.id = id
+    init(name: String, date: Date, value: Double) {
         self.name = name
         self.date = date
         self.value = value
     }
-    
-    func getExpense(id: String) -> Expense? {
-        if self.id == id {
-            return self
-        } else {
-            return nil
-        }
-    }
+ 
 }
 
 extension Expense {
