@@ -199,6 +199,7 @@ struct NewExpenseSheet: View {
     @State private var date: Date = .now
     @State private var amount: String = "0,00"
     
+    @State private var errorAlertMessage: String = "Kwota musi być większa niż zero."
     @State private var isErrorAlertPresent: Bool = false
     
     @State var selectedPhoto: PhotosPickerItem?
@@ -266,7 +267,7 @@ struct NewExpenseSheet: View {
                             Label("Zrób zdjęcie", systemImage: "camera.fill")
                         }
                     } label: {
-                        Label("Dodaj zdjęcie", systemImage: "photo")
+                        Label("Dodaj zdjęcie...", systemImage: "photo.badge.plus.fill")
                     }
 
                         if selectedPhotoData != nil {
@@ -300,6 +301,12 @@ struct NewExpenseSheet: View {
                     Button("Dodaj") {
                         let doubleAmount = Double(amount.replacingOccurrences(of: ",", with: "."))
                         if doubleAmount ?? 0 <= 0 {
+                            errorAlertMessage = "Kwota musi być większa niż zero."
+                            isErrorAlertPresent.toggle()
+                            return
+                        }
+                        if date > Date() {
+                            errorAlertMessage = "Data nie może być z przyszłości."
                             isErrorAlertPresent.toggle()
                             return
                         }
@@ -312,7 +319,7 @@ struct NewExpenseSheet: View {
                             dismiss()
                         }
                     }
-                    .alert("Kwota musi być większa niż zero.", isPresented: $isErrorAlertPresent){
+                    .alert(errorAlertMessage, isPresented: $isErrorAlertPresent){
                         Button("OK", role: .cancel) { }
                     }
                 }
