@@ -35,11 +35,14 @@ struct ContentView: View {
     
     @State var newExpenseSheetPresented: Bool = false
     @State var settingsSheetPresented: Bool = false
+
     
     @AppStorage("settings:isSummingDaily") var isSummingDaily: Bool = true
     
     private var gradientColors: [Int: Color] = Colors().gradientColors
     @AppStorage("settings:gradientColorIndex") var gradientColorIndex: Int = 0
+    
+    @State private var showingNoExpensesView: Bool = true
     
     var body: some View {
         NavigationStack{
@@ -75,7 +78,7 @@ struct ContentView: View {
                     
                     .offset(y:20)
                     
-                    VStack{
+                    LazyVStack{
                         GroupBox{
                             List{
                                 ForEach(expenses){ expense in
@@ -91,6 +94,7 @@ struct ContentView: View {
                                         }
                                 }
                                 .onDelete(perform: deleteItems)
+
                             }
                             .scrollDisabled(true)
                             .scrollContentBackground(.hidden)
@@ -110,21 +114,49 @@ struct ContentView: View {
                         .frame(width: 350, height: 250)
                         
                     }
+                    .onChange(of: expenses.isEmpty, { oldValue, newValue in
+                        withAnimation{
+                            showingNoExpensesView = expenses.isEmpty
+                        }
+                    })
+                    .onAppear {
+                        withAnimation {
+                            showingNoExpensesView = expenses.isEmpty
+                        }
+                    }
                     .overlay{
-                        if expenses.isEmpty{
+                        if showingNoExpensesView{
                             ContentUnavailableView(label: {
                                 Label("Brak wydatków", systemImage: "dollarsign.square.fill")
                             }, description: {
-                                Text("Dodaj nowy wydatek, aby zobaczyć listę wydatków.")
+                                Text("Dodaj nowy wydatek, aby zobaczyć listę wydatków oraz statystyki.")
                             }, actions: {
                                 Button("Dodaj", action: {
                                     newExpenseSheetPresented.toggle()
                                 })
-                            }).animation(.easeInOut, value: expenses.isEmpty)
+                            }).animation(.easeInOut, value: showingNoExpensesView)
                                 .offset(y:15)
                         }
                     }
-                    .offset(y: 70) 
+                    .offset(y: 50)
+                    
+//                    Charts
+                    LazyHStack {
+                        GroupBox{
+                            LastAndCurrentMonthExpensesChart()
+                        } label: {
+                            Label("Porównanie", systemImage: "chart.bar.xaxis")
+                        }
+                        .frame(width: 172, height: 200)
+                        
+                        GroupBox{
+                            BudgetView()
+                        } label: {
+                            Label("Budżet", systemImage: "dollarsign")
+                        }
+                        .frame(width: 172, height: 200)
+                        
+                    }.offset(y: -25)
                     
                 }.offset(y:20)
                                 
@@ -373,55 +405,6 @@ struct NewExpenseSheet: View {
 
 }
 
-struct CameraPickerView: UIViewControllerRepresentable {
-    
-    private var sourceType: UIImagePickerController.SourceType = .camera
-    private let onImagePicked: (UIImage) -> Void
-    
-    @Environment(\.presentationMode) private var presentationMode
-    
-    public init(onImagePicked: @escaping (UIImage) -> Void) {
-        self.onImagePicked = onImagePicked
-    }
-    
-    public func makeUIViewController(context: Context) -> UIImagePickerController {
-        let picker = UIImagePickerController()
-        picker.sourceType = self.sourceType
-        picker.delegate = context.coordinator
-        return picker
-    }
-    
-    public func updateUIViewController(_ uiViewController: UIImagePickerController, context: Context) {}
-    
-    public func makeCoordinator() -> Coordinator {
-        Coordinator(
-            onDismiss: { self.presentationMode.wrappedValue.dismiss() },
-            onImagePicked: self.onImagePicked
-        )
-    }
-    
-    final public class Coordinator: NSObject, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-        
-        private let onDismiss: () -> Void
-        private let onImagePicked: (UIImage) -> Void
-        
-        init(onDismiss: @escaping () -> Void, onImagePicked: @escaping (UIImage) -> Void) {
-            self.onDismiss = onDismiss
-            self.onImagePicked = onImagePicked
-        }
-        
-        public func imagePickerController(_ picker: UIImagePickerController,
-                                          didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey: Any]) {
-            if let image = info[.originalImage] as? UIImage {
-                self.onImagePicked(image)
-            }
-            self.onDismiss()
-        }
-        public func imagePickerControllerDidCancel(_: UIImagePickerController) {
-            self.onDismiss()
-        }
-    }
-}
 
 struct AllExpensesView: View {
     @Environment(\.modelContext) private var modelContext

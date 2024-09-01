@@ -71,4 +71,26 @@ extension Expense {
                 expense.date >= startOfMonth && expense.date <= endOfMonth
             }
     }
+    
+    static func lastMonthPredicate() -> Predicate<Expense> {
+        let calendar = Calendar.current
+        let now = Date()
+        
+        // Get the start of the previous month (00:00:00)
+        var startOfMonthComponents = calendar.dateComponents([.year, .month], from: now)
+        startOfMonthComponents.month = (startOfMonthComponents.month ?? 0) - 1
+        guard let startOfPreviousMonth = calendar.date(from: startOfMonthComponents) else {
+            fatalError("Failed to calculate start of the previous month")
+        }
+        
+        // Get the end of the previous month (23:59:59)
+        let endOfPreviousMonthComponents = DateComponents(month: 1, day: -1, hour: 23, minute: 59, second: 59)
+        guard let endOfPreviousMonth = calendar.date(byAdding: endOfPreviousMonthComponents, to: startOfPreviousMonth) else {
+            fatalError("Failed to calculate end of the previous month")
+        }
+        
+        return #Predicate<Expense> { expense in
+            expense.date >= startOfPreviousMonth && expense.date <= endOfPreviousMonth
+        }
+    }
 }
