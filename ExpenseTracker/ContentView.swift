@@ -9,7 +9,13 @@ import SwiftUI
 import SwiftData
 import PhotosUI
 
+enum Pages {
+    case home, stats, history
+}
+
 struct ContentView: View {
+    @Namespace private var namespace
+    
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Expense.date, order: .reverse)  var expenses: [Expense]
     
@@ -35,7 +41,7 @@ struct ContentView: View {
     
     @State var newExpenseSheetPresented: Bool = false
     @State var settingsSheetPresented: Bool = false
-
+    
     
     @AppStorage("settings:isSummingDaily") var isSummingDaily: Bool = true
     
@@ -43,6 +49,8 @@ struct ContentView: View {
     @AppStorage("settings:gradientColorIndex") var gradientColorIndex: Int = 0
     
     @State private var showingNoExpensesView: Bool = true
+    
+    @State private var page: Pages = .home
     
     var body: some View {
         NavigationStack{
@@ -56,92 +64,170 @@ struct ContentView: View {
                     .animation(.easeInOut, value: gradientColorIndex)
                 
                 VStack{
-                    HStack{
-                    
-                        Text(isSummingDaily ? todaysTotal : thisMonthTotal, format: .currency(code: "PLN"))
+                    VStack{
+                        HStack{
+                            
+                            Text(isSummingDaily ? todaysTotal : thisMonthTotal, format: .currency(code: "PLN"))
+                                .contentTransition(.numericText())
+                                .font(.largeTitle).bold()
+                                .animation(.easeInOut, value: isSummingDaily ? todaysTotal : thisMonthTotal)
+                            
+                        }
+                        
+                        Text(isSummingDaily ? "Dziś" : "Ten miesiąc")
+                            .font(.footnote)
                             .contentTransition(.numericText())
-                            .font(.largeTitle).bold()
-                            .animation(.easeInOut, value: isSummingDaily ? todaysTotal : thisMonthTotal)
+                            .animation(.easeInOut, value: isSummingDaily)
                         
-                    }
+                        HStack{
+                            
+                            
+                        }
+                    }.offset(y: 0)
                     
-                    Text(isSummingDaily ? "Dziś" : "Ten miesiąc")
-                        .font(.footnote)
-                        .contentTransition(.numericText())
-                        .animation(.easeInOut, value: isSummingDaily)
                     
                     HStack{
-                        Button("Dodaj wydatek"){
-                            newExpenseSheetPresented.toggle()
-                        }.buttonStyle(.borderedProminent)
-                    }
-                    
-                    .offset(y:20)
-                    
-                    LazyVStack{
-                        GroupBox{
-                            LastExpensesView()
+                        Button {
+                            withAnimation{
+                                page = .stats
+                            }
                         } label: {
-                            Label("Ostatnie", systemImage: "clock.arrow.circlepath")
+                            Label("Statystyki", systemImage: "chart.bar.xaxis")
+                                .labelStyle(VerticalLabelStyle())
                         }
-                        .frame(width: 350, height: 250)
+                        .buttonStyle(NavigationButtonStyle(isPressed: page == .stats))
                         
-                    }
-                    .onChange(of: expenses.isEmpty, { oldValue, newValue in
-                        withAnimation{
-                            showingNoExpensesView = expenses.isEmpty
-                        }
-                    })
-                    .onAppear {
-                        withAnimation {
-                            showingNoExpensesView = expenses.isEmpty
-                        }
-                    }
-                    .overlay{
-                        if showingNoExpensesView{
-                            ContentUnavailableView(label: {
-                                Label("Brak wydatków", systemImage: "dollarsign.square.fill")
-                            }, description: {
-                                Text("Dodaj nowy wydatek, aby zobaczyć listę wydatków oraz statystyki.")
-                            }, actions: {
-                                Button("Dodaj", action: {
-                                    newExpenseSheetPresented.toggle()
-                                })
-                            }).animation(.easeInOut, value: showingNoExpensesView)
-                                .offset(y:15)
-                        }
-                    }
-                    .offset(y: 50)
-                    
-//                    Charts
-                    LazyHStack {
-                        GroupBox{
-                            LastAndCurrentMonthExpensesChart()
+                        Button {
+                            withAnimation{
+                                page = .home
+                            }
                         } label: {
-                            Label("Porównanie", systemImage: "chart.bar.xaxis")
+                            Label("Główna", systemImage: "house.fill")
+                                .labelStyle(VerticalLabelStyle())
                         }
-                        .frame(width: 172, height: 200)
+                        .buttonStyle(NavigationButtonStyle(isPressed: page == .home))
                         
-                        GroupBox{
-                            BudgetView()
+                        Button {
+                            withAnimation{
+                                page = .history
+                            }
                         } label: {
-                            Label("Budżet", systemImage: "dollarsign")
+                            Label("Historia", systemImage: "clock.arrow.circlepath")
+                                .labelStyle(VerticalLabelStyle())
                         }
-                        .frame(width: 172, height: 200)
-                        
-                    }.offset(y: -25)
+                        .buttonStyle(NavigationButtonStyle(isPressed: page == .history))
+                    }.offset(y: 20)
                     
-                }.offset(y:20)
+                    LazyVStack {
+                        if page == .home {
+                            LazyVStack{
                                 
+                                GroupBox{
+                                    LastExpensesView()
+                                    
+                                    if !expenses.isEmpty{
+                                        Button{
+                                            withAnimation{
+                                                page = .history
+                                            }
+                                        } label: {
+                                            Label("Pokaż wszystkie", systemImage: "dollarsign.arrow.circlepath")
+                                        }
+                                    }
+                                } label: {
+                                    Label("Ostatnie", systemImage: "clock.arrow.circlepath")
+                                }
+                                .overlay{
+                                    if showingNoExpensesView{
+                                        ContentUnavailableView(label: {
+                                            Label("Brak wydatków", systemImage: "dollarsign.square.fill")
+                                        }, description: {
+                                            Text("Dodaj nowy wydatek, aby zobaczyć listę wydatków oraz statystyki.")
+                                        }, actions: {
+                                            Button("Dodaj", action: {
+                                                newExpenseSheetPresented.toggle()
+                                            })
+                                        }).animation(.easeInOut, value: showingNoExpensesView)
+                                            .offset(y:15)
+                                    }
+                                }
+                                .frame(width: 350, height: 250)
+                                
+                                
+                                //    Charts
+                                LazyHStack {
+                                    
+                                    GroupBox{
+                                        LastAndCurrentMonthExpensesChart()
+                                        
+                                    } label: {
+                                        Label("Porównanie", systemImage: "chart.bar.xaxis")
+                                    }
+                                    .frame(width: 172, height: 200)
+                                    .onTapGesture {
+                                        withAnimation{
+                                            page = .stats
+                                        }
+                                    }
+                                    
+                                    GroupBox{
+                                        BudgetView()
+                                    } label: {
+                                        Label("Budżet", systemImage: "dollarsign")
+                                    }
+                                    .frame(width: 172, height: 200)
+                                    
+                                }
+                            }
+                            .onChange(of: expenses.isEmpty, { oldValue, newValue in
+                                withAnimation{
+                                    showingNoExpensesView = expenses.isEmpty
+                                }
+                            })
+                            .onAppear {
+                                withAnimation {
+                                    showingNoExpensesView = expenses.isEmpty
+                                }
+                            }
+                            .transition(.blurReplace)
+                            .animation(.easeInOut, value: page)
+                            
+                            
+                        } else if page == .stats {
+                            StatisticsView()
+                                .transition(.blurReplace)
+                                .animation(.easeInOut, value: page)
+                            
+                        } else if page == .history {
+                            AllExpensesView()
+                                .transition(.blurReplace)
+                                .animation(.easeInOut, value: page)
+                        }
+                        
+                    }
+                    .offset(y:30)
+                }
+                
             }
-
+            
             .toolbar{
-                ToolbarItem(placement: .navigationBarTrailing) {
+                ToolbarItem(placement: .topBarLeading) {
                     Button{
                         settingsSheetPresented.toggle()
                     } label: {
                         Label("", systemImage: "gear")
                     }
+                }
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button{
+                        newExpenseSheetPresented.toggle()
+                    } label: {
+                        HStack{
+                            Text("Dodaj")
+                            Image(systemName: "plus")
+                        }
+                    }.buttonStyle(.bordered)
                 }
             }
         }
@@ -149,13 +235,13 @@ struct ContentView: View {
         .sheet(isPresented: $newExpenseSheetPresented) {
             NewExpenseSheet()
             
-            .presentationDetents([.medium])
+                .presentationDetents([.medium])
         }
         
         .sheet(isPresented: $settingsSheetPresented){
             SettingsView()
-            .presentationDetents([.fraction(0.4)])
-            .presentationDragIndicator(.visible)
+                .presentationDetents([.fraction(0.4)])
+                .presentationDragIndicator(.visible)
         }
         .tint(Colors().getColor(for: gradientColorIndex))
         .animation(.easeInOut, value: gradientColorIndex)
@@ -201,7 +287,7 @@ struct NewExpenseSheet: View {
                         .multilineTextAlignment(.trailing)
                 }
                 HStack{
-//                    Label("Data", systemImage: "calendar")
+                    //                    Label("Data", systemImage: "calendar")
                     Text("Data")
                     DatePicker("", selection: $date)
                 }
@@ -218,25 +304,25 @@ struct NewExpenseSheet: View {
                         }
                         .focused($amountFocused)
                     Text("PLN")
-                        
+                    
                 }
                 Section("Zdjęcie"){
-
-                        if let selectedPhotoData,
-                           let uiImage = UIImage(data: selectedPhotoData) {
-                            HStack{
-                                Image(uiImage: uiImage)
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(maxWidth: .infinity, maxHeight: 300)
-                            }
+                    
+                    if let selectedPhotoData,
+                       let uiImage = UIImage(data: selectedPhotoData) {
+                        HStack{
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: .infinity, maxHeight: 300)
                         }
-
-                            
+                    }
+                    
+                    
                     Menu{
-//                        PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()){
-//                            Label("Dodaj zdjęcie", systemImage: "photo")
-//                        }
+                        //                        PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()){
+                        //                            Label("Dodaj zdjęcie", systemImage: "photo")
+                        //                        }
                         Button {
                             showPhotosPicker.toggle()
                         } label: {
@@ -251,20 +337,20 @@ struct NewExpenseSheet: View {
                     } label: {
                         Label("Dodaj zdjęcie...", systemImage: "photo.badge.plus.fill")
                     }
-
-                        if selectedPhotoData != nil {
-                            Button(role: .destructive){
-                                withAnimation{
-                                    selectedPhoto = nil
-                                    selectedPhotoData = nil
-                                    
-                                }
-                            } label: {
-                                Label("Usuń zdjęcie", systemImage: "trash")
-                                    .foregroundStyle(.red)
+                    
+                    if selectedPhotoData != nil {
+                        Button(role: .destructive){
+                            withAnimation{
+                                selectedPhoto = nil
+                                selectedPhotoData = nil
+                                
                             }
+                        } label: {
+                            Label("Usuń zdjęcie", systemImage: "trash")
+                                .foregroundStyle(.red)
                         }
-
+                    }
+                    
                 }
             }
             .onAppear {
@@ -343,5 +429,31 @@ struct NewExpenseSheet: View {
         }
         return "0,00"
     }
+    
+}
 
+struct VerticalLabelStyle: LabelStyle {
+    func makeBody(configuration: Configuration) -> some View {
+        VStack {
+            configuration.icon.font(.headline)
+            configuration.title.font(.footnote)
+        }
+    }
+}
+
+struct NavigationButtonStyle: ButtonStyle {
+    
+    var isPressed: Bool
+    
+    @AppStorage("settings:gradientColorIndex") var gradientColorIndex: Int = 0
+    
+    func makeBody(configuration: Configuration) -> some View {
+        configuration.label
+            .frame(width: 70, height: 20)
+            .padding()
+            .background(isPressed ?
+                        Colors().getColor(for: gradientColorIndex).opacity(0.8)
+                        : Colors().getColor(for: gradientColorIndex).opacity(0.4))
+            .clipShape(.buttonBorder)
+    }
 }

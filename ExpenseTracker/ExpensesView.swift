@@ -28,19 +28,13 @@ struct LastExpensesView: View {
                     }
             }
             .onDelete(perform: deleteItems)
-
+            
         }
         .scrollDisabled(true)
         .scrollContentBackground(.hidden)
         .offset(y: -25)
         
-        if !expenses.isEmpty{
-            NavigationLink{
-                AllExpensesView()
-            } label: {
-                Label("Pokaż wszystkie", systemImage: "dollarsign.arrow.circlepath")
-            }
-        }
+        
     }
     
     private func deleteItems(offsets: IndexSet) {
@@ -84,8 +78,15 @@ struct AllExpensesView: View {
     
     @Query(sort: \Expense.date, order: .reverse) private var expenses: [Expense]
     
+    @State private var showingNoExpensesView: Bool = true
+    
     var body: some View {
-        NavigationStack {
+        NavigationStack{
+//            HStack{
+//                Text("Wszystkie wydatki")
+//                    .font(.title)
+//                Spacer()
+//            }
             List{
                 ForEach(expenses) { expense in
                     if expense.image != nil {
@@ -100,15 +101,38 @@ struct AllExpensesView: View {
                     } else {
                         ExpenseListItem(expense: expense)
                     }
-                        
+                    
                 }
                 .onDelete(perform: deleteItems)
                 
             }
+            //                    .listStyle(PlainListStyle())
+            .padding(-30)
+            .scrollContentBackground(.hidden)
             
-        }
-        .navigationTitle("Wszystkie wydatki")
-        .navigationBarTitleDisplayMode(.large)
+            .frame(height: UIScreen.screenHeight/2)
+            .overlay {
+                if showingNoExpensesView{
+                    ContentUnavailableView(label: {
+                        Label("Brak wydatków", systemImage: "dollarsign.square.fill")
+                    }, description: {
+                        Text("Dodaj nowy wydatek, aby zobaczyć listę wydatków oraz statystyki.")
+                    }).animation(.easeInOut, value: showingNoExpensesView)
+                        .offset(y:15)
+                }
+            }
+            .onChange(of: expenses.isEmpty, { oldValue, newValue in
+                withAnimation{
+                    showingNoExpensesView = expenses.isEmpty
+                }
+            })
+            .onAppear {
+                withAnimation {
+                    showingNoExpensesView = expenses.isEmpty
+                }
+            }
+        
+        }.padding(20)
     }
     
     private func deleteItems(offsets: IndexSet) {
@@ -172,14 +196,14 @@ struct ExpenseDetailsView: View {
                         .resizable()
                         .ignoresSafeArea(.all)
                     //We can use the LinearGradient in the mask modifier to fade it top to bottom
-                    .mask(LinearGradient(gradient: Gradient(stops: [
-                        .init(color: .black, location: 0),
-                        .init(color: .clear, location: 1),
-                        .init(color: .black, location: 1),
-                        .init(color: .clear, location: 1)
-                    ]), startPoint: .top, endPoint: .bottom))
-                    .padding()
-                    .frame(width: .infinity, height: 250)
+                        .mask(LinearGradient(gradient: Gradient(stops: [
+                            .init(color: .black, location: 0),
+                            .init(color: .clear, location: 1),
+                            .init(color: .black, location: 1),
+                            .init(color: .clear, location: 1)
+                        ]), startPoint: .top, endPoint: .bottom))
+                        .padding()
+                        .frame(width: .infinity, height: 250)
                 } else {
                     LinearGradient(gradient: Gradient(colors: [Color.red.opacity(0.8), Color.clear]), startPoint: .top, endPoint: .bottom)
                         .frame(height:250)
