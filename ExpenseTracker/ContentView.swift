@@ -50,7 +50,8 @@ struct ContentView: View {
     
     @State private var showingNoExpensesView: Bool = true
     
-    @State private var page: Pages = .home
+//    Default page 
+    @State private var page: Pages = .stats
     
     var body: some View {
         NavigationStack{
