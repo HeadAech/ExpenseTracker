@@ -193,11 +193,11 @@ struct LastWeekExpensesChart: View {
             return 0.0 // Return 0 if the list is empty to avoid division by zero
         }
         
-        let totalValue = expenses.reduce(0.0) { (result, expense) -> Double in
+        let totalValue = lastWeekExpenses.reduce(0.0) { (result, expense) -> Double in
             return result + expense.value
         }
         
-        return totalValue / Double(expenses.count)
+        return totalValue / Double(lastWeekExpenses.count)
     }
     
     var body: some View {
@@ -230,8 +230,14 @@ struct LastWeekExpensesChart: View {
                                         .font(.headline)
                                     Spacer()
                                 }
-                                Text(currentActiveExpense.value, format: .currency(code: "PLN"))
-                                    .font(.callout)
+                                HStack{
+                                    Text(currentActiveExpense.value, format: .currency(code: "PLN"))
+                                        .font(.callout)
+                                    Spacer()
+                                }
+                                HStack{
+                                    Text(currentActiveExpense.date.formatted(.dateTime.month().day().year()))
+                                }
                             }
                             .padding(.vertical, 10)
                             .padding(.horizontal, 4)
@@ -436,8 +442,14 @@ struct DateRangeExpensesChart: View {
                                         .font(.headline)
                                     Spacer()
                                 }
-                                Text(currentActiveExpense.value, format: .currency(code: "PLN"))
-                                    .font(.callout)
+                                HStack{
+                                    Text(currentActiveExpense.value, format: .currency(code: "PLN"))
+                                        .font(.callout)
+                                    Spacer()
+                                }
+                                HStack{
+                                    Text(currentActiveExpense.date.formatted(.dateTime.month().day().year()))
+                                }
                             }
                             .padding(.vertical, 10)
                             .padding(.horizontal, 4)

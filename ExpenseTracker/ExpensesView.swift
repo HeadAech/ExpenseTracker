@@ -15,6 +15,8 @@ struct LastExpensesView: View {
     
     var body: some View {
         List{
+//            Testing
+//            LastExpenseItem(date: .now, name: "Wydatek", amount: 10000)
             ForEach(expenses){ expense in
                 LastExpenseItem(date: expense.date, name: expense.name, amount: expense.value)
                     .contextMenu{
@@ -30,9 +32,11 @@ struct LastExpensesView: View {
             .onDelete(perform: deleteItems)
             
         }
+        .padding(-10)
         .scrollDisabled(true)
         .scrollContentBackground(.hidden)
         .offset(y: -25)
+        .animation(.smooth, value: expenses)
         
         
     }
@@ -54,12 +58,15 @@ struct LastExpenseItem: View {
     @State var amount: Double
     
     var body: some View {
-        withAnimation{
+        
             VStack{
                 HStack{
                     Text(name)
                     Spacer()
                     Text(amount, format: .currency(code: "PLN"))
+                        .font(.headline)
+                        .lineLimit(1)
+                      .truncationMode(.tail)
                 }
                 HStack{
                     Text(date.formatted(date: .numeric, time: .shortened))
@@ -67,8 +74,9 @@ struct LastExpenseItem: View {
                     Spacer()
                 }
             }
+            .listRowBackground(Color.clear)
             .listRowInsets(EdgeInsets())
-        }
+        
     }
 }
 
@@ -131,6 +139,7 @@ struct AllExpensesView: View {
                     showingNoExpensesView = expenses.isEmpty
                 }
             }
+            .animation(.smooth, value: expenses)
         
         }.padding(20)
     }
@@ -177,6 +186,7 @@ struct ExpenseListItem: View {
                 Label("Usuń", systemImage: "trash")
             }
         }
+
     }
 }
 

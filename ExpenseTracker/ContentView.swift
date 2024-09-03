@@ -51,7 +51,7 @@ struct ContentView: View {
     @State private var showingNoExpensesView: Bool = true
     
 //    Default page 
-    @State private var page: Pages = .stats
+    @State private var page: Pages = .home
     
     var body: some View {
         NavigationStack{
@@ -153,7 +153,11 @@ struct ContentView: View {
                                     }
                                 }
                                 .frame(width: 350, height: 250)
-                                
+                                .onTapGesture {
+                                    withAnimation {
+                                        page = .history
+                                    }
+                                }
                                 
                                 //    Charts
                                 LazyHStack {
