@@ -1,0 +1,193 @@
+{
+  "sourceLanguage" : "pl",
+  "strings" : {
+    "" : {
+
+    },
+    "Anuluj" : {
+
+    },
+    "Brak danych" : {
+
+    },
+    "Brak wydatków" : {
+
+    },
+    "Budżet" : {
+
+    },
+    "Data" : {
+
+    },
+    "Dodaj" : {
+
+    },
+    "Dodaj nowy wydatek, aby zobaczyć listę wydatków oraz statystyki." : {
+
+    },
+    "Dodaj wydatki, aby zobaczyć wykres." : {
+
+    },
+    "Dodaj zdjęcie..." : {
+
+    },
+    "Dzień" : {
+
+    },
+    "Dzisiaj" : {
+
+    },
+    "Edycja" : {
+
+    },
+    "Edytuj" : {
+
+    },
+    "Główna" : {
+
+    },
+    "Gotowe" : {
+
+    },
+    "Historia" : {
+
+    },
+    "Kolor gradientu" : {
+
+    },
+    "Kwota" : {
+
+    },
+    "Last Month" : {
+
+    },
+    "Motyw" : {
+
+    },
+    "Nazwa" : {
+
+    },
+    "Nowy wydatek" : {
+
+    },
+    "OK" : {
+
+    },
+    "Ostatnie" : {
+
+    },
+    "Ostatnie 7 dni" : {
+
+    },
+    "PLN" : {
+
+    },
+    "Podgląd" : {
+
+    },
+    "Pokaż wszystkie" : {
+
+    },
+    "Porównanie" : {
+
+    },
+    "Pozostało" : {
+
+    },
+    "Średnia" : {
+
+    },
+    "Średnia wydatków" : {
+
+    },
+    "Statystyki" : {
+
+    },
+    "Suma" : {
+
+    },
+    "Suma wydatków" : {
+
+    },
+    "Ten miesiąc" : {
+
+    },
+    "This Month" : {
+
+    },
+    "this_month" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This month"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten miesiąc"
+          }
+        }
+      }
+    },
+    "today" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dzisiaj"
+          }
+        }
+      }
+    },
+    "Total" : {
+
+    },
+    "Ustawienia" : {
+
+    },
+    "Usuń" : {
+
+    },
+    "Usuń zdjęcie" : {
+
+    },
+    "Widok" : {
+
+    },
+    "Wybierz zdjęcie" : {
+
+    },
+    "Wydano" : {
+
+    },
+    "Zakres dat" : {
+
+    },
+    "Zapisz" : {
+
+    },
+    "Zdjęcie" : {
+
+    },
+    "Zmień" : {
+
+    },
+    "Zmień miesięczny budżet" : {
+
+    },
+    "Zrób zdjęcie" : {
+
+    }
+  },
+  "version" : "1.0"
+}

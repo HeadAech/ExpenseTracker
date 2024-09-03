@@ -75,7 +75,7 @@ struct ContentView: View {
                             
                         }
                         
-                        Text(isSummingDaily ? "Dziś" : "Ten miesiąc")
+                        Text(isSummingDaily ? "today" : "this_month")
                             .font(.footnote)
                             .contentTransition(.numericText())
                             .animation(.easeInOut, value: isSummingDaily)

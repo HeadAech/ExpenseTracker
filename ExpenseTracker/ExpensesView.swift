@@ -368,7 +368,13 @@ struct NewExpenseSheet: View {
                 
                 if expenseToEdit != nil {
                     name = expenseToEdit!.name
-                    updateAmount(from: String(expenseToEdit!.value))
+                    let parts = String(expenseToEdit!.value).split(separator: ".")
+                    print(parts)
+                    if parts[1].count == 1 {
+                        updateAmount(from: String(expenseToEdit!.value * 10))
+                    }else{
+                        updateAmount(from: String(expenseToEdit!.value))
+                    }
                     date = expenseToEdit!.date
                     selectedPhotoData = expenseToEdit!.image
                 }
@@ -448,6 +454,7 @@ struct NewExpenseSheet: View {
     private func updateAmount(from newValue: String) {
         // Allow only digits
         let filtered = newValue.filter { "0123456789".contains($0) }
+        
         
         if let numericValue = Int(filtered) {
             // Update amount as an integer to shift the decimal place
