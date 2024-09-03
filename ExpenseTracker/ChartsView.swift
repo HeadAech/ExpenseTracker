@@ -256,7 +256,7 @@ struct LastWeekExpensesChart: View {
         .overlay{
             if showingNoDataView {
                 ContentUnavailableView(label: {
-                    Label("Brak danych", systemImage: "chart.xyaxis.line")
+                    Label("Brak danych", systemImage: "chart.bar.xaxis")
                 }, description: {
                     Text("Dodaj wydatki, aby zobaczyć wykres.")
                 }).animation(.easeInOut, value: showingNoDataView)
@@ -377,15 +377,15 @@ struct DateRangeExpensesChart: View {
     
     @State private var currentActiveExpense: Expense?
     
-    private var testExpenses: [Expense] {
-        var arr: [Expense] = []
-        for i in 1...7{
-            var e: Expense = Expense()
-            e.addToDate(days: -i)
-            arr.append(e)
-        }
-        return arr
-    }
+//    private var testExpenses: [Expense] {
+//        var arr: [Expense] = []
+//        for i in 1...7{
+//            var e: Expense = Expense()
+//            e.addToDate(days: -i)
+//            arr.append(e)
+//        }
+//        return arr
+//    }
     
     @State private var expenses: [Expense] = []
     

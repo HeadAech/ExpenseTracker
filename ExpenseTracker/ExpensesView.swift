@@ -7,19 +7,28 @@
 
 import SwiftUI
 import SwiftData
+import PhotosUI
 
 struct LastExpensesView: View {
     
     @Environment(\.modelContext) private var modelContext
     @Query(sort: \Expense.date, order: .reverse)  var expenses: [Expense]
     
+    @State private var expenseToEdit: Expense?
+    
     var body: some View {
         List{
 //            Testing
 //            LastExpenseItem(date: .now, name: "Wydatek", amount: 10000)
             ForEach(expenses){ expense in
-                LastExpenseItem(date: expense.date, name: expense.name, amount: expense.value)
+                LastExpenseItem(expense: expense)
                     .contextMenu{
+                        Button{
+                            expenseToEdit = expense
+                        } label: {
+                            Label("Edytuj", systemImage: "pencil")
+                        }
+                        
                         Button(role: .destructive){
                             withAnimation {
                                 modelContext.delete(expense)
@@ -37,6 +46,10 @@ struct LastExpensesView: View {
         .scrollContentBackground(.hidden)
         .offset(y: -25)
         .animation(.smooth, value: expenses)
+        .sheet(item: $expenseToEdit) {expense in
+            NewExpenseSheet(expenseToEdit: expense)
+                .presentationDetents([.medium])
+        }
         
         
     }
@@ -53,23 +66,21 @@ struct LastExpensesView: View {
 
 struct LastExpenseItem: View {
     
-    @State var date: Date
-    @State var name: String
-    @State var amount: Double
+    @State var expense: Expense
     
     var body: some View {
         
             VStack{
                 HStack{
-                    Text(name)
+                    Text(expense.name)
                     Spacer()
-                    Text(amount, format: .currency(code: "PLN"))
+                    Text(expense.value, format: .currency(code: "PLN"))
                         .font(.headline)
                         .lineLimit(1)
                       .truncationMode(.tail)
                 }
                 HStack{
-                    Text(date.formatted(date: .numeric, time: .shortened))
+                    Text(expense.date.formatted(date: .numeric, time: .shortened))
                         .font(.footnote)
                     Spacer()
                 }
@@ -157,6 +168,9 @@ struct ExpenseListItem: View {
     @Environment(\.modelContext) private var modelContext
     @State var expense: Expense
     
+    @State private var expenseToEdit: Expense?
+    
+    
     var body: some View {
         HStack{
             VStack(alignment: .leading){
@@ -166,8 +180,14 @@ struct ExpenseListItem: View {
                 Text(expense.value, format: .currency(code: "PLN"))
                     .bold()
                 
-                Text(expense.date, style: .relative)
-                    .font(.caption)
+                HStack{
+                    Text(expense.date.formatted(date: .numeric, time: .shortened))
+                        .font(.caption)
+                    Divider()
+                    Text(expense.date, style: .relative)
+                        .font(.caption)
+                }
+                .padding(.vertical, -10)
             }
             Spacer()
             if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
@@ -178,6 +198,12 @@ struct ExpenseListItem: View {
             }
         }
         .contextMenu{
+            Button{
+                expenseToEdit = expense
+            } label: {
+                Label("Edytuj", systemImage: "pencil")
+            }
+            
             Button(role: .destructive){
                 withAnimation {
                     modelContext.delete(expense)
@@ -187,6 +213,10 @@ struct ExpenseListItem: View {
             }
         }
 
+        .sheet(item: $expenseToEdit) {expense in
+            NewExpenseSheet(expenseToEdit: expense)
+                .presentationDetents([.medium])
+        }
     }
 }
 
@@ -224,6 +254,219 @@ struct ExpenseDetailsView: View {
             }.ignoresSafeArea(.all)
         }
     }
+}
+
+
+struct NewExpenseSheet: View {
+    @Environment(\.dismiss) private var dismiss
+    @Environment(\.modelContext) private var modelContext
+    
+    var expenseToEdit: Expense?
+    
+    @State private var name: String = "Wydatek"
+    @State private var date: Date = .now
+    @State private var amount: String = "0,00"
+    
+    @State private var errorAlertMessage: String = "Kwota musi być większa niż zero."
+    @State private var isErrorAlertPresent: Bool = false
+    
+    @State var selectedPhoto: PhotosPickerItem?
+    @State var selectedPhotoData: Data?
+    
+    @FocusState var amountFocused: Bool
+    
+    @State private var showCameraPicker: Bool = false
+    @State private var showPhotosPicker: Bool = false
+    
+    private var today: Date {
+        Calendar.current.startOfDay(for: Date())
+    }
+    
+    private var midnight: Date {
+        var components = DateComponents()
+        components.day = 1
+        components.second = -1 // The last second of the day
+        return Calendar.current.date(byAdding: components, to: today) ?? today
+    }
+    
+    var body: some View {
+        NavigationStack{
+            Form{
+                HStack{
+                    Text("Nazwa")
+                    TextField("Nazwa", text: $name)
+                        .multilineTextAlignment(.trailing)
+                }
+                HStack{
+                    //                    Label("Data", systemImage: "calendar")
+                    Text("Data")
+                    DatePicker("", selection: $date, in: ...midnight)
+                }
+                HStack{
+                    Text("Kwota")
+                    TextField("Kwota", text: $amount)
+                        .keyboardType(.decimalPad)
+                        .multilineTextAlignment(.trailing)
+                        .onTapGesture {
+                            
+                        }
+                        .onChange(of: amount) { oldValue, newValue in
+                            updateAmount(from: newValue)
+                        }
+                        .focused($amountFocused)
+                    Text("PLN")
+                    
+                }
+                Section("Zdjęcie"){
+                    
+                    if let selectedPhotoData,
+                       let uiImage = UIImage(data: selectedPhotoData) {
+                        HStack{
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .scaledToFit()
+                                .frame(maxWidth: .infinity, maxHeight: 300)
+                        }
+                    }
+                    
+                    
+                    Menu{
+                        //                        PhotosPicker(selection: $selectedPhoto, matching: .images, photoLibrary: .shared()){
+                        //                            Label("Dodaj zdjęcie", systemImage: "photo")
+                        //                        }
+                        Button {
+                            showPhotosPicker.toggle()
+                        } label: {
+                            Label("Wybierz zdjęcie", systemImage: "photo")
+                        }
+                        
+                        Button {
+                            showCameraPicker.toggle()
+                        } label: {
+                            Label("Zrób zdjęcie", systemImage: "camera.fill")
+                        }
+                    } label: {
+                        Label("Dodaj zdjęcie...", systemImage: "photo.badge.plus.fill")
+                    }
+                    
+                    if selectedPhotoData != nil {
+                        Button(role: .destructive){
+                            withAnimation{
+                                selectedPhoto = nil
+                                selectedPhotoData = nil
+                                
+                            }
+                        } label: {
+                            Label("Usuń zdjęcie", systemImage: "trash")
+                                .foregroundStyle(.red)
+                        }
+                    }
+                    
+                }
+            }
+            .onAppear {
+                
+                if expenseToEdit != nil {
+                    name = expenseToEdit!.name
+                    updateAmount(from: String(expenseToEdit!.value))
+                    date = expenseToEdit!.date
+                    selectedPhotoData = expenseToEdit!.image
+                }
+                
+                amountFocused.toggle()
+                
+            }
+            .navigationTitle(expenseToEdit == nil ? "Nowy wydatek" : "Edycja")
+            .navigationBarTitleDisplayMode(.inline)
+            .toolbar{
+                ToolbarItemGroup(placement: .topBarLeading) {
+                    Button("Anuluj") {
+                        dismiss()
+                    }
+                }
+                
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    Button(expenseToEdit != nil ? "Zapisz" : "Dodaj") {
+                        let doubleAmount = Double(amount.replacingOccurrences(of: ",", with: "."))
+                        if doubleAmount ?? 0 <= 0 {
+                            errorAlertMessage = "Kwota musi być większa niż zero."
+                            isErrorAlertPresent.toggle()
+                            return
+                        }
+                        if date > Date() {
+                            errorAlertMessage = "Data nie może być z przyszłości."
+                            isErrorAlertPresent.toggle()
+                            return
+                        }
+                        
+                        if expenseToEdit != nil {
+                            expenseToEdit!.name = name
+                            expenseToEdit!.date = date
+                            expenseToEdit!.value = doubleAmount ?? 0
+                            if selectedPhotoData != nil {
+                                expenseToEdit!.image = selectedPhotoData
+                            }
+                            withAnimation{
+//                                modelContext.insert(expenseToEdit!)
+                                dismiss()
+                            }
+                        } else {
+                            
+                            let expense = Expense(name: name, date: date, value: doubleAmount ?? 0)
+                            if selectedPhotoData != nil {
+                                expense.image = selectedPhotoData
+                            }
+                            withAnimation{
+                                modelContext.insert(expense)
+                                dismiss()
+                            }
+                        }
+                        
+                        
+                    }
+                    .alert(errorAlertMessage, isPresented: $isErrorAlertPresent){
+                        Button("OK", role: .cancel) { }
+                    }
+                }
+            }
+            .photosPicker(isPresented: $showPhotosPicker, selection: $selectedPhoto, matching: .images, photoLibrary: .shared())
+            .task(id: selectedPhoto){
+                if let data = try? await selectedPhoto?.loadTransferable(type: Data.self){
+                    selectedPhotoData = data
+                }
+            }
+            
+        }
+        .fullScreenCover(isPresented: $showCameraPicker) {
+            CameraPickerView() { image in
+                selectedPhotoData = image.jpegData(compressionQuality: 0.8)
+            }
+        }
+        
+    }
+    // Updates the amount by building up from the input string
+    private func updateAmount(from newValue: String) {
+        // Allow only digits
+        let filtered = newValue.filter { "0123456789".contains($0) }
+        
+        if let numericValue = Int(filtered) {
+            // Update amount as an integer to shift the decimal place
+            amount = String(numericValue)
+            amount = formattedAmount()
+        } else {
+            amount = "0,00"
+        }
+    }
+    
+    // Converts the current amount to a formatted string with 2 decimal places
+    private func formattedAmount() -> String {
+        if let value = Double(amount) {
+            return String(format: "%.2f", value / 100).replacingOccurrences(of: ".", with: ",")
+            
+        }
+        return "0,00"
+    }
+    
 }
 
 

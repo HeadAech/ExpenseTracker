@@ -156,7 +156,6 @@ extension Expense {
     
     static func lastWeekPredicate() -> Predicate<Expense> {
         let calendar = Calendar.current
-        let now = Date()
 
         let today = calendar.date(byAdding: .day, value: 1, to: calendar.startOfDay(for: .now)) ?? .now
         
