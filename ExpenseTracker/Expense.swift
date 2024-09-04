@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Expense {
+class Expense: ObservableObject {
     var id: String = UUID().uuidString
     var name: String
     var date: Date
@@ -171,4 +171,5 @@ extension Expense {
             expense.date >= startDate && expense.date <= endDate
         }
     }
+
 }

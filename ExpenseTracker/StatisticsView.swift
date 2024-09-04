@@ -41,17 +41,19 @@ struct StatisticsView: View {
     
     
     var body: some View {
-        LazyVStack{
-            
+        
+        VStack{
             HStack{
+                Text("Statystyki")
+                    .font(.largeTitle)
+                    .bold()
+                Spacer()
                 Picker("Widok", selection: $chosenStatsView.animation()) {
                     Text("Ostatnie 7 dni").tag(StatisticsViewType.last7DaysExpenses)
                     Text("Zakres dat").tag(StatisticsViewType.dateRangeExpenses)
                 }
-                Spacer()
-                
-            }
-            
+            }.padding(.horizontal, 0).padding(.vertical, -2)
+
             if chosenStatsView == .dateRangeExpenses {
                 HStack{
                     
@@ -89,10 +91,12 @@ struct StatisticsView: View {
             .frame(height: 300)
             
         }
-        .padding(20)
+        .offset(y: -20)
+        .padding(.horizontal, 20)
         .onChange(of: expenses) { oldV, newV in
             predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
         }
+        .frame(alignment: .top)
         
     }
     
@@ -105,6 +109,7 @@ struct DateRangeExpensesView: View {
     @State private var dateFrom: Date = Calendar.current.date(byAdding: .day, value: -3, to: .now)!
     @State private var dateTo: Date = .now
 
+    @Query private var expenses : [Expense]
     
     @AppStorage("settings:gradientColorIndex") var gradientColorIndex: Int = 0
     
@@ -124,7 +129,9 @@ struct DateRangeExpensesView: View {
                     predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
                 }
         }
-        
+        .onChange(of: expenses) { oldValue, newValue in
+            predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
+        }
 //        Actual chart
         DateRangeExpensesChart(predicate: predicate)
             .padding(.top, 10)

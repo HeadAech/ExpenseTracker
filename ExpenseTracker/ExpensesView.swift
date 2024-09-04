@@ -19,8 +19,8 @@ struct LastExpensesView: View {
     var body: some View {
         List{
 //            Testing
-//            LastExpenseItem(date: .now, name: "Wydatek", amount: 10000)
-            ForEach(expenses){ expense in
+//            LastExpenseItem(expense: Expense(name: "Wydatek", date: .now, value: 10000))
+            ForEach(expenses.prefix(3)){ expense in
                 LastExpenseItem(expense: expense)
                     .contextMenu{
                         Button{
@@ -107,6 +107,9 @@ struct AllExpensesView: View {
 //                Spacer()
 //            }
             List{
+//                Test expense
+//                ExpenseListItem(expense: Expense(name: "Wydatek", date: .now, value: 10000))
+                
                 ForEach(expenses) { expense in
                     if expense.image != nil {
                         NavigationLink(destination: {
@@ -125,6 +128,7 @@ struct AllExpensesView: View {
                 .onDelete(perform: deleteItems)
                 
             }
+
             //                    .listStyle(PlainListStyle())
             .padding(-30)
             .scrollContentBackground(.hidden)
@@ -155,6 +159,10 @@ struct AllExpensesView: View {
         }.padding(20)
     }
     
+    private func refresh() {
+        
+    }
+    
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
@@ -179,15 +187,14 @@ struct ExpenseListItem: View {
                 
                 Text(expense.value, format: .currency(code: "PLN"))
                     .bold()
+                    .foregroundStyle(Color.accentColor)
                 
                 HStack{
                     Text(expense.date.formatted(date: .numeric, time: .shortened))
                         .font(.caption)
-                    Divider()
-                    Text(expense.date, style: .relative)
-                        .font(.caption)
+                    Spacer()
                 }
-                .padding(.vertical, -10)
+
             }
             Spacer()
             if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {

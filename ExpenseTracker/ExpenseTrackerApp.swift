@@ -7,6 +7,7 @@
 
 import SwiftUI
 import SwiftData
+import TipKit
 
 @main
 struct ExpenseTrackerApp: App {
@@ -26,6 +27,12 @@ struct ExpenseTrackerApp: App {
         
         WindowGroup {
             ContentView()
+                .task {
+                    try? Tips.configure([
+                        .datastoreLocation(.applicationDefault)
+                        
+                    ])
+                }
         }
         .modelContainer(sharedModelContainer)
         
