@@ -51,26 +51,34 @@ struct BudgetView: View {
             Button{
                 changeBudgetSheetPresented.toggle()
             } label: {
-                Label("Zmień", systemImage: "arrow.2.circlepath")
+                Label("CHANGE_STRING", systemImage: "arrow.2.circlepath")
             }
             .onChange(of: remainingBudget) { oldValue, newValue in
-                if remainingBudget != monthlyBudget && remainingBudget > 0{
-                    withAnimation{
-                        isShowingPieChart = true
-                    }
-                } else {
-                    withAnimation{
-                        isShowingPieChart = false
-                    }
-                }
+                update()
+            }
+            .onAppear{
+                update()
             }
         }
         .sheet(isPresented: $changeBudgetSheetPresented) {
             ChangeBudgetView()
                 .presentationDetents([.fraction(0.3)])
                 .presentationDragIndicator(.visible)
+                .presentationBackground(.thinMaterial)
         }
         
+    }
+    
+    func update() {
+        if remainingBudget != monthlyBudget && remainingBudget > 0{
+            withAnimation{
+                isShowingPieChart = true
+            }
+        } else {
+            withAnimation{
+                isShowingPieChart = false
+            }
+        }
     }
 }
 
@@ -88,8 +96,8 @@ struct ChangeBudgetView: View {
         NavigationStack{
             Form{
                 HStack{
-                    Text("Budżet")
-                    TextField("Budżet", text: $budget)
+                    Text("BUDGET_STRING")
+                    TextField("BUDGET_STRING", text: $budget)
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.trailing)
                         .onChange(of: budget) { oldValue, newValue in
@@ -105,14 +113,14 @@ struct ChangeBudgetView: View {
                 }
             }
             
-            .navigationTitle("Zmień miesięczny budżet")
+            .navigationTitle("CHANGE_MONTHLY_BUDGET_STRING")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .topBarLeading) {
                     Button(role: .cancel){
                         dismiss()
                     } label: {
-                        Text("Anuluj")
+                        Text("CANCEL_STRING")
                     }
                 }
                 
@@ -122,7 +130,7 @@ struct ChangeBudgetView: View {
                         UserDefaults.standard.set(monthlyBudget, forKey: "settings:monthlyBudget")
                         dismiss()
                     } label: {
-                        Text("Gotowe")
+                        Text("DONE_STRING")
                     }
                 }
             }

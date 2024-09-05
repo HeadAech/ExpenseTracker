@@ -28,9 +28,9 @@ struct SettingsView: View {
     var body: some View {
         NavigationStack{
             Form{
-                Picker("Suma wydatków", selection: $selectedSumming) {
-                    Text("Dzisiaj").tag(Summing.daily)
-                    Text("Ten miesiąc").tag(Summing.monthly)
+                Picker("TOTAL_EXPENSES_STRING", selection: $selectedSumming) {
+                    Text("TODAY_STRING").tag(Summing.daily)
+                    Text("THIS_MONTH_STRING").tag(Summing.monthly)
                 }.onChange(of: selectedSumming, initial: false){
                     isSummingDaily = selectedSumming == .daily ? true : false
                     UserDefaults.standard.set(isSummingDaily, forKey: "settings:isSummingDaily")
@@ -39,8 +39,8 @@ struct SettingsView: View {
                     selectedSumming = isSummingDaily ? .daily : .monthly
                 }
                 
-                Section("Motyw"){
-                    Picker("Kolor gradientu", selection: $selectedGradientColor) {
+                Section("THEME_STRING"){
+                    Picker("GRADIENT_COLOR_STRING", selection: $selectedGradientColor) {
                         ForEach(gradientColors.sorted(by: { $0.key < $1.key }), id: \.key){ key, value in
                             Image(systemName: "circle.fill")
                                 .symbolRenderingMode(.palette)
@@ -56,11 +56,12 @@ struct SettingsView: View {
 
                 }
             }
-            .navigationTitle("Ustawienia")
+            .scrollContentBackground(.hidden)
+            .navigationTitle("SETTINGS_STRING")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .topBarTrailing){
-                    Button("Gotowe") {
+                    Button("DONE_STRING") {
                         dismiss()
                     }
                 }

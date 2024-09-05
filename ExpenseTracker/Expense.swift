@@ -10,10 +10,15 @@ import SwiftData
 
 @Model
 class Expense: ObservableObject {
+    
+    @Attribute(.unique)
     var id: String = UUID().uuidString
+    
     var name: String
     var date: Date
     var value: Double
+    
+    @Attribute(.externalStorage)
     var image: Data?
     
     init(name: String, date: Date, value: Double) {

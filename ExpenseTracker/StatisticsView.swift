@@ -42,22 +42,25 @@ struct StatisticsView: View {
     
     var body: some View {
         
-        VStack{
+        LazyVStack{
             HStack{
-                Text("Statystyki")
+                Text("STATISTICS_STRING")
                     .font(.largeTitle)
                     .bold()
                 Spacer()
-                Picker("Widok", selection: $chosenStatsView.animation()) {
-                    Text("Ostatnie 7 dni").tag(StatisticsViewType.last7DaysExpenses)
-                    Text("Zakres dat").tag(StatisticsViewType.dateRangeExpenses)
+                Picker("VIEW_STRING", selection: $chosenStatsView.animation()) {
+                    Text("LAST_7_DAYS_STRING").tag(StatisticsViewType.last7DaysExpenses)
+                    Text("DATE_RANGE_STRING").tag(StatisticsViewType.dateRangeExpenses)
                 }
-            }.padding(.horizontal, 0).padding(.vertical, -2)
+            }
+                .padding(.horizontal, 0)
+                .padding(.vertical, -2)
 
+            
             if chosenStatsView == .dateRangeExpenses {
                 HStack{
                     
-                    DatePicker("", selection: $dateFrom, in: ...dateTo, displayedComponents: [.date])
+                    DatePicker("", selection: $dateFrom, in: ...(Calendar.current.date(byAdding: .day, value: -1, to: dateTo) ?? .now), displayedComponents: [.date])
                         .onChange(of: dateFrom) { oldValue, newValue in
                             dateFrom = Calendar.current.startOfDay(for: newValue)
                             predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
@@ -85,10 +88,16 @@ struct StatisticsView: View {
                     case .dateRangeExpenses: DateRangeExpensesChart(predicate: predicate)
                         .transition(.blurReplace)
                         .animation(.easeInOut, value: chosenStatsView)
+                        .onAppear{
+                            predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
+                        }
                 }
                 
             }
-            .frame(height: 300)
+            .frame(height: 370)
+            
+            
+            
             
         }
         .offset(y: -20)
@@ -97,46 +106,12 @@ struct StatisticsView: View {
             predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
         }
         .frame(alignment: .top)
+        .frame(height: UIScreen.screenHeight/2)
+     
+        
         
     }
     
-}
-
-
-struct DateRangeExpensesView: View {
-    @Environment(\.modelContext) private var modelContext
- 
-    @State private var dateFrom: Date = Calendar.current.date(byAdding: .day, value: -3, to: .now)!
-    @State private var dateTo: Date = .now
-
-    @Query private var expenses : [Expense]
-    
-    @AppStorage("settings:gradientColorIndex") var gradientColorIndex: Int = 0
-    
-    @State private var predicate: Predicate<Expense> = .false
-    
-    var body: some View {
-        HStack{
-            DatePicker("", selection: $dateFrom, displayedComponents: [.date])
-                .onChange(of: dateFrom) { oldValue, newValue in
-                    predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
-                }
-            
-            Image(systemName: "arrow.right")
-            
-            DatePicker("", selection: $dateTo, displayedComponents: [.date])
-                .onChange(of: dateTo) { oldValue, newValue in
-                    predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
-                }
-        }
-        .onChange(of: expenses) { oldValue, newValue in
-            predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
-        }
-//        Actual chart
-        DateRangeExpensesChart(predicate: predicate)
-            .padding(.top, 10)
-    }
-
 }
 
 

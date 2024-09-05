@@ -72,19 +72,20 @@ struct ContentView: View {
                                 .contentTransition(.numericText())
                                 .font(.largeTitle).bold()
                                 .animation(.easeInOut, value: isSummingDaily ? todaysTotal : thisMonthTotal)
+                                .multilineTextAlignment(.center)
+                                .lineLimit(2)
+                                .truncationMode(.tail)
                             
                         }
                         
-                        Text(isSummingDaily ? "today" : "this_month")
+                        Text(isSummingDaily ? "TODAY_STRING" : "THIS_MONTH_STRING")
                             .font(.footnote)
                             .contentTransition(.numericText())
                             .animation(.easeInOut, value: isSummingDaily)
                         
-                        HStack{
-                            
-                            
-                        }
-                    }.offset(y: 10)
+                    }
+                    .ignoresSafeArea(.keyboard)
+                    .offset(y: 10)
                     
                     
 
@@ -92,21 +93,21 @@ struct ContentView: View {
 
                             StatisticsView()
                                 .tabItem {
-                                    Label("Statystyki", systemImage: "chart.bar.xaxis")
+                                    Label("STATISTICS_STRING", systemImage: "chart.bar.xaxis")
                                         .labelStyle(VerticalLabelStyle())
                                 }
                                 .tag(Pages.stats)
                             
                             homeView
                                 .tabItem {
-                                    Label("Główna", systemImage: "house.fill")
+                                    Label("HOME_STRING", systemImage: "house.fill")
                                         .labelStyle(VerticalLabelStyle())
                                 }
                                 .tag(Pages.home)
                             
                             AllExpensesView()
                                 .tabItem {
-                                    Label("Historia", systemImage: "clock.arrow.circlepath")
+                                    Label("HISTORY_STRING", systemImage: "clock.arrow.circlepath")
                                         .labelStyle(VerticalLabelStyle())
                                 }
                                 .tag(Pages.history)
@@ -121,6 +122,7 @@ struct ContentView: View {
 //                    }
 
                 }
+                .ignoresSafeArea(.keyboard)
              
 //                END ZSTACK
             }
@@ -129,10 +131,10 @@ struct ContentView: View {
                 //            NAVBAR ITEMS
                 ZStack(alignment: .bottom){
                     HStack{
-                        navBarItem(name: "Statystyki", icon: "chart.bar.xaxis", tab: .stats)
-                        navBarItem(name: "Główna", icon: "house.fill", tab: .home)
-                        navBarItem(name: "Historia", icon: "clock.arrow.circlepath", tab: .history)
-                    }
+                        navBarItem(name: "STATISTICS_STRING", icon: "chart.bar.xaxis", tab: .stats)
+                        navBarItem(name: "HOME_STRING", icon: "house.fill", tab: .home)
+                        navBarItem(name: "HISTORY_STRING", icon: "clock.arrow.circlepath", tab: .history)
+                    }.ignoresSafeArea(.keyboard)
                     .background(
                         Capsule()
                             .fill(.clear)
@@ -140,7 +142,8 @@ struct ContentView: View {
                             .clipShape(Capsule())
                     )
                 }
-            }
+                .ignoresSafeArea(.keyboard)
+            }.ignoresSafeArea(.keyboard)
             
             
             .toolbar{
@@ -157,7 +160,7 @@ struct ContentView: View {
                         newExpenseSheetPresented.toggle()
                     } label: {
                         HStack{
-                            Text("Dodaj")
+                            Text("ADD_STRING")
                             Image(systemName: "plus")
                         }
                     }.buttonStyle(.bordered)
@@ -166,15 +169,16 @@ struct ContentView: View {
         }
         
         .sheet(isPresented: $newExpenseSheetPresented) {
-            NewExpenseSheet()
             
-                .presentationDetents([.medium])
+            NewExpenseSheet()
+                .presentationDetents([.medium, .large])
         }
         
         .sheet(isPresented: $settingsSheetPresented){
             SettingsView()
-                .presentationDetents([.fraction(0.4)])
+                .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
+                .presentationBackground(.thinMaterial)
         }
         .tint(Colors().getColor(for: gradientColorIndex))
         .animation(.easeInOut, value: gradientColorIndex)
@@ -193,20 +197,20 @@ struct ContentView: View {
                             page = .history
                         }
                     } label: {
-                        Label("Pokaż wszystkie", systemImage: "dollarsign.arrow.circlepath")
+                        Label("SHOW_ALL_STRING", systemImage: "dollarsign.arrow.circlepath")
                     }
                 }
             } label: {
-                Label("Ostatnie", systemImage: "clock.arrow.circlepath")
+                Label("RECENT_STRING", systemImage: "clock.arrow.circlepath")
             }
             .overlay{
                 if showingNoExpensesView{
                     ContentUnavailableView(label: {
-                        Label("Brak wydatków", systemImage: "dollarsign.square.fill")
+                        Label("NO_EXPENSES_STRING", systemImage: "dollarsign.square.fill")
                     }, description: {
-                        Text("Dodaj nowy wydatek, aby zobaczyć listę wydatków oraz statystyki.")
+                        Text("NO_EXPENSES_DESCRIPTION")
                     }, actions: {
-                        Button("Dodaj", action: {
+                        Button("ADD_STRING", action: {
                             newExpenseSheetPresented.toggle()
                         })
                     }).animation(.easeInOut, value: showingNoExpensesView)
@@ -227,7 +231,7 @@ struct ContentView: View {
                     LastAndCurrentMonthExpensesChart()
                     
                 } label: {
-                    Label("Porównanie", systemImage: "chart.bar.xaxis")
+                    Label("COMPARISON_STRING", systemImage: "chart.bar.xaxis")
                 }
                 .frame(width: 172, height: 200)
                 .onTapGesture {
@@ -239,7 +243,7 @@ struct ContentView: View {
                 GroupBox{
                     BudgetView()
                 } label: {
-                    Label("Budżet", systemImage: "dollarsign")
+                    Label("BUDGET_STRING", systemImage: "dollarsign")
                 }
                 .frame(width: 172, height: 200)
                 
@@ -258,16 +262,22 @@ struct ContentView: View {
         .transition(.blurReplace)
         .animation(.easeInOut, value: page)
         
+        
     }
     
-    func navBarItem(name: String, icon: String, tab: Pages) -> some View {
+    func navBarItem(name: LocalizedStringResource, icon: String, tab: Pages) -> some View {
+        
            Button {
                page = tab
            } label: {
 
                VStack {
                    if page == tab {
-                       Label(name, systemImage: icon)
+                       Label{
+                           Text(name)
+                       } icon: {
+                           Image(systemName: icon)
+                       }
 //                       Text(name)
                            .frame(width: 70, height: 20)
                            .padding()

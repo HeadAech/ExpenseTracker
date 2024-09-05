@@ -4,122 +4,471 @@
     "" : {
 
     },
-    "Anuluj" : {
-
+    "ADD_EXPENSES_STATISTICS_DESCRIPTION" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj wydatki, aby zobaczyć wykres."
+          }
+        }
+      }
     },
-    "Brak danych" : {
-
+    "ADD_PHOTO_MORE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj zdjęcie…"
+          }
+        }
+      }
     },
-    "Brak wydatków" : {
-
+    "ADD_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj"
+          }
+        }
+      }
     },
-    "Budżet" : {
-
+    "AMOUNT_LESS_THAN_ZERO_MESSAGE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kwota nie może być mniejsza niż zero."
+          }
+        }
+      }
     },
-    "Data" : {
-
+    "AMOUNT_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kwota"
+          }
+        }
+      }
     },
-    "Dodaj" : {
-
+    "AVERAGE_EXPENSES_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Średnia wydatków"
+          }
+        }
+      }
+    },
+    "AVERAGE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Średnia"
+          }
+        }
+      }
+    },
+    "BUDGET_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budżet"
+          }
+        }
+      }
+    },
+    "CANCEL_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Anuluj"
+          }
+        }
+      }
+    },
+    "CHANGE_MONTHLY_BUDGET_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmień miesięczny budżet"
+          }
+        }
+      }
+    },
+    "CHANGE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmień"
+          }
+        }
+      }
+    },
+    "CHOOSE_PHOTO_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz zdjęcie"
+          }
+        }
+      }
+    },
+    "COMPARISON_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Porównanie"
+          }
+        }
+      }
+    },
+    "DATE_FROM_FUTURE_MESSAGE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data nie może być z przyszłości."
+          }
+        }
+      }
+    },
+    "DATE_RANGE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zakres dat"
+          }
+        }
+      }
+    },
+    "DATE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Data"
+          }
+        }
+      }
+    },
+    "DAY_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dzień"
+          }
+        }
+      }
+    },
+    "DELETE_PHOTO_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń zdjęcie"
+          }
+        }
+      }
+    },
+    "DELETE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń"
+          }
+        }
+      }
     },
     "Dodaj nowy wydatek" : {
 
     },
-    "Dodaj nowy wydatek, aby zobaczyć listę wydatków oraz statystyki." : {
-
+    "DONE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gotowe"
+          }
+        }
+      }
     },
-    "Dodaj wydatki, aby zobaczyć wykres." : {
-
+    "EDIT_EXPENSE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edytuj wydatek"
+          }
+        }
+      }
     },
-    "Dodaj zdjęcie..." : {
-
+    "EDIT_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edytuj"
+          }
+        }
+      }
     },
-    "Dzień" : {
-
+    "GRADIENT_COLOR_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kolor gradientu"
+          }
+        }
+      }
     },
-    "Dzisiaj" : {
-
+    "HISTORY_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historia"
+          }
+        }
+      }
     },
-    "Edycja" : {
-
+    "HOME_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Główna"
+          }
+        }
+      }
     },
-    "Edytuj" : {
-
+    "LAST_7_DAYS_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ostatnie 7 dni"
+          }
+        }
+      }
     },
-    "Główna" : {
-
+    "LAST_MONTH_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ostatni miesiąc"
+          }
+        }
+      }
     },
-    "Gotowe" : {
-
+    "NAME_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nazwa"
+          }
+        }
+      }
     },
-    "Historia" : {
-
+    "NEW_EXPENSE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nowy wydatek"
+          }
+        }
+      }
     },
-    "Kolor gradientu" : {
-
+    "NO_DATA_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brak danych"
+          }
+        }
+      }
     },
-    "Kwota" : {
-
+    "NO_EXPENSES_DESCRIPTION" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj nowy wydatek, aby zobaczyć listę wydatków oraz statystyki."
+          }
+        }
+      }
     },
-    "Last Month" : {
-
-    },
-    "Motyw" : {
-
-    },
-    "Nazwa" : {
-
-    },
-    "Nowy wydatek" : {
-
+    "NO_EXPENSES_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brak wydatków"
+          }
+        }
+      }
     },
     "OK" : {
-
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        }
+      }
     },
-    "Ostatnie" : {
-
+    "PAID_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wydano"
+          }
+        }
+      }
     },
-    "Ostatnie 7 dni" : {
-
+    "PHOTO_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zdjęcie"
+          }
+        }
+      }
     },
     "PLN" : {
-
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "zł"
+          }
+        }
+      }
     },
-    "Podgląd" : {
-
+    "PREVIEW_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podgląd"
+          }
+        }
+      }
     },
-    "Pokaż wszystkie" : {
-
+    "RECENT_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ostatnie"
+          }
+        }
+      }
     },
-    "Porównanie" : {
-
+    "REMAINING_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pozostało"
+          }
+        }
+      }
     },
-    "Pozostało" : {
-
+    "SAVE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zapisz"
+          }
+        }
+      }
     },
-    "Średnia" : {
-
+    "SEARCH_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Szukaj"
+          }
+        }
+      }
     },
-    "Średnia wydatków" : {
-
+    "SETTINGS_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ustawienia"
+          }
+        }
+      }
     },
-    "Statystyki" : {
-
+    "SHOW_ALL_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pokaż wszystkie"
+          }
+        }
+      }
+    },
+    "STATISTICS_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statystyki"
+          }
+        }
+      }
     },
     "Stuknij tutaj, aby dodać nowy wydatek." : {
 
     },
-    "Suma" : {
-
+    "TAKE_PHOTO_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zrób zdjęcie"
+          }
+        }
+      }
     },
-    "Suma wydatków" : {
-
-    },
-    "Ten miesiąc" : {
-
-    },
-    "This Month" : {
-
+    "THEME_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Motyw"
+          }
+        }
+      }
     },
     "this_month" : {
       "extractionState" : "manual",
@@ -130,6 +479,16 @@
             "value" : "This month"
           }
         },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten miesiąc"
+          }
+        }
+      }
+    },
+    "THIS_MONTH_STRING" : {
+      "localizations" : {
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -155,44 +514,45 @@
         }
       }
     },
-    "Total" : {
-
+    "TODAY_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dzisiaj"
+          }
+        }
+      }
     },
-    "Ustawienia" : {
-
+    "TOTAL_EXPENSES_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suma wydatków"
+          }
+        }
+      }
     },
-    "Usuń" : {
-
+    "TOTAL_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suma"
+          }
+        }
+      }
     },
-    "Usuń zdjęcie" : {
-
-    },
-    "Widok" : {
-
-    },
-    "Wybierz zdjęcie" : {
-
-    },
-    "Wydano" : {
-
-    },
-    "Zakres dat" : {
-
-    },
-    "Zapisz" : {
-
-    },
-    "Zdjęcie" : {
-
-    },
-    "Zmień" : {
-
-    },
-    "Zmień miesięczny budżet" : {
-
-    },
-    "Zrób zdjęcie" : {
-
+    "VIEW_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widok"
+          }
+        }
+      }
     }
   },
   "version" : "1.0"

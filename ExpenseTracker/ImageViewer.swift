@@ -68,7 +68,7 @@ struct ImageViewer: View {
                     }
             }
             
-            .navigationTitle("Podgląd")
+            .navigationTitle("PREVIEW_STRING")
             .navigationBarTitleDisplayMode(.inline)
         }
     }

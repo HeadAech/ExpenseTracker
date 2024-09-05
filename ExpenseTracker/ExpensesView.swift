@@ -26,7 +26,7 @@ struct LastExpensesView: View {
                         Button{
                             expenseToEdit = expense
                         } label: {
-                            Label("Edytuj", systemImage: "pencil")
+                            Label("EDIT_STRING", systemImage: "pencil")
                         }
                         
                         Button(role: .destructive){
@@ -34,7 +34,7 @@ struct LastExpensesView: View {
                                 modelContext.delete(expense)
                             }
                         } label: {
-                            Label("Usuń", systemImage: "trash")
+                            Label("DELETE_STRING", systemImage: "trash")
                         }
                     }
             }
@@ -97,20 +97,94 @@ struct AllExpensesView: View {
     
     @Query(sort: \Expense.date, order: .reverse) private var expenses: [Expense]
     
+    @State private var filteredExpenses: [Expense] = []
+    
     @State private var showingNoExpensesView: Bool = true
+    
+    @State private var searchText: String = ""
+    
+    @State private var showingSearchBar: Bool = false
+    
+    @FocusState private var searchBarFocused: Bool
+    
+    func searchBar() -> some View {
+
+        HStack{
+            Image(systemName: "magnifyingglass")
+            TextField("SEARCH_STRING", text: $searchText)
+                .textFieldStyle(.roundedBorder)
+                .onChange(of: searchText) { oldValue, newValue in
+                    filteredExpenses = filterSearchResults(text: searchText)
+                }
+                .onChange(of: expenses) { oldValue, newValue in
+                    filteredExpenses = filterSearchResults(text: searchText)
+                }
+                .focused($searchBarFocused)
+            
+            if !searchText.isEmpty{
+                Button {
+                    searchText = ""
+                } label: {
+                    Image(systemName: "xmark")
+                }
+            }
+        }
+        
+    }
+    
+    func filterSearchResults(text: String) -> [Expense] {
+        if text.isEmpty{
+            return expenses
+        }
+        
+        return expenses.filter { $0.name.contains(text) }
+    }
     
     var body: some View {
         NavigationStack{
-//            HStack{
-//                Text("Wszystkie wydatki")
-//                    .font(.title)
-//                Spacer()
-//            }
+            
+            VStack{
+                HStack{
+                    Text("HISTORY_STRING")
+                        .font(.largeTitle).bold()
+                    Spacer()
+                    if !showingNoExpensesView {
+                        EditButton()
+                            .padding(.horizontal, 10)
+                        
+                        Button {
+                            withAnimation{
+                                showingSearchBar.toggle()
+                                searchBarFocused.toggle()
+                            }
+                        } label: {
+                            Image(systemName: showingSearchBar ? "xmark.circle.fill" : "magnifyingglass.circle.fill")
+                                .font(.title)
+                                .contentTransition(.symbolEffect(.replace))
+                        }
+                        
+                    }
+                }
+                
+                
+            }
+            .offset(y:0)
+            .ignoresSafeArea(.keyboard)
+            
+            VStack{
+                if showingSearchBar && !showingNoExpensesView{
+                    searchBar()
+                        .transition(.blurReplace)
+                }
+            }
+            .opacity(showingSearchBar ? 1 : 0)
+            .animation(.spring, value: showingSearchBar)
+            
             List{
 //                Test expense
 //                ExpenseListItem(expense: Expense(name: "Wydatek", date: .now, value: 10000))
                 
-                ForEach(expenses) { expense in
+                ForEach(searchText.isEmpty ? expenses : filteredExpenses) { expense in
                     if expense.image != nil {
                         NavigationLink(destination: {
                             if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
@@ -128,18 +202,17 @@ struct AllExpensesView: View {
                 .onDelete(perform: deleteItems)
                 
             }
-
             //                    .listStyle(PlainListStyle())
-            .padding(-30)
+            .padding(.horizontal, -20)
             .scrollContentBackground(.hidden)
             
             .frame(height: UIScreen.screenHeight/2)
             .overlay {
                 if showingNoExpensesView{
                     ContentUnavailableView(label: {
-                        Label("Brak wydatków", systemImage: "dollarsign.square.fill")
+                        Label("NO_EXPENSES_STRING", systemImage: "dollarsign.square.fill")
                     }, description: {
-                        Text("Dodaj nowy wydatek, aby zobaczyć listę wydatków oraz statystyki.")
+                        Text("NO_EXPENSES_DESCRIPTION")
                     }).animation(.easeInOut, value: showingNoExpensesView)
                         .offset(y:15)
                 }
@@ -149,14 +222,24 @@ struct AllExpensesView: View {
                     showingNoExpensesView = expenses.isEmpty
                 }
             })
+            .onChange(of: showingSearchBar) { oldValue, newValue in
+                searchText = ""
+            }
             .onAppear {
                 withAnimation {
                     showingNoExpensesView = expenses.isEmpty
                 }
             }
+            .onDisappear{
+                withAnimation{
+                    showingSearchBar = false
+                }
+            }
+            
             .animation(.smooth, value: expenses)
         
         }.padding(20)
+            
     }
     
     private func refresh() {
@@ -182,12 +265,12 @@ struct ExpenseListItem: View {
     var body: some View {
         HStack{
             VStack(alignment: .leading){
-                Text(expense.name)
-                    .font(.headline)
                 
-                Text(expense.value, format: .currency(code: "PLN"))
-                    .bold()
-                    .foregroundStyle(Color.accentColor)
+                if !expense.name.isEmpty{
+                    Text(expense.name)
+                        .font(.headline)
+                }
+                
                 
                 HStack{
                     Text(expense.date.formatted(date: .numeric, time: .shortened))
@@ -200,15 +283,22 @@ struct ExpenseListItem: View {
             if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
                 Image(uiImage: uiImage)
                     .resizable()
-                    .frame(width: 60, height: 60, alignment: .trailing)
+                    .frame(width: 50, height: 50, alignment: .center)
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
+            Spacer()
+            Text(expense.value, format: .currency(code: "PLN"))
+                .bold()
+                .foregroundStyle(Color.accentColor)
+                .multilineTextAlignment(.trailing)
+                .lineLimit(2)
+                .truncationMode(.tail)
         }
         .contextMenu{
             Button{
                 expenseToEdit = expense
             } label: {
-                Label("Edytuj", systemImage: "pencil")
+                Label("EDIT_STRING", systemImage: "pencil")
             }
             
             Button(role: .destructive){
@@ -216,7 +306,7 @@ struct ExpenseListItem: View {
                     modelContext.delete(expense)
                 }
             } label: {
-                Label("Usuń", systemImage: "trash")
+                Label("DELETE_STRING", systemImage: "trash")
             }
         }
 
@@ -270,11 +360,11 @@ struct NewExpenseSheet: View {
     
     var expenseToEdit: Expense?
     
-    @State private var name: String = "Wydatek"
+    @State private var name: String = ""
     @State private var date: Date = .now
     @State private var amount: String = "0,00"
     
-    @State private var errorAlertMessage: String = "Kwota musi być większa niż zero."
+    @State private var errorAlertMessage: LocalizedStringResource = "AMOUNT_LESS_THAN_ZERO_MESSAGE"
     @State private var isErrorAlertPresent: Bool = false
     
     @State var selectedPhoto: PhotosPickerItem?
@@ -300,18 +390,18 @@ struct NewExpenseSheet: View {
         NavigationStack{
             Form{
                 HStack{
-                    Text("Nazwa")
-                    TextField("Nazwa", text: $name)
+                    Text("NAME_STRING")
+                    TextField("NAME_STRING", text: $name)
                         .multilineTextAlignment(.trailing)
                 }
                 HStack{
                     //                    Label("Data", systemImage: "calendar")
-                    Text("Data")
+                    Text("DATE_STRING")
                     DatePicker("", selection: $date, in: ...midnight)
                 }
                 HStack{
-                    Text("Kwota")
-                    TextField("Kwota", text: $amount)
+                    Text("AMOUNT_STRING")
+                    TextField("AMOUNT_STRING", text: $amount)
                         .keyboardType(.decimalPad)
                         .multilineTextAlignment(.trailing)
                         .onTapGesture {
@@ -324,7 +414,7 @@ struct NewExpenseSheet: View {
                     Text("PLN")
                     
                 }
-                Section("Zdjęcie"){
+                Section("PHOTO_STRING"){
                     
                     if let selectedPhotoData,
                        let uiImage = UIImage(data: selectedPhotoData) {
@@ -344,16 +434,16 @@ struct NewExpenseSheet: View {
                         Button {
                             showPhotosPicker.toggle()
                         } label: {
-                            Label("Wybierz zdjęcie", systemImage: "photo")
+                            Label("CHOOSE_PHOTO_STRING", systemImage: "photo")
                         }
                         
                         Button {
                             showCameraPicker.toggle()
                         } label: {
-                            Label("Zrób zdjęcie", systemImage: "camera.fill")
+                            Label("TAKE_PHOTO_STRING", systemImage: "camera.fill")
                         }
                     } label: {
-                        Label("Dodaj zdjęcie...", systemImage: "photo.badge.plus.fill")
+                        Label("ADD_PHOTO_MORE_STRING", systemImage: "photo.badge.plus.fill")
                     }
                     
                     if selectedPhotoData != nil {
@@ -364,13 +454,14 @@ struct NewExpenseSheet: View {
                                 
                             }
                         } label: {
-                            Label("Usuń zdjęcie", systemImage: "trash")
+                            Label("DELETE_PHOTO_STRING", systemImage: "trash")
                                 .foregroundStyle(.red)
                         }
                     }
                     
                 }
             }
+            .scrollContentBackground(.hidden)
             .onAppear {
                 
                 if expenseToEdit != nil {
@@ -389,25 +480,26 @@ struct NewExpenseSheet: View {
                 amountFocused.toggle()
                 
             }
-            .navigationTitle(expenseToEdit == nil ? "Nowy wydatek" : "Edycja")
+            .navigationTitle(expenseToEdit == nil ? "NEW_EXPENSE_STRING" : "EDIT_EXPENSE_STRING")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItemGroup(placement: .topBarLeading) {
-                    Button("Anuluj") {
+                    Button("CANCEL_STRING") {
                         dismiss()
                     }
                 }
                 
                 ToolbarItemGroup(placement: .topBarTrailing) {
-                    Button(expenseToEdit != nil ? "Zapisz" : "Dodaj") {
+                    Button(expenseToEdit != nil ? "SAVE_STRING" : "ADD_STRING") {
                         let doubleAmount = Double(amount.replacingOccurrences(of: ",", with: "."))
+                        
                         if doubleAmount ?? 0 <= 0 {
-                            errorAlertMessage = "Kwota musi być większa niż zero."
+                            errorAlertMessage = Error.AMOUNT_LESS_THAN_ZERO.title
                             isErrorAlertPresent.toggle()
                             return
                         }
                         if date > Date() {
-                            errorAlertMessage = "Data nie może być z przyszłości."
+                            errorAlertMessage = Error.DATE_FROM_THE_FUTURE.title
                             isErrorAlertPresent.toggle()
                             return
                         }
@@ -437,11 +529,14 @@ struct NewExpenseSheet: View {
                         
                         
                     }
-                    .alert(errorAlertMessage, isPresented: $isErrorAlertPresent){
+                    .alert(Text(errorAlertMessage), isPresented: $isErrorAlertPresent){
                         Button("OK", role: .cancel) { }
                     }
+                    
                 }
+                
             }
+            
             .photosPicker(isPresented: $showPhotosPicker, selection: $selectedPhoto, matching: .images, photoLibrary: .shared())
             .task(id: selectedPhoto){
                 if let data = try? await selectedPhoto?.loadTransferable(type: Data.self){
@@ -450,11 +545,14 @@ struct NewExpenseSheet: View {
             }
             
         }
+        .presentationBackground(.thinMaterial)
         .fullScreenCover(isPresented: $showCameraPicker) {
             CameraPickerView() { image in
                 selectedPhotoData = image.jpegData(compressionQuality: 0.8)
             }
         }
+        
+        
         
     }
     // Updates the amount by building up from the input string

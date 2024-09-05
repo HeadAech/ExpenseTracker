@@ -64,11 +64,11 @@ struct LastAndCurrentMonthExpensesChart: View {
             if isShowingChart {
                 
                 Chart{
-                    BarMark(x: .value("Last Month", lastMonthName), y: .value("Total", lastMonthTotal))
+                    BarMark(x: .value("LAST_MONTH_STRING", lastMonthName), y: .value("TOTAL_STRING", lastMonthTotal))
                         .cornerRadius(3)
                         .foregroundStyle(.opacity(0.7))
                     
-                    BarMark(x: .value("This Month", currentMonthName), y: .value("Total", currentMonthTotal))
+                    BarMark(x: .value("THIS_MONTH_STRING", currentMonthName), y: .value("TOTAL_STRING", currentMonthTotal))
                         .cornerRadius(3)
                     //                    .annotation(position: .overlay) {
                     //                        Text(currentMonthTotal, format: .currency(code: "PLN")).bold().font(.caption)
@@ -84,7 +84,7 @@ struct LastAndCurrentMonthExpensesChart: View {
                 
                 VStack{
                     Spacer()
-                    Text("Brak danych")
+                    Text("NO_DATA_STRING")
                         .font(.headline)
                     Spacer()
                 }
@@ -141,8 +141,8 @@ struct BudgetUsageView: View {
     
     var body: some View {
         Chart{
-            SectorMark(angle: .value("Pozostało", remainingBudget), angularInset: 1.0)
-            SectorMark(angle: .value("Ten miesiąc", currentMonthTotal), angularInset: 1.0)
+            SectorMark(angle: .value("REMAINING_STRING", remainingBudget), angularInset: 1.0)
+            SectorMark(angle: .value("THIS_MONTH_STRING", currentMonthTotal), angularInset: 1.0)
                 .foregroundStyle(.opacity(0.7))
         }
         .foregroundStyle(Colors().getColor(for: gradientColorIndex).gradient)
@@ -208,25 +208,25 @@ struct LastWeekExpensesChart: View {
         
         Chart{
             if expenseAvg > 0{
-                RuleMark(y: .value("Średnia", expenseAvg))
+                RuleMark(y: .value("AVERAGE_STRING", expenseAvg))
                     .lineStyle(StrokeStyle(lineWidth: 1, dash: [5]))
                 //                    .annotation(alignment: .leading) {
                 //                        Text("Średnia")
                 //                    }
             }
             ForEach(Array(expenses.enumerated()), id: \.element){ index, expense in
-                BarMark(x: .value("Dzień", lastSevenDays[index], unit: .day),
-                        y: .value("Wydano", expense.value)
+                BarMark(x: .value("DAY_STRING", lastSevenDays[index], unit: .day),
+                        y: .value("PAID_STRING", expense.value)
                 )
                 .foregroundStyle(Colors().getColor(for: gradientColorIndex).opacity(0.85).gradient)
                 
                 if let currentActiveExpense,currentActiveExpense.id == expense.id {
                     
-                    RuleMark(x: .value("Dzień", expense.date, unit: .day))
+                    RuleMark(x: .value("DAY_STRING", expense.date, unit: .day))
                         .annotation(position: .top) {
                             GroupBox{
                                 HStack{
-                                    Text("Suma")
+                                    Text("TOTAL_STRING")
                                         .font(.headline)
                                     Spacer()
                                 }
@@ -256,9 +256,9 @@ struct LastWeekExpensesChart: View {
         .overlay{
             if showingNoDataView {
                 ContentUnavailableView(label: {
-                    Label("Brak danych", systemImage: "chart.bar.xaxis")
+                    Label("NO_DATA_STRING", systemImage: "chart.bar.xaxis")
                 }, description: {
-                    Text("Dodaj wydatki, aby zobaczyć wykres.")
+                    Text("ADD_EXPENSES_STATISTICS_DESCRIPTION")
                 }).animation(.easeInOut, value: showingNoDataView)
             }
         }
@@ -313,7 +313,7 @@ struct LastWeekExpensesChart: View {
                     .rotationEffect(.degrees(45))
                     .foregroundStyle(Colors().getColor(for: gradientColorIndex))
                 
-                Text("Średnia wydatków")
+                Text("AVERAGE_EXPENSES_STRING")
                     .font(.caption2)
                     .foregroundStyle(.secondary)
                 
@@ -411,8 +411,8 @@ struct DateRangeExpensesChart: View {
         
         Chart {
             ForEach(expenses, id: \.self){ expense in
-                LineMark(x: .value("Dzień", expense.date, unit: .day),
-                         y: .value("Wydano", expense.value)
+                LineMark(x: .value("DAY_STRING", expense.date, unit: .day),
+                         y: .value("PAID_STRING", expense.value)
                 )
                 .foregroundStyle(Colors().getColor(for: gradientColorIndex).opacity(0.85).gradient)
                 .interpolationMethod(.catmullRom)
@@ -426,19 +426,19 @@ struct DateRangeExpensesChart: View {
                 
                 
                 
-                AreaMark(x: .value("Dzień", expense.date, unit: .day),
-                         y: .value("Wydano", expense.value)
+                AreaMark(x: .value("DAY_STRING", expense.date, unit: .day),
+                         y: .value("PAID_STRING", expense.value)
                 )
                 .interpolationMethod(.catmullRom)
                 .foregroundStyle(gradient)
                 
                 if let currentActiveExpense,currentActiveExpense.id == expense.id {
                     
-                    RuleMark(x: .value("Dzień", expense.date, unit: .day))
+                    RuleMark(x: .value("DAY_STRING", expense.date, unit: .day))
                         .annotation(position: .top) {
                             GroupBox{
                                 HStack{
-                                    Text("Suma")
+                                    Text("TOTAL_STRING")
                                         .font(.headline)
                                     Spacer()
                                 }
@@ -463,9 +463,9 @@ struct DateRangeExpensesChart: View {
         .overlay{
             if showingNoDataView {
                 ContentUnavailableView(label: {
-                    Label("Brak danych", systemImage: "chart.xyaxis.line")
+                    Label("NO_DATA_STRING", systemImage: "chart.xyaxis.line")
                 }, description: {
-                    Text("Dodaj wydatki, aby zobaczyć wykres.")
+                    Text("ADD_EXPENSES_STATISTICS_DESCRIPTION")
                 }).animation(.easeInOut, value: showingNoDataView)
             }
         }
