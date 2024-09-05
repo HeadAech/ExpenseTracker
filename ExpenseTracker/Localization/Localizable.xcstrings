@@ -6,6 +6,12 @@
     },
     "ADD_EXPENSES_STATISTICS_DESCRIPTION" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add expenses to see the chart."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -16,6 +22,12 @@
     },
     "ADD_PHOTO_MORE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add photo…"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26,6 +38,12 @@
     },
     "ADD_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -36,6 +54,12 @@
     },
     "AMOUNT_LESS_THAN_ZERO_MESSAGE" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The amount can’t be lower than zero"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -46,6 +70,12 @@
     },
     "AMOUNT_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Amount"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -56,6 +86,12 @@
     },
     "AVERAGE_EXPENSES_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average expenses"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -66,6 +102,12 @@
     },
     "AVERAGE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Average"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -76,6 +118,12 @@
     },
     "BUDGET_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budget"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -86,6 +134,12 @@
     },
     "CANCEL_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancel"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -96,6 +150,12 @@
     },
     "CHANGE_MONTHLY_BUDGET_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change monthly budget"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -106,6 +166,12 @@
     },
     "CHANGE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -116,6 +182,12 @@
     },
     "CHOOSE_PHOTO_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose photo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -126,6 +198,12 @@
     },
     "CHOOSE_TAG_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Choose tag"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -136,6 +214,12 @@
     },
     "COLOR_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -146,6 +230,12 @@
     },
     "COMPARISON_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comparison"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -156,6 +246,12 @@
     },
     "DATE_FROM_FUTURE_MESSAGE" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "The date can’t be from the future"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -166,6 +262,12 @@
     },
     "DATE_RANGE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date range"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -176,6 +278,12 @@
     },
     "DATE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Date"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -186,6 +294,12 @@
     },
     "DAY_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Day"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -196,6 +310,12 @@
     },
     "DELETE_PHOTO_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete photo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -206,6 +326,12 @@
     },
     "DELETE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Delete"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -219,6 +345,12 @@
     },
     "DONE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Done"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -229,6 +361,12 @@
     },
     "EDIT_EXPENSE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit expense"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -239,6 +377,12 @@
     },
     "EDIT_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -249,6 +393,12 @@
     },
     "EDIT_TAG_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edit tag"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -259,6 +409,12 @@
     },
     "GRADIENT_COLOR_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gradient color"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -269,6 +425,12 @@
     },
     "HISTORY_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "History"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -279,6 +441,12 @@
     },
     "HOME_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -289,6 +457,12 @@
     },
     "LAST_7_DAYS_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last seven days"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -299,6 +473,12 @@
     },
     "LAST_MONTH_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Last month"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -309,6 +489,12 @@
     },
     "NAME_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Name"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -319,6 +505,12 @@
     },
     "NEW_EXPENSE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New expense"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -329,6 +521,12 @@
     },
     "NEW_TAG_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "New tag"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -339,6 +537,12 @@
     },
     "NO_DATA_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No data"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -349,6 +553,12 @@
     },
     "NO_EXPENSES_DESCRIPTION" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add a new expense to see the list and statistics."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -359,6 +569,12 @@
     },
     "NO_EXPENSES_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No expenses"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -369,6 +585,12 @@
     },
     "NO_TAGS_DESCRIPTION" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Add tags to classify your expenses."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -379,6 +601,12 @@
     },
     "NO_TAGS_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No tags"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -389,6 +617,12 @@
     },
     "OK" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "OK"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -399,6 +633,12 @@
     },
     "PAID_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spent"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -409,6 +649,12 @@
     },
     "PHOTO_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Photo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -419,6 +665,12 @@
     },
     "PLN" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "PLN"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -429,6 +681,12 @@
     },
     "PREVIEW_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -439,6 +697,12 @@
     },
     "RECENT_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Recent"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -449,6 +713,12 @@
     },
     "REMAINING_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Remaining"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -459,6 +729,12 @@
     },
     "SAVE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Save"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -469,6 +745,12 @@
     },
     "SEARCH_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Search"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -479,6 +761,12 @@
     },
     "SETTINGS_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Settings"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -489,6 +777,12 @@
     },
     "SHOW_ALL_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Show all"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -499,6 +793,12 @@
     },
     "STATISTICS_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Statistics"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -508,10 +808,23 @@
       }
     },
     "Stuknij tutaj, aby dodać nowy wydatek." : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tap here to add a new expense"
+          }
+        }
+      }
     },
     "TAG_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -522,6 +835,12 @@
     },
     "TAGS_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tags"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -532,6 +851,12 @@
     },
     "TAKE_PHOTO_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Take photo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -542,6 +867,12 @@
     },
     "THEME_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Theme"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -569,6 +900,12 @@
     },
     "THIS_MONTH_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This Month"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -596,6 +933,12 @@
     },
     "TODAY_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Today"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -606,6 +949,12 @@
     },
     "TOTAL_EXPENSES_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total expenses"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -616,6 +965,12 @@
     },
     "TOTAL_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -626,6 +981,12 @@
     },
     "VIEW_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "View"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
