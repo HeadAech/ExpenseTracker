@@ -11,19 +11,33 @@ import TipKit
 
 @main
 struct ExpenseTrackerApp: App {
-    var sharedModelContainer: ModelContainer = {
-        let schema = Schema([
-            Expense.self,
-            Tag.self
-        ])
-        let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
+    //    var sharedModelContainer: ModelContainer = {
+//            let modelConfigurationExpense = ModelConfiguration(for: Expense.self, isStoredInMemoryOnly: false)
+//            let modelConfigurationTag = ModelConfiguration(for: Tag.self, isStoredInMemoryOnly: false)
+//    
+    //        let schema: Schema {[
+    //            Expense.self,
+    //            Tag.self
+    //        ]}
+    //
+    //
+    //        do {
+    //            return try ModelContainer(schema: schema, configurations: modelConfigurationExpense, modelConfigurationTag)
+    //        } catch {
+    //            fatalError("Could not create ModelContainer: \(error)")
+    //        }
+    //    }()
+    
+    let sharedModelContainer: ModelContainer
 
+    init() {
         do {
-            return try ModelContainer(for: schema, configurations: [modelConfiguration])
+            // Initialize the ModelContainer for both Expense and Tag models
+            sharedModelContainer = try ModelContainer(for: Expense.self, Tag.self)
         } catch {
-            fatalError("Could not create ModelContainer: \(error)")
+            fatalError("Could not initialize ModelContainer: \(error)")
         }
-    }()
+    }
     var body: some Scene {
         
         WindowGroup {

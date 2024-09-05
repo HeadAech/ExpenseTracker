@@ -7,7 +7,9 @@
 
 import Foundation
 
-enum Icon: String {
+enum Icon: String, RawRepresentable, CaseIterable, Identifiable {
+    var id : String { self.rawValue }
+    
     case tag = "tag.fill"
     case phone = "phone.fill"
     case video = "video.fill"
@@ -20,7 +22,7 @@ enum Icon: String {
     case location = "location.fill"
     case car = "car.fill"
     case tram = "tram.fill"
-    case bicycle = "bicycle.fill"
+    case bicycle = "bicycle"
     case fuelpump = "fuelpump.fill"
     case binocular = "binoculars.fill"
     

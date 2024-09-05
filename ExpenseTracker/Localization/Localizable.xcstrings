@@ -124,6 +124,26 @@
         }
       }
     },
+    "CHOOSE_TAG_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybierz tag"
+          }
+        }
+      }
+    },
+    "COLOR_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kolor"
+          }
+        }
+      }
+    },
     "COMPARISON_STRING" : {
       "localizations" : {
         "pl" : {
@@ -227,6 +247,16 @@
         }
       }
     },
+    "EDIT_TAG_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Edytuj tag"
+          }
+        }
+      }
+    },
     "GRADIENT_COLOR_STRING" : {
       "localizations" : {
         "pl" : {
@@ -236,9 +266,6 @@
           }
         }
       }
-    },
-    "Hello" : {
-
     },
     "HISTORY_STRING" : {
       "localizations" : {
@@ -296,6 +323,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nowy wydatek"
+          }
+        }
+      }
+    },
+    "NEW_TAG_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nowy tag"
           }
         }
       }
@@ -472,6 +509,26 @@
     },
     "Stuknij tutaj, aby dodać nowy wydatek." : {
 
+    },
+    "TAG_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag"
+          }
+        }
+      }
+    },
+    "TAGS_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tagi"
+          }
+        }
+      }
     },
     "TAKE_PHOTO_STRING" : {
       "localizations" : {

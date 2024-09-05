@@ -42,6 +42,8 @@ struct ContentView: View {
     @State var newExpenseSheetPresented: Bool = false
     @State var settingsSheetPresented: Bool = false
     
+    @State var tagsViewPresented: Bool = false
+    
     
     @AppStorage("settings:isSummingDaily") var isSummingDaily: Bool = true
     
@@ -147,15 +149,22 @@ struct ContentView: View {
             
             
             .toolbar{
-                ToolbarItem(placement: .topBarLeading) {
+                ToolbarItemGroup(placement: .topBarLeading) {
                     Button{
                         settingsSheetPresented.toggle()
                     } label: {
                         Label("", systemImage: "gear")
                     }
+                    
+                    Button {
+                        tagsViewPresented.toggle()
+                    } label: {
+                        Image(systemName: "tag.fill")
+                    }
                 }
                 
-                ToolbarItem(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .topBarTrailing) {
+                    
                     Button{
                         newExpenseSheetPresented.toggle()
                     } label: {
@@ -180,6 +189,11 @@ struct ContentView: View {
                 .presentationDragIndicator(.visible)
                 .presentationBackground(.thinMaterial)
         }
+        
+        .fullScreenCover(isPresented: $tagsViewPresented) {
+            TagsView()
+        }
+        
         .tint(Colors().getColor(for: gradientColorIndex))
         .animation(.easeInOut, value: gradientColorIndex)
 
@@ -311,6 +325,7 @@ struct ContentView: View {
 #Preview {
     ContentView()
         .modelContainer(for: Expense.self, inMemory: true)
+        .modelContainer(for: Tag.self, inMemory: true)
 }
 //
 //#Preview{

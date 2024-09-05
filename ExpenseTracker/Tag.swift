@@ -16,7 +16,7 @@ class Tag {
     var name: String
     var color: String
     
-    var icon: String?
+    var icon: String
     
     
     init(name: String, color: String, icon: String) {
@@ -25,8 +25,8 @@ class Tag {
         self.icon = icon
     }
     
-    init(name: String, color: String){
-        self.name = name
-        self.color = color
-    }
+//    init(name: String, color: String){
+//        self.name = name
+//        self.color = color
+//    }
 }

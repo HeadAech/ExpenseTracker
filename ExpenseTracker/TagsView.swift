@@ -17,7 +17,9 @@ struct TagsView: View {
     
     @State private var showingNoTagsView: Bool = true
     
-    @State private var isNewTagViewPresented: Bool = true
+    @State private var isNewTagViewPresented: Bool = false
+    
+    @State private var tagToEdit: Tag?
     
     var body: some View {
         NavigationStack {
@@ -40,10 +42,18 @@ struct TagsView: View {
                         }
                     }.buttonStyle(.bordered)
                 }
+                .padding()
                 
                 List{
-                    
+//                    Test
+//                    tagItem(tag: Tag(name: "Test", color: "#ff0000", icon: "tag.fill"))
+                    ForEach(tags) {tag in
+                        
+                        tagItem(tag: tag)
+                    }
                 }
+                .scrollContentBackground(.hidden)
+                .padding(-10)
                 
                 Spacer()
                 
@@ -74,6 +84,7 @@ struct TagsView: View {
                         Image(systemName: "xmark.circle.fill")
                             .font(.title)
                     }
+                    .buttonStyle(.plain)
                 }
                 
             }
@@ -85,9 +96,275 @@ struct TagsView: View {
             }
         }
         
+        .onChange(of: tags, { oldV, newV in
+            withAnimation {
+                showingNoTagsView = tags.isEmpty
+            }
+        })
+        .presentationBackground(.thinMaterial)
+        
         .sheet(isPresented: $isNewTagViewPresented) {
             NewTagView()
-                .presentationDetents([.medium])
+        }
+        
+        .sheet(item: $tagToEdit) {tag in
+            NewTagView(tagToEdit: tag)
+        }
+    }
+    
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(tags[index])
+            }
+        }
+    }
+    
+    func tagItem(tag: Tag) -> some View{
+        
+        VStack{
+            
+            let name: String = tag.name
+            let color: Color = Color(hex: tag.color) ?? .red
+            let icon: String = tag.icon
+            
+            HStack{
+                iconThumbnail(color: color, icon: icon)
+                    .padding(.horizontal, -5)
+                Text(name)
+                    .font(.headline)
+            }
+        }.padding(-10)
+            .contextMenu {
+                Button{
+                    tagToEdit = tag
+                } label: {
+                    Label {
+                        Text("EDIT_STRING")
+                    } icon: {
+                        Image(systemName: "pencil")
+                    }
+                }
+                
+                Button(role: .destructive) {
+                    withAnimation{
+                        modelContext.delete(tag)
+                    }
+                } label: {
+                    Label {
+                        Text("DELETE_STRING")
+                    } icon: {
+                        Image(systemName: "trash.fill")
+                    }
+                }
+            }
+    }
+    
+    func iconThumbnail(color: Color, icon: String) -> some View {
+        ZStack{
+            Circle()
+                .fill(color.gradient)
+                .frame(width: 40, height: 40)
+            
+            Image(systemName: icon)
+                .resizable()
+                .scaledToFit()
+                .padding(20)
+                .frame(width: 60, height: 60)
+                .foregroundColor(color.foregroundColorForBackground())
+        }
+    }
+}
+
+struct TagPickerView: View {
+    @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
+    
+    @Query private var tags: [Tag]
+    
+    @State private var showingNoTagsView: Bool = true
+    
+    @State private var isNewTagViewPresented: Bool = false
+    
+    @State private var tagToEdit: Tag?
+    
+    @Binding var selectedTag: Tag?
+    
+    var body: some View {
+        NavigationStack {
+            
+            VStack {
+                HStack{
+                    Text("TAGS_STRING")
+                        .font(.largeTitle).bold()
+                    
+                    Spacer()
+                    
+                    Button{
+                        withAnimation {
+                            isNewTagViewPresented.toggle()
+                        }
+                    } label: {
+                        HStack {
+                            Text("ADD_STRING")
+                            Image(systemName: "plus")
+                        }
+                    }.buttonStyle(.bordered)
+                }
+                .padding()
+                
+                List{
+//                    Test
+//                    tagItem(tag: Tag(name: "Test", color: "#ff0000", icon: "tag.fill"))
+                    ForEach(tags) {tag in
+                        
+                        HStack{
+                            tagItem(tag: tag)
+                                
+                            Spacer()
+                            HStack{
+                                if selectedTag == tag {
+                                    Text(Image(systemName: "checkmark"))
+                                        .font(.title)
+                                        .foregroundStyle(.tint)
+                                        .transition(.scale)
+                                }
+                            }
+                            .opacity(selectedTag == tag ? 1 : 0)
+                            .animation(.spring, value: selectedTag)
+                        }
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            withAnimation{
+                                if selectedTag == tag {
+                                    selectedTag = nil
+                                } else {
+                                    selectedTag = tag
+                                }
+                            }
+                        }
+                    }
+                }
+                .scrollContentBackground(.hidden)
+                .padding(-10)
+                
+                Spacer()
+                
+                
+            }
+            .padding(10)
+            
+            
+            .overlay{
+                if showingNoTagsView {
+                    ContentUnavailableView(label: {
+                        Label("NO_TAGS_STRING", systemImage: "tag.fill")
+                    }, description: {
+                        Text("NO_TAGS_DESCRIPTION")
+                    }).animation(.easeInOut, value: showingNoTagsView)
+    //                        .offset(y:15)
+                }
+            }
+        
+            .toolbar {
+                
+                ToolbarItem(placement: .topBarTrailing) {
+                    Button{
+                        withAnimation {
+                            dismiss()
+                        }
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.title)
+                    }
+                    .buttonStyle(.plain)
+                }
+                
+            }
+        }
+        
+        .onAppear {
+            withAnimation {
+                showingNoTagsView = tags.isEmpty
+            }
+        }
+        
+        .onChange(of: tags, { oldV, newV in
+            withAnimation {
+                showingNoTagsView = tags.isEmpty
+            }
+        })
+        .presentationBackground(.thinMaterial)
+        
+        .sheet(isPresented: $isNewTagViewPresented) {
+            NewTagView()
+        }
+        
+        .sheet(item: $tagToEdit) {tag in
+            NewTagView(tagToEdit: tag)
+        }
+    }
+    
+    private func deleteItems(offsets: IndexSet) {
+        withAnimation {
+            for index in offsets {
+                modelContext.delete(tags[index])
+            }
+        }
+    }
+    
+    func tagItem(tag: Tag) -> some View{
+        
+        VStack{
+            
+            let name: String = tag.name
+            let color: Color = Color(hex: tag.color) ?? .red
+            let icon: String = tag.icon
+            
+            HStack{
+                iconThumbnail(color: color, icon: icon)
+                    .padding(.horizontal, -5)
+                Text(name)
+                    .font(.headline)
+            }
+        }.padding(-10)
+            .contextMenu {
+                Button{
+                    tagToEdit = tag
+                } label: {
+                    Label {
+                        Text("EDIT_STRING")
+                    } icon: {
+                        Image(systemName: "pencil")
+                    }
+                }
+                
+                Button(role: .destructive) {
+                    withAnimation{
+                        modelContext.delete(tag)
+                    }
+                } label: {
+                    Label {
+                        Text("DELETE_STRING")
+                    } icon: {
+                        Image(systemName: "trash.fill")
+                    }
+                }
+            }
+    }
+    
+    func iconThumbnail(color: Color, icon: String) -> some View {
+        ZStack{
+            Circle()
+                .fill(color.gradient)
+                .frame(width: 40, height: 40)
+            
+            Image(systemName: icon)
+                .resizable()
+                .scaledToFit()
+                .padding(20)
+                .frame(width: 60, height: 60)
+                .foregroundColor(color.foregroundColorForBackground())
         }
     }
 }
@@ -98,7 +375,7 @@ struct NewTagView: View {
     
     @Environment(\.dismiss) private var dismiss
     
-    @State private var icon: String = "tag"
+    @State private var icon: String = "tag.fill"
     
     @State private var name: String = ""
     
@@ -110,15 +387,15 @@ struct NewTagView: View {
     
     func iconPreview() -> some View {
         ZStack{
-            Circle() // The shape
-                .fill(color.gradient) // Background color of the shape
-                .frame(width: 70, height: 70) // Adjust size of the shape
+            Circle()
+                .fill(color.gradient)
+                .frame(width: 70, height: 70)
             
-            Image(systemName: "tag.fill") // The image (you can use any SF Symbol or custom image)
+            Image(systemName: icon)
                 .resizable()
                 .scaledToFit()
-                .padding(20) // Add padding around the image
-                .frame(width: 80, height: 80) // Adjust size of the image inside the shape
+                .padding(20) 
+                .frame(width: 80, height: 80)
                 .foregroundColor(color.foregroundColorForBackground())
         }
     }
@@ -128,8 +405,11 @@ struct NewTagView: View {
             
             VStack{
                 iconPreview()
+                    .onTapGesture {
+                        isIconPickerPresented.toggle()
+                    }
                 Button{
-                    
+                    isIconPickerPresented.toggle()
                 } label: {
                     Text("CHANGE_STRING")
                 }
@@ -149,7 +429,7 @@ struct NewTagView: View {
             }
             .scrollContentBackground(.hidden)
             
-            .navigationTitle("NEW_TAG_STRING")
+            .navigationTitle(tagToEdit != nil ? "EDIT_TAG_STRING" : "NEW_TAG_STRING")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .cancellationAction) {
@@ -169,15 +449,41 @@ struct NewTagView: View {
                 }
             }
         }
+        .onAppear {
+            if tagToEdit != nil {
+                name = tagToEdit!.name
+                color = Color(hex: tagToEdit!.color) ?? .red
+                icon = tagToEdit!.icon
+            }
+        }
+        .sheet(isPresented: $isIconPickerPresented) {
+            IconPickerView(chosenIcon: $icon)
+        }
         
+        .presentationDetents([.medium])
         .presentationBackground(.thinMaterial)
     }
     
     private func save() {
+        if name.isEmpty { return }
         
+        if tagToEdit != nil {
+            tagToEdit!.name = name
+            tagToEdit!.color = color.toHex() ?? "#fc0000"
+            tagToEdit!.icon = icon
+            dismiss()
+            return
+        }
+        
+        let newTag = Tag(name: name, color: color.toHex() ?? "#fc0000", icon: icon)
+        
+        modelContext.insert(newTag)
+        dismiss()
     }
 }
 
 #Preview {
     TagsView()
+        .modelContainer(for: Expense.self, inMemory: true)
+        .modelContainer(for: Tag.self, inMemory: true)
 }

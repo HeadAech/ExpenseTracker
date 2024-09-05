@@ -261,16 +261,50 @@ struct ExpenseListItem: View {
     
     @State private var expenseToEdit: Expense?
     
+    func iconThumbnail(color: Color, icon: String) -> some View {
+        ZStack{
+            Circle()
+                .fill(color.gradient)
+                .frame(width: 30, height: 30)
+            
+            Image(systemName: icon)
+                .resizable()
+                .scaledToFit()
+                .padding(10)
+                .frame(width: 40, height: 40)
+                .foregroundColor(color.foregroundColorForBackground())
+        }
+    }
     
     var body: some View {
         HStack{
             VStack(alignment: .leading){
                 
+                if expense.tag != nil {
+                    HStack {
+                        let tagName = expense.tag!.name
+                        let tagColor: Color = Color(hex: expense.tag!.color) ?? .red
+                        let tagIcon: String = expense.tag!.icon
+                        
+//                        iconThumbnail(color: tagColor, icon: tagIcon)
+                        
+                        
+                        Image(systemName: "circle.fill")
+                            .symbolRenderingMode(.palette)
+                            .foregroundStyle(tagColor.gradient)
+                            .font(.system(size: 8))
+                        
+                        Text(tagName)
+                            .font(.caption)
+                            .bold()
+
+                    }
+                }
+                
                 if !expense.name.isEmpty{
                     Text(expense.name)
                         .font(.headline)
                 }
-                
                 
                 HStack{
                     Text(expense.date.formatted(date: .numeric, time: .shortened))
@@ -287,12 +321,19 @@ struct ExpenseListItem: View {
                     .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
             }
             Spacer()
+            
+               
+                
             Text(expense.value, format: .currency(code: "PLN"))
                 .bold()
                 .foregroundStyle(Color.accentColor)
                 .multilineTextAlignment(.trailing)
                 .lineLimit(2)
                 .truncationMode(.tail)
+            
+
+            
+            
         }
         .contextMenu{
             Button{
@@ -358,14 +399,19 @@ struct NewExpenseSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
     
+    @Query(sort: \Tag.name) private var tags: [Tag]
+    
     var expenseToEdit: Expense?
     
     @State private var name: String = ""
     @State private var date: Date = .now
     @State private var amount: String = "0,00"
+    @State private var tag: Tag?
     
     @State private var errorAlertMessage: LocalizedStringResource = "AMOUNT_LESS_THAN_ZERO_MESSAGE"
     @State private var isErrorAlertPresent: Bool = false
+    
+    @State private var isTagPickerPresented: Bool = false
     
     @State var selectedPhoto: PhotosPickerItem?
     @State var selectedPhotoData: Data?
@@ -414,6 +460,43 @@ struct NewExpenseSheet: View {
                     Text("PLN")
                     
                 }
+                
+                Section("TAG_STRING"){
+                    
+                    if tag != nil {
+                        HStack {
+                            iconThumbnail(color: Color(hex: tag!.color) ?? .red, icon: tag!.icon)
+                                .padding(-10)
+                            Text(tag!.name)
+                            
+                            Spacer()
+                            
+                            Button(role: .destructive) {
+                                withAnimation{
+                                    tag = nil
+                                }
+                            } label: {
+                                Image(systemName: "xmark")
+                            }
+                        }
+                    }
+                    
+                    HStack {
+                        Button {
+                            isTagPickerPresented.toggle()
+                        } label: {
+                            
+                            Label {
+                                Text("CHOOSE_TAG_STRING")
+                            } icon: {
+                                Image(systemName: "tag.fill")
+                            }
+                            
+                        }
+                    }
+
+                }
+                
                 Section("PHOTO_STRING"){
                     
                     if let selectedPhotoData,
@@ -475,6 +558,10 @@ struct NewExpenseSheet: View {
                     }
                     date = expenseToEdit!.date
                     selectedPhotoData = expenseToEdit!.image
+                    
+                    if expenseToEdit!.tag != nil {
+                        tag = expenseToEdit!.tag
+                    }
                 }
                 
                 amountFocused.toggle()
@@ -511,6 +598,9 @@ struct NewExpenseSheet: View {
                             if selectedPhotoData != nil {
                                 expenseToEdit!.image = selectedPhotoData
                             }
+                            if tag != nil {
+                                expenseToEdit!.tag = tag
+                            }
                             withAnimation{
 //                                modelContext.insert(expenseToEdit!)
                                 dismiss()
@@ -518,6 +608,9 @@ struct NewExpenseSheet: View {
                         } else {
                             
                             let expense = Expense(name: name, date: date, value: doubleAmount ?? 0)
+                            if tag != nil {
+                                expense.tag = tag!
+                            }
                             if selectedPhotoData != nil {
                                 expense.image = selectedPhotoData
                             }
@@ -552,9 +645,32 @@ struct NewExpenseSheet: View {
             }
         }
         
+        .fullScreenCover(isPresented: $isTagPickerPresented) {
+            TagPickerView(selectedTag: $tag)
+        }
+        
         
         
     }
+    
+    func iconThumbnail(color: Color, icon: String) -> some View {
+        ZStack{
+            Circle()
+                .fill(color.gradient)
+                .foregroundStyle(color.gradient)
+                .frame(width: 40, height: 40)
+                .symbolRenderingMode(.palette)
+            
+            Image(systemName: icon)
+                .resizable()
+                .scaledToFit()
+                .padding(20)
+                .frame(width: 65, height: 65)
+                .foregroundColor(color.foregroundColorForBackground())
+                .foregroundStyle(color.gradient)
+        }
+    }
+    
     // Updates the amount by building up from the input string
     private func updateAmount(from newValue: String) {
         // Allow only digits
