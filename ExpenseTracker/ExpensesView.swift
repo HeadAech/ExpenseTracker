@@ -483,13 +483,13 @@ struct NewExpenseSheet: View {
             .navigationTitle(expenseToEdit == nil ? "NEW_EXPENSE_STRING" : "EDIT_EXPENSE_STRING")
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
-                ToolbarItemGroup(placement: .topBarLeading) {
+                ToolbarItemGroup(placement: .cancellationAction) {
                     Button("CANCEL_STRING") {
                         dismiss()
                     }
                 }
                 
-                ToolbarItemGroup(placement: .topBarTrailing) {
+                ToolbarItemGroup(placement: .confirmationAction) {
                     Button(expenseToEdit != nil ? "SAVE_STRING" : "ADD_STRING") {
                         let doubleAmount = Double(amount.replacingOccurrences(of: ",", with: "."))
                         

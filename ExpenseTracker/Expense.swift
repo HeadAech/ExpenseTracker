@@ -18,8 +18,17 @@ class Expense: ObservableObject {
     var date: Date
     var value: Double
     
+    var tag: Tag?
+    
     @Attribute(.externalStorage)
     var image: Data?
+    
+    init(name: String, date: Date, value: Double, tag: Tag) {
+        self.name = name
+        self.date = date
+        self.value = value
+        self.tag = tag
+    }
     
     init(name: String, date: Date, value: Double) {
         self.name = name

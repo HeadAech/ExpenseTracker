@@ -14,6 +14,7 @@ struct ExpenseTrackerApp: App {
     var sharedModelContainer: ModelContainer = {
         let schema = Schema([
             Expense.self,
+            Tag.self
         ])
         let modelConfiguration = ModelConfiguration(schema: schema, isStoredInMemoryOnly: false)
 

@@ -237,6 +237,9 @@
         }
       }
     },
+    "Hello" : {
+
+    },
     "HISTORY_STRING" : {
       "localizations" : {
         "pl" : {
@@ -323,6 +326,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Brak wydatków"
+          }
+        }
+      }
+    },
+    "NO_TAGS_DESCRIPTION" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dodaj tag, aby kategoryzować swoje wydatki."
+          }
+        }
+      }
+    },
+    "NO_TAGS_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brak tagów"
           }
         }
       }
