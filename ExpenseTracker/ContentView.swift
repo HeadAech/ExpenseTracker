@@ -194,7 +194,7 @@ struct ContentView: View {
             TagsView()
         }
         
-        .tint(Colors().getColor(for: gradientColorIndex))
+//        .tint(Colors().getColor(for: gradientColorIndex))
         .animation(.easeInOut, value: gradientColorIndex)
 
     }

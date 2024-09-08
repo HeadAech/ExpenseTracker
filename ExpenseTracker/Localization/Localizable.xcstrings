@@ -308,6 +308,22 @@
         }
       }
     },
+    "DELETE_ALERT_TITLE" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Are you sure you want to delete?"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czy na pewno chcesz usunąć?"
+          }
+        }
+      }
+    },
     "DELETE_PHOTO_STRING" : {
       "localizations" : {
         "en" : {
@@ -680,6 +696,7 @@
       }
     },
     "PREVIEW_STRING" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -975,6 +992,23 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suma"
+          }
+        }
+      }
+    },
+    "UNTAGGED_STRING" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Untagged"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Brak tagu"
           }
         }
       }

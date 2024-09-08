@@ -107,6 +107,8 @@ struct AllExpensesView: View {
     
     @FocusState private var searchBarFocused: Bool
     
+    @State private var chosenExpense: Expense?
+    
     func searchBar() -> some View {
 
         HStack{
@@ -137,7 +139,7 @@ struct AllExpensesView: View {
             return expenses
         }
         
-        return expenses.filter { $0.name.contains(text) }
+        return expenses.filter { $0.name.lowercased().contains(text.lowercased()) }
     }
     
     var body: some View {
@@ -185,18 +187,11 @@ struct AllExpensesView: View {
 //                ExpenseListItem(expense: Expense(name: "Wydatek", date: .now, value: 10000))
                 
                 ForEach(searchText.isEmpty ? expenses : filteredExpenses) { expense in
-                    if expense.image != nil {
-                        NavigationLink(destination: {
-                            if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
-                                ImageViewer(image: uiImage)
-                            }
-                        }) {
-                            ExpenseListItem(expense: expense)
+                    ExpenseListItem(expense: expense)
+                        .contentShape(Rectangle())
+                        .onTapGesture {
+                            chosenExpense = expense
                         }
-                        
-                    } else {
-                        ExpenseListItem(expense: expense)
-                    }
                     
                 }
                 .onDelete(perform: deleteItems)
@@ -239,6 +234,10 @@ struct AllExpensesView: View {
             .animation(.smooth, value: expenses)
         
         }.padding(20)
+        
+            .fullScreenCover(item: $chosenExpense) {expense in
+                ExpenseDetailsView(expense: expense)
+            }
             
     }
     
@@ -280,30 +279,23 @@ struct ExpenseListItem: View {
         HStack{
             VStack(alignment: .leading){
                 
-                if expense.tag != nil {
-                    HStack {
-                        let tagName = expense.tag!.name
-                        let tagColor: Color = Color(hex: expense.tag!.color) ?? .red
-                        let tagIcon: String = expense.tag!.icon
-                        
-//                        iconThumbnail(color: tagColor, icon: tagIcon)
-                        
-                        
-                        Image(systemName: "circle.fill")
-                            .symbolRenderingMode(.palette)
-                            .foregroundStyle(tagColor.gradient)
-                            .font(.system(size: 8))
-                        
-                        Text(tagName)
-                            .font(.caption)
-                            .bold()
-
-                    }
-                }
                 
                 if !expense.name.isEmpty{
-                    Text(expense.name)
-                        .font(.headline)
+                    HStack{
+                        
+                        if expense.tag != nil {
+                            
+                            let tagColor: Color = Color(hex: expense.tag!.color) ?? .red
+                            
+                            Image(systemName: "circle.fill")
+                                .symbolRenderingMode(.palette)
+                                .foregroundStyle(tagColor.gradient)
+                                .font(.system(size: 8))
+                            
+                        }
+                        Text(expense.name)
+                            .font(.headline)
+                    }
                 }
                 
                 HStack{
@@ -314,15 +306,6 @@ struct ExpenseListItem: View {
 
             }
             Spacer()
-            if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
-                Image(uiImage: uiImage)
-                    .resizable()
-                    .frame(width: 50, height: 50, alignment: .center)
-                    .clipShape(RoundedRectangle(cornerRadius: 10, style: .continuous))
-            }
-            Spacer()
-            
-               
                 
             Text(expense.value, format: .currency(code: "PLN"))
                 .bold()
@@ -360,36 +343,183 @@ struct ExpenseListItem: View {
 
 struct ExpenseDetailsView: View {
     @Environment(\.modelContext) private var modelContext
+    @Environment(\.dismiss) private var dismiss
     
-    @State var expense: Expense
+    var expense: Expense
+    
+    @State private var isImagePreviewPresented: Bool = false
+    
+    @State private var isInEdit: Bool = false
+    
+    @State private var isDeleteAlertPresented: Bool = false
+    
+    func tagBox(tag: Tag) -> some View{
+        let name: String = tag.name
+        let color: Color = Color(hex: tag.color) ?? .secondary
+        let icon: String = tag.icon
+        
+        return VStack{
+            
+            HStack(alignment: .center) {
+                Image(systemName: icon)
+                    .font(.caption)
+                
+                if name == "" {
+                    Text("UNTAGGED_STRING")
+                        .font(.caption)
+                        .foregroundColor(color.foregroundColorForBackground())
+                } else {
+                    Text(name)
+                        .font(.caption)
+                        .foregroundColor(color.foregroundColorForBackground())
+                }
+            }.padding(5)
+            
+        }.background(
+            RoundedRectangle(cornerRadius: 3)
+                .fill(color)
+                .opacity(0.8)
+            )
+
+    }
     
     var body: some View {
-        NavigationStack{
-            ZStack(alignment: .top){
-                Color.clear.edgesIgnoringSafeArea(.all)
-                
-                if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
-                    
-                    Image(uiImage: uiImage)
-                        .resizable()
-                        .ignoresSafeArea(.all)
-                    //We can use the LinearGradient in the mask modifier to fade it top to bottom
-                        .mask(LinearGradient(gradient: Gradient(stops: [
-                            .init(color: .black, location: 0),
-                            .init(color: .clear, location: 1),
-                            .init(color: .black, location: 1),
-                            .init(color: .clear, location: 1)
-                        ]), startPoint: .top, endPoint: .bottom))
-                        .padding()
-                        .frame(width: .infinity, height: 250)
-                } else {
-                    LinearGradient(gradient: Gradient(colors: [Color.red.opacity(0.8), Color.clear]), startPoint: .top, endPoint: .bottom)
-                        .frame(height:250)
-                        .ignoresSafeArea(.all)
+        
+        let name = expense.name
+        let date = expense.date
+        let amount = expense.value
+        
+        VStack{
+            HStack {
+                Spacer()
+                Button {
+                    dismiss()
+                } label: {
+                    Image(systemName: "xmark.circle.fill")
+                        .font(.title)
                 }
+                .buttonStyle(.plain)
+                .padding(.vertical, 5)
+            }
+            
+            HStack{
                 
+                Text(name)
+                    .font(.largeTitle)
+                    .bold()
                 
-            }.ignoresSafeArea(.all)
+                Spacer()
+                
+                HStack{
+                    
+                    Button {
+                        isInEdit.toggle()
+                    } label: {
+                        Image(systemName: "pencil")
+                            .frame(height: 15)
+                    }
+                    .buttonStyle(.bordered)
+                    
+                    Button(role: .destructive) {
+                        isDeleteAlertPresented.toggle()
+                    } label: {
+                        Image(systemName: "trash.fill")
+                            .frame(height: 15)
+                    }
+                    .foregroundStyle(.red)
+                    .buttonStyle(.bordered)
+                    
+                }
+            }
+            .padding(.vertical, 10)
+            
+            HStack {
+                if expense.tag != nil {
+                    tagBox(tag: expense.tag!)
+                } else {
+                    tagBox(tag: Tag(name: "", color: "", icon: "tag.slash.fill"))
+                }
+                Spacer()
+            }
+            .padding(.vertical, -10)
+            
+            HStack {
+                Text(amount, format: .currency(code: "PLN"))
+                    .font(.title)
+                    .bold()
+                    .foregroundStyle(.tint)
+                Spacer()
+            }
+            .padding(.vertical, 15)
+            
+            if expense.image != nil {
+                
+                Form {
+                    
+                    HStack{
+                        
+                        Button {
+                            isImagePreviewPresented.toggle()
+                        } label: {
+                            Label {
+                                Text("PHOTO_STRING")
+                            } icon: {
+                                Image(systemName: "photo")
+                            }
+                        }
+                        Spacer()
+                        
+                        if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
+                            Image(uiImage: uiImage)
+                                .resizable()
+                                .frame(width: 50, height: 50, alignment: .center)
+                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                        }
+                        
+                    }
+                    
+                }
+                .padding(.horizontal, -20)
+                .scrollContentBackground(.hidden)
+                
+            }
+            
+            Spacer()
+            
+            
+            
+            
+            HStack {
+                Text(date.formatted(date: .complete, time: .shortened))
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                
+            }
+            .padding(.vertical, 20)
+            
+            
+            
+        }
+        .padding(.horizontal, 20)
+        .presentationBackground(.thinMaterial)
+        
+        .fullScreenCover(isPresented: $isImagePreviewPresented) {
+            if let selectedPhotoData = expense.image, let image = Image(data: selectedPhotoData) {
+                ImageViewer(image: image)
+            }
+        }
+        
+        .sheet(isPresented: $isInEdit) {
+            NewExpenseSheet(expenseToEdit: expense)
+        }
+        
+        .alert("DELETE_ALERT_TITLE", isPresented: $isDeleteAlertPresented) {
+            Button(role: .destructive) {
+                modelContext.delete(expense)
+                dismiss()
+            } label: {
+                Text("DELETE_STRING")
+            }
         }
     }
 }
@@ -699,5 +829,7 @@ struct NewExpenseSheet: View {
 
 
 #Preview {
-    LastExpensesView()
+    @Previewable @State var expense: Expense = Expense(name: "Test expense", date: .now, value: 200.96)
+    
+    ExpenseDetailsView(expense: expense)
 }

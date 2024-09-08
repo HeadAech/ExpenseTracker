@@ -30,6 +30,9 @@ struct ExpenseTrackerApp: App {
     
     let sharedModelContainer: ModelContainer
 
+    private var gradientColors: [Int: Color] = Colors().gradientColors
+    @AppStorage("settings:gradientColorIndex") var gradientColorIndex: Int = 0
+    
     init() {
         do {
             // Initialize the ModelContainer for both Expense and Tag models
@@ -48,6 +51,7 @@ struct ExpenseTrackerApp: App {
                         
                     ])
                 }
+                .tint(Colors().getColor(for: gradientColorIndex))
         }
         .modelContainer(sharedModelContainer)
         

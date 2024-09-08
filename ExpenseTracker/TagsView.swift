@@ -23,8 +23,23 @@ struct TagsView: View {
     
     var body: some View {
         NavigationStack {
-            
+  
             VStack {
+                HStack {
+                    Spacer()
+                    
+                    Button{
+                        withAnimation {
+                            dismiss()
+                        }
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.title)
+                    }
+                    .buttonStyle(.plain)
+                    
+                }.padding(.horizontal, 10)
+                
                 HStack{
                     Text("TAGS_STRING")
                         .font(.largeTitle).bold()
@@ -72,22 +87,7 @@ struct TagsView: View {
     //                        .offset(y:15)
                 }
             }
-        
-            .toolbar {
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button{
-                        withAnimation {
-                            dismiss()
-                        }
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.title)
-                    }
-                    .buttonStyle(.plain)
-                }
-                
-            }
+
         }
         
         .onAppear {

@@ -93,3 +93,24 @@ extension Color {
         return brightness > 0.5 ? .black.opacity(0.8) : .white
     }
 }
+
+extension Image {
+    /// Initializes a SwiftUI `Image` from data.
+    init?(data: Data) {
+        #if canImport(UIKit)
+        if let uiImage = UIImage(data: data) {
+            self.init(uiImage: uiImage)
+        } else {
+            return nil
+        }
+        #elseif canImport(AppKit)
+        if let nsImage = NSImage(data: data) {
+            self.init(nsImage: nsImage)
+        } else {
+            return nil
+        }
+        #else
+        return nil
+        #endif
+    }
+}
