@@ -17,7 +17,7 @@ class Expense: ObservableObject {
     var name: String
     var date: Date
     var value: Double
-    
+
     var tag: Tag?
     
     @Attribute(.externalStorage)

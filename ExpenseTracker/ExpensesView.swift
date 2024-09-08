@@ -187,11 +187,16 @@ struct AllExpensesView: View {
 //                ExpenseListItem(expense: Expense(name: "Wydatek", date: .now, value: 10000))
                 
                 ForEach(searchText.isEmpty ? expenses : filteredExpenses) { expense in
-                    ExpenseListItem(expense: expense)
-                        .contentShape(Rectangle())
-                        .onTapGesture {
-                            chosenExpense = expense
-                        }
+                    Button {
+                        chosenExpense = expense
+                    } label: {
+                        ExpenseListItem(expense: expense)
+                            .contentShape(Rectangle())
+                    }
+                    .contentShape(Rectangle())
+                    .buttonStyle(.plain)
+                        
+                    
                     
                 }
                 .onDelete(perform: deleteItems)
@@ -303,6 +308,7 @@ struct ExpenseListItem: View {
                         .font(.caption)
                     Spacer()
                 }
+                .padding(.vertical, 1)
 
             }
             Spacer()
@@ -315,7 +321,7 @@ struct ExpenseListItem: View {
                 .truncationMode(.tail)
             
 
-            
+            Image(systemName: "chevron.right")
             
         }
         .contextMenu{
@@ -715,8 +721,15 @@ struct NewExpenseSheet: View {
                             isErrorAlertPresent.toggle()
                             return
                         }
+                        
                         if date > Date() {
                             errorAlertMessage = Error.DATE_FROM_THE_FUTURE.title
+                            isErrorAlertPresent.toggle()
+                            return
+                        }
+                        
+                        if name.isEmpty {
+                            errorAlertMessage = Error.NAME_IS_EMPTY.title
                             isErrorAlertPresent.toggle()
                             return
                         }

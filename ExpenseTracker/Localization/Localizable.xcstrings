@@ -503,6 +503,9 @@
         }
       }
     },
+    "NAME_IS_EMPTY_MESSAGE" : {
+
+    },
     "NAME_STRING" : {
       "localizations" : {
         "en" : {

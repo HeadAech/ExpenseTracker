@@ -15,6 +15,8 @@ struct TagsView: View {
     
     @Query private var tags: [Tag]
     
+    @Query private var expenses: [Expense]
+    
     @State private var showingNoTagsView: Bool = true
     
     @State private var isNewTagViewPresented: Bool = false
@@ -115,7 +117,16 @@ struct TagsView: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
+                nullifyExpensesTags(tag: tags[index])
                 modelContext.delete(tags[index])
+            }
+        }
+    }
+    
+    func nullifyExpensesTags(tag: Tag) {
+        for expense in expenses{
+            if expense.tag == tag {
+                expense.tag = nil
             }
         }
     }
@@ -147,6 +158,7 @@ struct TagsView: View {
                 }
                 
                 Button(role: .destructive) {
+                    nullifyExpensesTags(tag: tag)
                     withAnimation{
                         modelContext.delete(tag)
                     }
@@ -181,6 +193,7 @@ struct TagPickerView: View {
     @Environment(\.dismiss) private var dismiss
     
     @Query private var tags: [Tag]
+    @Query private var expenses: [Expense]
     
     @State private var showingNoTagsView: Bool = true
     
@@ -194,6 +207,21 @@ struct TagPickerView: View {
         NavigationStack {
             
             VStack {
+                HStack {
+                    Spacer()
+                    
+                    Button{
+                        withAnimation {
+                            dismiss()
+                        }
+                    } label: {
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.title)
+                    }
+                    .buttonStyle(.plain)
+                    
+                }.padding(.horizontal, 10)
+                
                 HStack{
                     Text("TAGS_STRING")
                         .font(.largeTitle).bold()
@@ -266,21 +294,6 @@ struct TagPickerView: View {
                 }
             }
         
-            .toolbar {
-                
-                ToolbarItem(placement: .topBarTrailing) {
-                    Button{
-                        withAnimation {
-                            dismiss()
-                        }
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.title)
-                    }
-                    .buttonStyle(.plain)
-                }
-                
-            }
         }
         
         .onAppear {
@@ -308,7 +321,17 @@ struct TagPickerView: View {
     private func deleteItems(offsets: IndexSet) {
         withAnimation {
             for index in offsets {
+                nullifyExpensesTags(tag: tags[index])
                 modelContext.delete(tags[index])
+            }
+        }
+    }
+    
+    func nullifyExpensesTags(tag: Tag) {
+
+        for expense in expenses{
+            if expense.tag == tag {
+                expense.tag = nil
             }
         }
     }
@@ -341,6 +364,7 @@ struct TagPickerView: View {
                 
                 Button(role: .destructive) {
                     withAnimation{
+                        nullifyExpensesTags(tag: tag)
                         modelContext.delete(tag)
                     }
                 } label: {
