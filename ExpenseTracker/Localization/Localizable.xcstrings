@@ -4,6 +4,9 @@
     "" : {
 
     },
+    "Add Expense Intent" : {
+
+    },
     "ADD_EXPENSES_STATISTICS_DESCRIPTION" : {
       "localizations" : {
         "en" : {
@@ -51,6 +54,9 @@
           }
         }
       }
+    },
+    "Amount" : {
+
     },
     "AMOUNT_LESS_THAN_ZERO_MESSAGE" : {
       "localizations" : {
@@ -471,6 +477,12 @@
         }
       }
     },
+    "Just to confirm, you wanted ‘%@’?" : {
+
+    },
+    "Just to confirm, you wanted ‘%lf’?" : {
+
+    },
     "LAST_7_DAYS_STRING" : {
       "localizations" : {
         "en" : {
@@ -503,8 +515,18 @@
         }
       }
     },
-    "NAME_IS_EMPTY_MESSAGE" : {
+    "Name" : {
 
+    },
+    "NAME_IS_EMPTY_MESSAGE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nazwa nie może być pusta."
+          }
+        }
+      }
     },
     "NAME_STRING" : {
       "localizations" : {
@@ -897,6 +919,26 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Motyw"
+          }
+        }
+      }
+    },
+    "There are %lld options matching ‘%@’." : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There are %1$lld options matching ‘%2$@’."
+          }
+        }
+      }
+    },
+    "There are %lld options matching ‘%lf’." : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "new",
+            "value" : "There are %1$lld options matching ‘%2$lf’."
           }
         }
       }

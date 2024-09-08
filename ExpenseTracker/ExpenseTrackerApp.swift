@@ -8,6 +8,7 @@
 import SwiftUI
 import SwiftData
 import TipKit
+import AppIntents
 
 @main
 struct ExpenseTrackerApp: App {
@@ -37,10 +38,15 @@ struct ExpenseTrackerApp: App {
         do {
             // Initialize the ModelContainer for both Expense and Tag models
             sharedModelContainer = try ModelContainer(for: Expense.self, Tag.self)
+            
+            
         } catch {
             fatalError("Could not initialize ModelContainer: \(error)")
         }
+        
     }
+    
+    
     var body: some Scene {
         
         WindowGroup {
