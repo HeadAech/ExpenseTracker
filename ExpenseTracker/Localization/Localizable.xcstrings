@@ -250,6 +250,16 @@
         }
       }
     },
+    "CONFIRM_PIN_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Potwierdź pin"
+          }
+        }
+      }
+    },
     "DATE_FROM_FUTURE_MESSAGE" : {
       "localizations" : {
         "en" : {
@@ -346,6 +356,16 @@
         }
       }
     },
+    "DELETE_PIN_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usuń pin"
+          }
+        }
+      }
+    },
     "DELETE_STRING" : {
       "localizations" : {
         "en" : {
@@ -425,6 +445,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edytuj tag"
+          }
+        }
+      }
+    },
+    "ENTER_PIN_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podaj pin"
           }
         }
       }
@@ -515,6 +545,16 @@
         }
       }
     },
+    "LOCK_DATA_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zablokuj dane"
+          }
+        }
+      }
+    },
     "Name" : {
 
     },
@@ -556,6 +596,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nowy wydatek"
+          }
+        }
+      }
+    },
+    "NEW_PIN_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Podaj nowy pin"
           }
         }
       }
@@ -733,6 +783,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Podgląd"
+          }
+        }
+      }
+    },
+    "PRIVACY_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prywatność"
           }
         }
       }
@@ -1054,6 +1114,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Brak tagu"
+          }
+        }
+      }
+    },
+    "USE_BIOMETRICS_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Używaj biometryki"
           }
         }
       }

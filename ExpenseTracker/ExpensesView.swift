@@ -755,7 +755,7 @@ struct NewExpenseSheet: View {
                                 expense.tag = tag!
                             }
                             if selectedPhotoData != nil {
-                                expense.image = selectedPhotoData
+                                expense.image = UIImage(data: selectedPhotoData!)!.jpeg(.low)
                             }
                             withAnimation{
                                 modelContext.insert(expense)
@@ -784,7 +784,7 @@ struct NewExpenseSheet: View {
         .presentationBackground(.thinMaterial)
         .fullScreenCover(isPresented: $showCameraPicker) {
             CameraPickerView() { image in
-                selectedPhotoData = image.jpegData(compressionQuality: 0.8)
+                selectedPhotoData = image.jpeg(.low)
             }
         }
         
