@@ -371,6 +371,7 @@ struct DateRangeExpensesChart: View {
         // Initialize the @Query with a default predicate
         _dateRangeExpenses = Query(filter: predicate)
         expenses = summarizeExpenses()
+        print(expenses.count)
     }
     
     @AppStorage("settings:gradientColorIndex") var gradientColorIndex: Int = 0
@@ -544,3 +545,184 @@ struct DateRangeExpensesChart: View {
     }
 }
 
+public enum InfluenceExpenseRange: CaseIterable {
+    case TODAY
+    case LAST_7_DAYS
+    case LAST_MONTH
+    case LAST_3_MONTHS
+    
+    var id: Self { self }
+    
+    var string: LocalizedStringResource {
+        switch self {
+            
+        case .TODAY: "TODAY_STRING"
+        case .LAST_7_DAYS: "7_DAYS_STRING"
+        case .LAST_MONTH: "MONTH_STRING"
+        case .LAST_3_MONTHS: "3_MONTHS_STRING"
+            
+        }
+    }
+}
+
+struct InfluenceExpenseChart: View {
+    
+    @State private var showingNoDataView: Bool = true
+    
+    @Query private var filteredExpenses: [Expense]
+    
+    @State private var expenses: [Expense] = []
+    
+    var expense: Expense
+//    var tags: [Tag] = [Tag(name: "Test 1", color: "#ff0000", icon: "tag.fill"), Tag(name: "Test 2", color: "#00ff00", icon: "tag.fill"), Tag(name: "Test 3", color: "#0000ff", icon: "tag.fill")]
+    
+    
+//    private var testExpenses: [Expense]
+    
+    init(predicate: Predicate<Expense>, expense: Expense) {
+        // Initialize the @Query with a default predicate
+        _filteredExpenses = Query(filter: predicate)
+        self.expense = expense
+//        self.testExpenses = []
+//        expense.tag = tags[0]
+//        testExpenses = populateTest()
+        expenses = filterWithTag(expenses: filteredExpenses, tag: expense.tag)
+//        print(expenses.count)
+    }
+    
+    
+   func filterWithTag(expenses: [Expense], tag: Tag?) -> [Expense]{
+       if tag == nil { return expenses}
+
+       return expenses.filter {expense in
+           if let t = expense.tag {
+               return t == tag
+           } else {
+               return false
+           }
+       }
+   }
+    
+    func populateTest() -> [Expense]{
+        var arr: [Expense] = []
+        
+//        expense.tag = tags[0]
+        for _ in 0...5 {
+            let e = Expense()
+            e.mock()
+//            e.tag = tags[1]
+            
+            arr.append(e)
+        }
+        arr.append(expense)
+        return arr
+    }
+    
+    
+    private var sumAllExpenses: Double {
+        expenses.reduce(0) { $0 + $1.value } - expense.value
+    }
+    
+    private var thisExpensePercent: Double {
+        round((expense.value / (sumAllExpenses + expense.value)) * 100) / 100
+    }
+    
+    var body: some View {
+        VStack{
+            VStack{
+                HStack{
+                    VStack(alignment: .leading){
+                        if expense.tag != nil {
+                            Text("TOTAL_WITH_TAG_STRING")
+                                .contentTransition(.numericText())
+                                .font(.caption)
+                        } else {
+                            Text("OTHERS_TOTAL_STRING")
+                                .contentTransition(.numericText())
+                                .font(.caption)
+                        }
+                        Text(sumAllExpenses.formatted(.currency(code: "PLN")))
+                            .font(.title)
+                            .bold()
+                            .contentTransition(.numericText())
+                            .animation(.spring(), value: sumAllExpenses)
+                    }
+                    Spacer()
+                }.padding(.vertical, 5)
+                
+                Chart {
+                    SectorMark(angle: .value("TOTAL_STRING", sumAllExpenses), angularInset: 1.0)
+                        .opacity(0.6)
+                        .annotation(position: .overlay) {
+                            Text(1 - thisExpensePercent, format: .percent)
+                                .font(.footnote).bold()
+                                .contentTransition(.numericText())
+                                .animation(.default, value: thisExpensePercent)
+                        }
+                    
+                    SectorMark(angle: .value("EXPENSE_STRING", expense.value), angularInset: 2.0)
+                        .annotation(position: .overlay) {
+                            Text(thisExpensePercent, format: .percent)
+                                .font(.footnote).bold()
+                                .contentTransition(.numericText())
+                                .animation(.default, value: thisExpensePercent)
+                        }
+                }
+                .padding()
+                .foregroundStyle(Color.accentColor.gradient)
+                .animation(.smooth(duration: 0.6), value: expenses)
+                
+                HStack {
+                    Image(systemName: "circle.fill")
+                        .foregroundStyle(.tint)
+                    Text("THIS_EXPENSE_STRING")
+                        .foregroundStyle(.secondary)
+                }
+                .font(.caption2)
+            }.opacity(showingNoDataView ? 0 : 1)
+        }
+        .onAppear {
+            if expenses.count < 2 {
+                withAnimation {
+                    showingNoDataView = true
+                }
+            } else {
+                withAnimation {
+                    showingNoDataView = false
+                }
+            }
+        }
+        .overlay {
+            if showingNoDataView{
+                ContentUnavailableView(label: {
+                    Label("NO_DATA_STRING", systemImage: "chart.pie.fill")
+                }, description: {
+                    Text("NO_DATA_FILTER_STRING")
+                }).animation(.easeInOut, value: showingNoDataView)
+                    .offset(y:15)
+            }
+        }
+        .onAppear {
+            update()
+        }
+        .onChange(of: filteredExpenses) { oldValue, newValue in
+            update()
+        }
+        
+    }
+    
+    
+    func update() {
+        expenses = filterWithTag(expenses: filteredExpenses, tag: expense.tag)
+        
+        if expenses.count < 2 {
+            withAnimation {
+                showingNoDataView = true
+            }
+        } else {
+            withAnimation {
+                showingNoDataView = false
+            }
+        }
+    }
+}

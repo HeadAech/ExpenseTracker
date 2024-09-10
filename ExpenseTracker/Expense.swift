@@ -99,6 +99,8 @@ class Expense: ObservableObject {
 
 extension Expense {
     
+    
+    
     static func currentPredicate() -> Predicate<Expense> {
         let currentDate = Date.now
         
@@ -185,5 +187,30 @@ extension Expense {
             expense.date >= startDate && expense.date <= endDate
         }
     }
-
+    
+    static func startDate(for range: InfluenceExpenseRange) -> Date {
+        let calendar = Calendar.current
+        let today = Date.now
+        
+        switch range {
+        case .TODAY:
+            return calendar.startOfDay(for: today)
+        case .LAST_7_DAYS:
+            return calendar.date(byAdding: .day, value: -7, to: today)!
+        case .LAST_MONTH:
+            return calendar.date(byAdding: .month, value: -1, to: today)!
+        case .LAST_3_MONTHS:
+            return calendar.date(byAdding: .month, value: -3, to: today)!
+        }
+    }
+    
+    static func expensesInfluenceExpenseRangePredicate(for range: InfluenceExpenseRange) -> Predicate<Expense> {
+        let start = startDate(for: range)
+        return #Predicate { expense in
+            expense.date >= start
+        }
+    }
+    
+    
+    
 }

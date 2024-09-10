@@ -4,6 +4,26 @@
     "" : {
 
     },
+    "3_MONTHS_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Miesiące"
+          }
+        }
+      }
+    },
+    "7_DAYS_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7 Dni"
+          }
+        }
+      }
+    },
     "Add Expense Intent" : {
 
     },
@@ -459,6 +479,16 @@
         }
       }
     },
+    "EXPENSE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wydatek"
+          }
+        }
+      }
+    },
     "GRADIENT_COLOR_STRING" : {
       "localizations" : {
         "en" : {
@@ -507,6 +537,16 @@
         }
       }
     },
+    "INFLUENCE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wpływ"
+          }
+        }
+      }
+    },
     "Just to confirm, you wanted ‘%@’?" : {
 
     },
@@ -551,6 +591,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Zablokuj dane"
+          }
+        }
+      }
+    },
+    "MONTH_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miesiąc"
           }
         }
       }
@@ -622,6 +672,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Nowy tag"
+          }
+        }
+      }
+    },
+    "NO_DATA_FILTER_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nie znaleziono danych przy aktywnym filtrze."
           }
         }
       }
@@ -722,6 +782,16 @@
         }
       }
     },
+    "OTHERS_TOTAL_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suma pozostałych wydatków"
+          }
+        }
+      }
+    },
     "PAID_STRING" : {
       "localizations" : {
         "en" : {
@@ -793,6 +863,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Prywatność"
+          }
+        }
+      }
+    },
+    "RANGE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zakres"
           }
         }
       }
@@ -1003,6 +1083,16 @@
         }
       }
     },
+    "THIS_EXPENSE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ten wydatek"
+          }
+        }
+      }
+    },
     "this_month" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -1097,6 +1187,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suma"
+          }
+        }
+      }
+    },
+    "TOTAL_WITH_TAG_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Suma wydatków z wybranym tagiem"
           }
         }
       }

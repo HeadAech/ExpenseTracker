@@ -23,7 +23,22 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		B41DD5A42C8F8BBC00F96D7B /* Embed Foundation Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed Foundation Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
+		B41DD58F2C8F8BBA00F96D7B /* WidgetKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WidgetKit.framework; path = System/Library/Frameworks/WidgetKit.framework; sourceTree = SDKROOT; };
+		B41DD5912C8F8BBA00F96D7B /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
 		B4E5A4ED2C81D62A0000ECB9 /* ExpenseTracker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ExpenseTracker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4E5A4FF2C81D62C0000ECB9 /* ExpenseTrackerTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpenseTrackerTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		B4E5A5092C81D62C0000ECB9 /* ExpenseTrackerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ExpenseTrackerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,12 +100,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B41DD58E2C8F8BBA00F96D7B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B41DD58F2C8F8BBA00F96D7B /* WidgetKit.framework */,
+				B41DD5912C8F8BBA00F96D7B /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B4E5A4E42C81D6290000ECB9 = {
 			isa = PBXGroup;
 			children = (
 				B4E5A4EF2C81D62A0000ECB9 /* ExpenseTracker */,
 				B4E5A5022C81D62C0000ECB9 /* ExpenseTrackerTests */,
 				B4E5A50C2C81D62C0000ECB9 /* ExpenseTrackerUITests */,
+				B41DD58E2C8F8BBA00F96D7B /* Frameworks */,
 				B4E5A4EE2C81D62A0000ECB9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -115,6 +140,7 @@
 				B4E5A4E92C81D6290000ECB9 /* Sources */,
 				B4E5A4EA2C81D6290000ECB9 /* Frameworks */,
 				B4E5A4EB2C81D6290000ECB9 /* Resources */,
+				B41DD5A42C8F8BBC00F96D7B /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);

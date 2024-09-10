@@ -9,7 +9,7 @@ import Foundation
 import SwiftData
 
 @Model
-class Tag {
+class Tag: Equatable {
     
     @Attribute(.unique)
     var id: String = UUID().uuidString

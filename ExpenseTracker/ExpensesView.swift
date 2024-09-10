@@ -359,6 +359,9 @@ struct ExpenseDetailsView: View {
     
     @State private var isDeleteAlertPresented: Bool = false
     
+    @State private var influenceSelection: InfluenceExpenseRange = .TODAY
+    @State private var predicate: Predicate<Expense> = .false
+    
     func tagBox(tag: Tag) -> some View{
         let name: String = tag.name
         let color: Color = Color(hex: tag.color) ?? .secondary
@@ -387,6 +390,34 @@ struct ExpenseDetailsView: View {
                 .opacity(0.8)
             )
 
+    }
+    
+    func influenceView() -> some View {
+        GroupBox{
+            
+            Picker("RANGE_STRING", selection: $influenceSelection.animation()) {
+                ForEach(InfluenceExpenseRange.allCases, id: \.self){range in
+                    Text(range.string).tag(range)
+                }
+            }
+            .pickerStyle(.segmented)
+            .onChange(of: influenceSelection) { oldValue, newValue in
+                predicate = Expense.expensesInfluenceExpenseRangePredicate(for: influenceSelection)
+            }
+            
+            InfluenceExpenseChart(predicate: predicate, expense: expense)
+                .frame(height: 300)
+                .onAppear {
+                    predicate = Expense.expensesInfluenceExpenseRangePredicate(for: influenceSelection)
+                }
+            
+        } label: {
+            Label {
+                Text("INFLUENCE_STRING")
+            } icon: {
+                Image(systemName: "chart.pie.fill")
+            }
+        }
     }
     
     var body: some View {
@@ -434,6 +465,7 @@ struct ExpenseDetailsView: View {
                     }
                     .foregroundStyle(.red)
                     .buttonStyle(.bordered)
+
                     
                 }
             }
@@ -484,11 +516,17 @@ struct ExpenseDetailsView: View {
                         
                     }
                     
+                    
                 }
+                .padding(.vertical, -10)
+                .scrollDisabled(true)
                 .padding(.horizontal, -20)
                 .scrollContentBackground(.hidden)
                 
             }
+            Spacer()
+            
+            influenceView()
             
             Spacer()
             
