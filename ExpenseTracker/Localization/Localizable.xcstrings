@@ -12,6 +12,12 @@
             "value" : "3 Months"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "3 Meses"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -26,6 +32,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "7 Days"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "7 Días"
           }
         },
         "pl" : {
@@ -47,6 +59,12 @@
             "value" : "Add expenses to see the chart."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añade gastos para ver el gráfico."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -63,6 +81,12 @@
             "value" : "Add photo…"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir foto..."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -77,6 +101,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Add"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir"
           }
         },
         "pl" : {
@@ -98,6 +128,12 @@
             "value" : "The amount can’t be lower than zero"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El importe no debe ser inferior a cero."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -112,6 +148,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Amount"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Importe"
           }
         },
         "pl" : {
@@ -130,6 +172,12 @@
             "value" : "Average expenses"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gasto medio"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -144,6 +192,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Average"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Medio"
           }
         },
         "pl" : {
@@ -162,6 +216,12 @@
             "value" : "Budget"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Presupuesto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -176,6 +236,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cancel"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cancelar"
           }
         },
         "pl" : {
@@ -194,6 +260,12 @@
             "value" : "Change monthly budget"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Modifique su presupuesto mensual"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -208,6 +280,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Change"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cambia"
           }
         },
         "pl" : {
@@ -226,6 +304,12 @@
             "value" : "Choose photo"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccionar imagen"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -242,6 +326,12 @@
             "value" : "Choose tag"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Seleccione una etiqueta"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -253,6 +343,12 @@
     "COLOR_STRING" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Color"
@@ -274,6 +370,12 @@
             "value" : "Comparison"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Comparación"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -288,6 +390,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Confirm PIN code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Confirmar pin"
           }
         },
         "pl" : {
@@ -306,6 +414,12 @@
             "value" : "The date can’t be from the future"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La fecha no puede ser del futuro."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -320,6 +434,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Date range"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Intervalo de fechas"
           }
         },
         "pl" : {
@@ -338,6 +458,12 @@
             "value" : "Date"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fecha"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -352,6 +478,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Day"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Día"
           }
         },
         "pl" : {
@@ -370,6 +502,12 @@
             "value" : "Are you sure you want to delete?"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "¿Seguro que quieres borrar?"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -384,6 +522,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Delete photo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar imagen"
           }
         },
         "pl" : {
@@ -402,6 +546,12 @@
             "value" : "Delete PIN code"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar pin"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -418,6 +568,12 @@
             "value" : "Delete"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Borrar"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -427,7 +583,14 @@
       }
     },
     "Dodaj nowy wydatek" : {
-
+      "localizations" : {
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añadir nuevo gasto"
+          }
+        }
+      }
     },
     "DONE_STRING" : {
       "localizations" : {
@@ -435,6 +598,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Done"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Listo"
           }
         },
         "pl" : {
@@ -453,6 +622,12 @@
             "value" : "Edit expense"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar gastos"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -467,6 +642,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Edit"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar"
           }
         },
         "pl" : {
@@ -485,6 +666,12 @@
             "value" : "Edit tag"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Editar etiqueta"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -499,6 +686,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Enter PIN code"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introducir pin"
           }
         },
         "pl" : {
@@ -517,6 +710,12 @@
             "value" : "Expense"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gasto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -531,6 +730,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Gradient color"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Color gradiente"
           }
         },
         "pl" : {
@@ -549,6 +754,12 @@
             "value" : "History"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Historia"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -563,6 +774,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Home"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Inicio"
           }
         },
         "pl" : {
@@ -581,6 +798,12 @@
             "value" : "Airplane"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avión "
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -595,6 +818,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Airplane - arrival"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avión - llegada"
           }
         },
         "pl" : {
@@ -613,6 +842,12 @@
             "value" : "Airplane - departure"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Avión - salida"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -627,6 +862,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Alarm clock"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Despertador"
           }
         },
         "pl" : {
@@ -645,6 +886,12 @@
             "value" : "Apple Logo"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logotipo de Apple"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -656,6 +903,12 @@
     "ICON_APPLETV" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple TV"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Apple TV"
@@ -677,6 +930,12 @@
             "value" : "Apple Watch"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -688,6 +947,12 @@
     "ICON_ATOM" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atom"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Atom"
@@ -709,6 +974,12 @@
             "value" : "Backpack"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mochila"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -723,6 +994,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bag"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bolsa"
           }
         },
         "pl" : {
@@ -741,6 +1018,12 @@
             "value" : "Ballon"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Globo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -755,6 +1038,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Basket"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cesta"
           }
         },
         "pl" : {
@@ -773,6 +1062,12 @@
             "value" : "Basketball"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Baloncesto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -787,6 +1082,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Battery"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Batería"
           }
         },
         "pl" : {
@@ -805,6 +1106,12 @@
             "value" : "Bed"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cama"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -819,6 +1126,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bell"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Campana"
           }
         },
         "pl" : {
@@ -837,6 +1150,12 @@
             "value" : "Bicycle"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bicicleta"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -851,6 +1170,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Binocular"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prismáticos"
           }
         },
         "pl" : {
@@ -869,6 +1194,12 @@
             "value" : "Closed book"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Libro cerrado"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -883,6 +1214,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Bookmark"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marcar como favorito"
           }
         },
         "pl" : {
@@ -901,6 +1238,12 @@
             "value" : "Books"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Libros"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -915,6 +1258,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Brain"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cerebro"
           }
         },
         "pl" : {
@@ -933,6 +1282,12 @@
             "value" : "Brush"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cepillo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -947,6 +1302,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Camera"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cámara"
           }
         },
         "pl" : {
@@ -965,6 +1326,12 @@
             "value" : "Car"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Automóvil"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -979,6 +1346,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Carrot"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zanahoria"
           }
         },
         "pl" : {
@@ -997,6 +1370,12 @@
             "value" : "Cart"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cesta"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1011,6 +1390,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Clock"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Reloj"
           }
         },
         "pl" : {
@@ -1029,6 +1414,12 @@
             "value" : "Cloud"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nube"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1043,6 +1434,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Credit card"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tarjeta de crédito"
           }
         },
         "pl" : {
@@ -1061,6 +1458,12 @@
             "value" : "Cross"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cruz"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1075,6 +1478,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Cup"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taza"
           }
         },
         "pl" : {
@@ -1093,6 +1502,12 @@
             "value" : "Dice"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cubo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1107,6 +1522,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Document"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Documento"
           }
         },
         "pl" : {
@@ -1125,6 +1546,12 @@
             "value" : "Dumbbell"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mancuerna"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1139,6 +1566,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Envelope"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sobre"
           }
         },
         "pl" : {
@@ -1157,6 +1590,12 @@
             "value" : "EV Charger"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cargador"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1171,6 +1610,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "External drive"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Conducir"
           }
         },
         "pl" : {
@@ -1189,6 +1634,12 @@
             "value" : "Make-up"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maquillaje"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1203,6 +1654,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Eyeglasses"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gafas"
           }
         },
         "pl" : {
@@ -1221,6 +1678,12 @@
             "value" : "Eyes"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ojos"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1235,6 +1698,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Film"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cinta de película"
           }
         },
         "pl" : {
@@ -1253,6 +1722,12 @@
             "value" : "Flag"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bandera"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1267,6 +1742,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Checkered flag"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "La bandera de meta"
           }
         },
         "pl" : {
@@ -1285,6 +1766,12 @@
             "value" : "Flask"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Frasco"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1299,6 +1786,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Flower"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flor"
           }
         },
         "pl" : {
@@ -1317,6 +1810,12 @@
             "value" : "Fork and knife"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tenedor y cuchillo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1331,6 +1830,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Fuelpump"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Distribuidor"
           }
         },
         "pl" : {
@@ -1349,6 +1854,12 @@
             "value" : "Function"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Función"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1363,6 +1874,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Game controller"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mando de juegos"
           }
         },
         "pl" : {
@@ -1381,6 +1898,12 @@
             "value" : "Gift"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Regalo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1395,6 +1918,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Globe"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glob"
           }
         },
         "pl" : {
@@ -1413,6 +1942,12 @@
             "value" : "Desk Globe"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Globus"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1427,6 +1962,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Graduation cap"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gorra de diploma"
           }
         },
         "pl" : {
@@ -1445,6 +1986,12 @@
             "value" : "Hammer"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Martillo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1459,6 +2006,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Hanger"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Percha"
           }
         },
         "pl" : {
@@ -1477,6 +2030,12 @@
             "value" : "Headphones"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Auriculares"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1493,6 +2052,12 @@
             "value" : "Heart"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Corazón"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1504,6 +2069,12 @@
     "ICON_IPHONE" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "iPhone"
@@ -1525,6 +2096,12 @@
             "value" : "Key"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clave"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1539,6 +2116,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Location"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ubicación"
           }
         },
         "pl" : {
@@ -1557,6 +2140,12 @@
             "value" : "Lock"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Candado"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1568,6 +2157,12 @@
     "ICON_MACBOOK" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MacBook"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "MacBook"
@@ -1589,6 +2184,12 @@
             "value" : "Magazine"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Revista"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1603,6 +2204,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Map"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mapa"
           }
         },
         "pl" : {
@@ -1621,6 +2228,12 @@
             "value" : "Microphone"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Micrófono"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1635,6 +2248,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Moon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Luna"
           }
         },
         "pl" : {
@@ -1653,6 +2272,12 @@
             "value" : "Mouth"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Boca"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1667,6 +2292,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Movie clapper"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Badajo de película"
           }
         },
         "pl" : {
@@ -1685,6 +2316,12 @@
             "value" : "Mug"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taza"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1699,6 +2336,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Newspaper"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Periódico"
           }
         },
         "pl" : {
@@ -1717,6 +2360,12 @@
             "value" : "Paint brush"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pincel"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1731,6 +2380,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Paint palette"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paleta"
           }
         },
         "pl" : {
@@ -1749,6 +2404,12 @@
             "value" : "Paperclip"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clip"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1763,6 +2424,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Party popper"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fiesta popper"
           }
         },
         "pl" : {
@@ -1781,6 +2448,12 @@
             "value" : "Paw print"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Huella"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1795,6 +2468,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "People"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Personas"
           }
         },
         "pl" : {
@@ -1813,6 +2492,12 @@
             "value" : "Person"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Persona"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1829,6 +2514,12 @@
             "value" : "Phone"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teléfono"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1840,6 +2531,12 @@
     "ICON_PIANO" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piano"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Piano"
@@ -1861,6 +2558,12 @@
             "value" : "Pill"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tableta"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1875,6 +2578,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Popcorn"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Palomitas de maíz"
           }
         },
         "pl" : {
@@ -1893,6 +2602,12 @@
             "value" : "Powerplug"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enchufe"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1907,6 +2622,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Rainbow"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Arco iris"
           }
         },
         "pl" : {
@@ -1925,6 +2646,12 @@
             "value" : "Remote"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piloto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1939,6 +2666,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Shoe"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zapato"
           }
         },
         "pl" : {
@@ -1957,6 +2690,12 @@
             "value" : "Soccer ball"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Fútbol"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -1971,6 +2710,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Sparkles"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estrellas"
           }
         },
         "pl" : {
@@ -1989,6 +2734,12 @@
             "value" : "Spigot"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toque"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2003,6 +2754,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Square root"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Elemento"
           }
         },
         "pl" : {
@@ -2021,6 +2778,12 @@
             "value" : "Stethoscope"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estetoscopio"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2035,6 +2798,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Icon"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Icono"
           }
         },
         "pl" : {
@@ -2053,6 +2822,12 @@
             "value" : "Student desk"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Escritorio"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2067,6 +2842,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suitcase"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Maleta"
           }
         },
         "pl" : {
@@ -2085,6 +2866,12 @@
             "value" : "Sun"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sol"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2099,6 +2886,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Syringe"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Jeringa"
           }
         },
         "pl" : {
@@ -2117,6 +2910,12 @@
             "value" : "Tag"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiqueta"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2131,6 +2930,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Takeout"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Para llevar"
           }
         },
         "pl" : {
@@ -2149,6 +2954,12 @@
             "value" : "Teddybear"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Osito de peluche"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2163,6 +2974,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Text book"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Cuaderno"
           }
         },
         "pl" : {
@@ -2181,6 +2998,12 @@
             "value" : "Theater masks"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teatro"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2195,6 +3018,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Toilet"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aseo"
           }
         },
         "pl" : {
@@ -2213,6 +3042,12 @@
             "value" : "Tram"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tranvía"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2227,6 +3062,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tree"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Árbol"
           }
         },
         "pl" : {
@@ -2245,6 +3086,12 @@
             "value" : "Trophy"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trofeo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2259,6 +3106,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "T-Shirt"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Camiseta"
           }
         },
         "pl" : {
@@ -2277,6 +3130,12 @@
             "value" : "Video"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Vídeo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2293,6 +3152,12 @@
             "value" : "Wand"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Varita"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2307,6 +3172,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Influence"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Impacto"
           }
         },
         "pl" : {
@@ -2331,6 +3202,12 @@
             "value" : "Last seven days"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Últimos 7 días"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2345,6 +3222,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Last month"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Último mes"
           }
         },
         "pl" : {
@@ -2363,6 +3246,12 @@
             "value" : "Lock data"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Datos de bloqueo"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2377,6 +3266,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Month"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mes"
           }
         },
         "pl" : {
@@ -2394,6 +3289,12 @@
             "state" : "translated",
             "value" : "Name"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
         }
       }
     },
@@ -2403,6 +3304,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Name cannot be empty."
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "El nombre no debe estar vacío."
           }
         },
         "pl" : {
@@ -2421,6 +3328,12 @@
             "value" : "Name"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nombre"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2435,6 +3348,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "New expense"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nuevos gastos"
           }
         },
         "pl" : {
@@ -2453,6 +3372,12 @@
             "value" : "Enter new PIN code"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Introduzca el nuevo pin"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2467,6 +3392,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "New tag"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Nueva etiqueta"
           }
         },
         "pl" : {
@@ -2485,6 +3416,12 @@
             "value" : "No data found with this filter."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No se han encontrado datos con el filtro activo."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2499,6 +3436,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No data"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "No hay datos disponibles"
           }
         },
         "pl" : {
@@ -2517,6 +3460,12 @@
             "value" : "Add a new expense to see the list and statistics."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añada un nuevo gasto para ver una lista de gastos y estadísticas."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2531,6 +3480,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No expenses"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin gastos"
           }
         },
         "pl" : {
@@ -2549,6 +3504,12 @@
             "value" : "Add tags to classify your expenses."
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Añada una etiqueta para clasificar sus gastos."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2563,6 +3524,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "No tags"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin etiquetas"
           }
         },
         "pl" : {
@@ -2581,6 +3548,12 @@
             "value" : "OK"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ok"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2595,6 +3568,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Other expenses"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otros gastos"
           }
         },
         "pl" : {
@@ -2613,6 +3592,12 @@
             "value" : "Total other expenses"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total otros gastos"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2629,6 +3614,12 @@
             "value" : "Spent"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Publicado en"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2643,6 +3634,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Photo"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Foto"
           }
         },
         "pl" : {
@@ -2677,6 +3674,12 @@
             "value" : "Privacy"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Privacidad"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2691,6 +3694,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Range"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Alcance"
           }
         },
         "pl" : {
@@ -2709,6 +3718,12 @@
             "value" : "Recent"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Última"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2723,6 +3738,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Remaining"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Resto"
           }
         },
         "pl" : {
@@ -2741,6 +3762,12 @@
             "value" : "Save"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Guardar"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2755,6 +3782,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Search"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Buscar en"
           }
         },
         "pl" : {
@@ -2773,6 +3806,12 @@
             "value" : "Settings"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ajustes"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2787,6 +3826,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Show all"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mostrar todo"
           }
         },
         "pl" : {
@@ -2805,6 +3850,12 @@
             "value" : "Statistics"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Estadísticas"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2820,6 +3871,12 @@
             "state" : "translated",
             "value" : "Tap here to add a new expense"
           }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pulse aquí para añadir un nuevo gasto."
+          }
         }
       }
     },
@@ -2829,6 +3886,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Tag"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiqueta"
           }
         },
         "pl" : {
@@ -2847,6 +3910,12 @@
             "value" : "Tags"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Etiquetas"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2863,6 +3932,12 @@
             "value" : "Take photo"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Haz una foto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2877,6 +3952,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Theme"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Motivo"
           }
         },
         "pl" : {
@@ -2915,6 +3996,12 @@
             "value" : "This expense"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este gasto"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2932,6 +4019,12 @@
             "value" : "This month"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este mes"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2946,6 +4039,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "This Month"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este mes"
           }
         },
         "pl" : {
@@ -2965,6 +4064,12 @@
             "value" : "Today"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoy"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -2979,6 +4084,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Today"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hoy"
           }
         },
         "pl" : {
@@ -2997,6 +4108,12 @@
             "value" : "Total expenses"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gastos totales"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3008,6 +4125,12 @@
     "TOTAL_STRING" : {
       "localizations" : {
         "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total"
+          }
+        },
+        "es" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Total"
@@ -3029,6 +4152,12 @@
             "value" : "Total other expenses with this tag"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Total de otros gastos con esta etiqueta"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3044,6 +4173,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Untagged"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sin etiqueta"
           }
         },
         "pl" : {
@@ -3062,6 +4197,12 @@
             "value" : "Use biometrics"
           }
         },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Utilizar la biometría"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3076,6 +4217,12 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "View"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ver"
           }
         },
         "pl" : {
