@@ -231,7 +231,7 @@ struct LastWeekExpensesChart: View {
                                     Spacer()
                                 }
                                 HStack{
-                                    Text(currentActiveExpense.value, format: .currency(code: "PLN"))
+                                    Text(currentActiveExpense.value, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                                         .font(.callout)
                                     Spacer()
                                 }
@@ -444,7 +444,7 @@ struct DateRangeExpensesChart: View {
                                     Spacer()
                                 }
                                 HStack{
-                                    Text(currentActiveExpense.value, format: .currency(code: "PLN"))
+                                    Text(currentActiveExpense.value, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                                         .font(.callout)
                                     Spacer()
                                 }
@@ -641,7 +641,7 @@ struct InfluenceExpenseChart: View {
                                 .contentTransition(.numericText())
                                 .font(.caption)
                         }
-                        Text(sumAllExpenses.formatted(.currency(code: "PLN")))
+                        Text(sumAllExpenses.formatted(.currency(code: Locale.current.currency?.identifier ?? "USD")))
                             .font(.title)
                             .bold()
                             .contentTransition(.numericText())

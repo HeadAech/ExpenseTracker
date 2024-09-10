@@ -33,7 +33,7 @@ struct BudgetView: View {
 
             Spacer()
             
-            Text(remainingBudget, format: .currency(code: "PLN"))
+            Text(remainingBudget, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 .contentTransition(.numericText())
                 .animation(.easeInOut, value: remainingBudget)
                 .font(.headline)
@@ -62,9 +62,8 @@ struct BudgetView: View {
         }
         .sheet(isPresented: $changeBudgetSheetPresented) {
             ChangeBudgetView()
-                .presentationDetents([.fraction(0.3)])
+                .presentationDetents([.medium])
                 .presentationDragIndicator(.visible)
-                .presentationBackground(.thinMaterial)
         }
         
     }
@@ -104,7 +103,7 @@ struct ChangeBudgetView: View {
                             updateAmount(from: newValue)
                         }
                         .focused($budgetFocused)
-                    Text("PLN")
+                    Text(Locale.current.currency?.identifier ?? "USD")
                         
                 }
                 .onAppear{
@@ -112,6 +111,7 @@ struct ChangeBudgetView: View {
                     budgetFocused.toggle()
                 }
             }
+            .scrollContentBackground(.hidden)
             
             .navigationTitle("CHANGE_MONTHLY_BUDGET_STRING")
             .navigationBarTitleDisplayMode(.inline)
@@ -135,7 +135,7 @@ struct ChangeBudgetView: View {
                 }
             }
         }
-        
+        .presentationBackground(.thinMaterial)
     }
     
     // Updates the amount by building up from the input string

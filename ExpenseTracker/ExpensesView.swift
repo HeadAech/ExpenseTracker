@@ -74,7 +74,7 @@ struct LastExpenseItem: View {
                 HStack{
                     Text(expense.name)
                     Spacer()
-                    Text(expense.value, format: .currency(code: "PLN"))
+                    Text(expense.value, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                         .font(.headline)
                         .lineLimit(1)
                       .truncationMode(.tail)
@@ -313,7 +313,7 @@ struct ExpenseListItem: View {
             }
             Spacer()
                 
-            Text(expense.value, format: .currency(code: "PLN"))
+            Text(expense.value, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                 .bold()
                 .foregroundStyle(Color.accentColor)
                 .multilineTextAlignment(.trailing)
@@ -516,7 +516,7 @@ struct ExpenseDetailsView: View {
             .padding(.vertical, -10)
             
             HStack {
-                Text(amount, format: .currency(code: "PLN"))
+                Text(amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                     .font(.title)
                     .bold()
                     .foregroundStyle(.tint)
@@ -670,7 +670,7 @@ struct NewExpenseSheet: View {
                             updateAmount(from: newValue)
                         }
                         .focused($amountFocused)
-                    Text("PLN")
+                    Text(Locale.current.currency?.identifier ?? "USD")
                     
                 }
                 

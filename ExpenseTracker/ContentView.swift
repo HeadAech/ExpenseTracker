@@ -70,7 +70,7 @@ struct ContentView: View {
                     VStack{
                         HStack{
                             
-                            Text(isSummingDaily ? todaysTotal : thisMonthTotal, format: .currency(code: "PLN"))
+                            Text(isSummingDaily ? todaysTotal : thisMonthTotal, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
                                 .contentTransition(.numericText())
                                 .font(.largeTitle).bold()
                                 .animation(.easeInOut, value: isSummingDaily ? todaysTotal : thisMonthTotal)
@@ -185,7 +185,7 @@ struct ContentView: View {
         
         .sheet(isPresented: $settingsSheetPresented){
             SettingsView()
-                .presentationDetents([.medium])
+                .presentationDetents([.medium, .large])
                 .presentationDragIndicator(.visible)
                 .presentationBackground(.thinMaterial)
         }
