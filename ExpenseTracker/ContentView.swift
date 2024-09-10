@@ -200,69 +200,73 @@ struct ContentView: View {
     }
     
     var homeView: some View {
-        LazyVStack{
-            
-            GroupBox{
-                LastExpensesView()
-                
-                if !expenses.isEmpty{
-                    Button{
-                        withAnimation{
-                            page = .history
-                        }
-                    } label: {
-                        Label("SHOW_ALL_STRING", systemImage: "dollarsign.arrow.circlepath")
-                    }
-                }
-            } label: {
-                Label("RECENT_STRING", systemImage: "clock.arrow.circlepath")
-            }
-            .overlay{
-                if showingNoExpensesView{
-                    ContentUnavailableView(label: {
-                        Label("NO_EXPENSES_STRING", systemImage: "dollarsign.square.fill")
-                    }, description: {
-                        Text("NO_EXPENSES_DESCRIPTION")
-                    }, actions: {
-                        Button("ADD_STRING", action: {
-                            newExpenseSheetPresented.toggle()
-                        })
-                    }).animation(.easeInOut, value: showingNoExpensesView)
-                        .offset(y:15)
-                }
-            }
-            .frame(width: 350, height: 250)
-            .onTapGesture {
-                withAnimation {
-                    page = .history
-                }
-            }
-            
-            //    Charts
-            LazyHStack {
+        ScrollView {
+            VStack{
                 
                 GroupBox{
-                    LastAndCurrentMonthExpensesChart()
+                    LastExpensesView()
                     
+                    if !expenses.isEmpty{
+                        Button{
+                            withAnimation{
+                                page = .history
+                            }
+                        } label: {
+                            Label("SHOW_ALL_STRING", systemImage: "dollarsign.arrow.circlepath")
+                        }
+                    }
                 } label: {
-                    Label("COMPARISON_STRING", systemImage: "chart.bar.xaxis")
+                    Label("RECENT_STRING", systemImage: "clock.arrow.circlepath")
                 }
-                .frame(width: 172, height: 200)
+                .overlay{
+                    if showingNoExpensesView{
+                        ContentUnavailableView(label: {
+                            Label("NO_EXPENSES_STRING", systemImage: "dollarsign.square.fill")
+                        }, description: {
+                            Text("NO_EXPENSES_DESCRIPTION")
+                        }, actions: {
+                            Button("ADD_STRING", action: {
+                                newExpenseSheetPresented.toggle()
+                            })
+                        }).animation(.easeInOut, value: showingNoExpensesView)
+                            .offset(y:15)
+                    }
+                }
+                .frame(width: 350, height: 250)
                 .onTapGesture {
-                    withAnimation{
-                        page = .stats
+                    withAnimation {
+                        page = .history
                     }
                 }
                 
-                GroupBox{
-                    BudgetView()
-                } label: {
-                    Label("BUDGET_STRING", systemImage: "dollarsign")
+                //    Charts
+                LazyHStack {
+                    
+                    GroupBox{
+                        LastAndCurrentMonthExpensesChart()
+                        
+                    } label: {
+                        Label("COMPARISON_STRING", systemImage: "chart.bar.xaxis")
+                    }
+                    .frame(width: 172, height: 200)
+                    .onTapGesture {
+                        withAnimation{
+                            page = .stats
+                        }
+                    }
+                    
+                    GroupBox{
+                        BudgetView()
+                    } label: {
+                        Label("BUDGET_STRING", systemImage: "dollarsign")
+                    }
+                    .frame(width: 172, height: 200)
+                    
                 }
-                .frame(width: 172, height: 200)
                 
             }
         }
+        .padding(.top, 70)
         .onChange(of: expenses.isEmpty, { oldValue, newValue in
             withAnimation{
                 showingNoExpensesView = expenses.isEmpty

@@ -392,33 +392,73 @@ struct ExpenseDetailsView: View {
 
     }
     
+    @State private var influenceViewExpanded: Bool = false
+    
     func influenceView() -> some View {
         GroupBox{
             
-            Picker("RANGE_STRING", selection: $influenceSelection.animation()) {
-                ForEach(InfluenceExpenseRange.allCases, id: \.self){range in
-                    Text(range.string).tag(range)
-                }
-            }
-            .pickerStyle(.segmented)
-            .onChange(of: influenceSelection) { oldValue, newValue in
-                predicate = Expense.expensesInfluenceExpenseRangePredicate(for: influenceSelection)
-            }
             
-            InfluenceExpenseChart(predicate: predicate, expense: expense)
-                .frame(height: 300)
-                .onAppear {
-                    predicate = Expense.expensesInfluenceExpenseRangePredicate(for: influenceSelection)
+                VStack {
+                    Picker("RANGE_STRING", selection: $influenceSelection.animation()) {
+                        ForEach(InfluenceExpenseRange.allCases, id: \.self){range in
+                            Text(range.string).tag(range)
+                        }
+                    }
+                    .pickerStyle(.segmented)
+                    .onChange(of: influenceSelection) { oldValue, newValue in
+                        predicate = Expense.expensesInfluenceExpenseRangePredicate(for: influenceSelection)
+                    }
+                    
+                    InfluenceExpenseChart(predicate: predicate, expense: expense)
+                        .frame(height: 270)
+                        .onAppear {
+                            predicate = Expense.expensesInfluenceExpenseRangePredicate(for: influenceSelection)
+                        }
                 }
+                .padding(.vertical, 5)
+                .opacity(influenceViewExpanded ? 1 : 0)
+                .frame(height: influenceViewExpanded ? nil : 0)
+                .clipped()
             
         } label: {
-            Label {
-                Text("INFLUENCE_STRING")
-            } icon: {
-                Image(systemName: "chart.pie.fill")
+            
+            HStack{
+                Label {
+                    Text("INFLUENCE_STRING")
+                } icon: {
+                    Image(systemName: "chart.pie.fill")
+                }
+                
+                Spacer()
+                
+                Button {
+                    withAnimation {
+                        influenceViewExpanded.toggle()
+                    }
+                } label: {
+                    Image(systemName: influenceViewExpanded ? "chevron.down.circle" : "chevron.forward.circle")
+                        .font(.title2)
+                        
+                }.symbolEffect(.bounce.down, value: influenceViewExpanded)
             }
+            .offset(y:5)
         }
     }
+    
+    private var closeButton: some View {
+        Button {
+            withAnimation {
+                dismiss()
+            }
+        } label: {
+            Image(systemName: "xmark")
+                .font(.headline)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
+        .padding(.vertical, 5)
+    }
+    
     
     var body: some View {
         
@@ -429,14 +469,8 @@ struct ExpenseDetailsView: View {
         VStack{
             HStack {
                 Spacer()
-                Button {
-                    dismiss()
-                } label: {
-                    Image(systemName: "xmark.circle.fill")
-                        .font(.title)
-                }
-                .buttonStyle(.plain)
-                .padding(.vertical, 5)
+                
+                closeButton
             }
             
             HStack{
@@ -490,48 +524,53 @@ struct ExpenseDetailsView: View {
             }
             .padding(.vertical, 15)
             
-            if expense.image != nil {
+            ScrollView {
                 
-                Form {
+                influenceView()
+                
+                Spacer()
+                
+                if expense.image != nil {
                     
-                    HStack{
+                    Form {
                         
-                        Button {
-                            isImagePreviewPresented.toggle()
-                        } label: {
-                            Label {
-                                Text("PHOTO_STRING")
-                            } icon: {
-                                Image(systemName: "photo")
+                        HStack{
+                            
+                            Button {
+                                isImagePreviewPresented.toggle()
+                            } label: {
+                                Label {
+                                    Text("PHOTO_STRING")
+                                } icon: {
+                                    Image(systemName: "photo")
+                                }
                             }
+                            Spacer()
+                            
+                            if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 50, height: 50, alignment: .center)
+                                    .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                            }
+                            //                        Image("dog")
+                            //                            .resizable()
+                            //                            .scaledToFill()
+                            //                            .frame(width: 50, height: 50, alignment: .center)
+                            //                            .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
                         }
-                        Spacer()
                         
-                        if let selectedPhotoData = expense.image, let uiImage = UIImage(data: selectedPhotoData) {
-                            Image(uiImage: uiImage)
-                                .resizable()
-                                .frame(width: 50, height: 50, alignment: .center)
-                                .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
-                        }
                         
                     }
-                    
-                    
+                    .padding(.vertical, -10)
+                    .scrollDisabled(true)
+                    .padding(.horizontal, -20)
+                    .scrollContentBackground(.hidden)
+                    .frame(height: 100)
                 }
-                .padding(.vertical, -10)
-                .scrollDisabled(true)
-                .padding(.horizontal, -20)
-                .scrollContentBackground(.hidden)
                 
             }
-            Spacer()
-            
-            influenceView()
-            
-            Spacer()
-            
-            
-            
             
             HStack {
                 Text(date.formatted(date: .complete, time: .shortened))

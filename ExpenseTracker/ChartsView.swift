@@ -679,6 +679,15 @@ struct InfluenceExpenseChart: View {
                         .foregroundStyle(.secondary)
                 }
                 .font(.caption2)
+                
+                HStack {
+                    Image(systemName: "circle.fill")
+                        .foregroundStyle(.tint)
+                        .opacity(0.6)
+                    Text("OTHER_EXPENSES_STRING")
+                        .foregroundStyle(.secondary)
+                }
+                .font(.caption2)
             }.opacity(showingNoDataView ? 0 : 1)
         }
         .onAppear {

@@ -782,6 +782,16 @@
         }
       }
     },
+    "OTHER_EXPENSES_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pozostałe wydatki"
+          }
+        }
+      }
+    },
     "OTHERS_TOTAL_STRING" : {
       "localizations" : {
         "pl" : {
@@ -1196,7 +1206,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Suma wydatków z wybranym tagiem"
+            "value" : "Suma pozostałych wydatków z tym tagiem"
           }
         }
       }

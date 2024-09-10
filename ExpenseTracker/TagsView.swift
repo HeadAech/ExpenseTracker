@@ -23,6 +23,20 @@ struct TagsView: View {
     
     @State private var tagToEdit: Tag?
     
+    private var closeButton: some View {
+        Button {
+            withAnimation {
+                dismiss()
+            }
+        } label: {
+            Image(systemName: "xmark")
+                .font(.headline)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
+        .padding(.horizontal, 10)
+    }
+    
     var body: some View {
         NavigationStack {
   
@@ -30,17 +44,9 @@ struct TagsView: View {
                 HStack {
                     Spacer()
                     
-                    Button{
-                        withAnimation {
-                            dismiss()
-                        }
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.title)
-                    }
-                    .buttonStyle(.plain)
+                    closeButton
                     
-                }.padding(.horizontal, 10)
+                }
                 
                 HStack{
                     Text("TAGS_STRING")
@@ -203,6 +209,20 @@ struct TagPickerView: View {
     
     @Binding var selectedTag: Tag?
     
+    private var closeButton: some View {
+        Button {
+            withAnimation {
+                dismiss()
+            }
+        } label: {
+            Image(systemName: "xmark")
+                .font(.headline)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
+        .padding(.horizontal, 10)
+    }
+    
     var body: some View {
         NavigationStack {
             
@@ -210,17 +230,9 @@ struct TagPickerView: View {
                 HStack {
                     Spacer()
                     
-                    Button{
-                        withAnimation {
-                            dismiss()
-                        }
-                    } label: {
-                        Image(systemName: "xmark.circle.fill")
-                            .font(.title)
-                    }
-                    .buttonStyle(.plain)
+                    closeButton
                     
-                }.padding(.horizontal, 10)
+                }
                 
                 HStack{
                     Text("TAGS_STRING")

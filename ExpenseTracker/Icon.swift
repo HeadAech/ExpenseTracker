@@ -25,6 +25,8 @@ enum Icon: String, RawRepresentable, CaseIterable, Identifiable {
     case bicycle = "bicycle"
     case fuelpump = "fuelpump.fill"
     case binocular = "binoculars.fill"
+    case brush = "paintbrush.pointed.fill"
+    
     
 //    TODO: Add more icons
    
