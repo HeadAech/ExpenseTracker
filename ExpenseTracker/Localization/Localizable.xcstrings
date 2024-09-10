@@ -537,6 +537,1086 @@
         }
       }
     },
+    "ICON_AIRPLANE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Samolot"
+          }
+        }
+      }
+    },
+    "ICON_AIRPLANE_ARRIVAL" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Samolot - przylot"
+          }
+        }
+      }
+    },
+    "ICON_AIRPLANE_DEPARTURE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Samolot - odlot"
+          }
+        }
+      }
+    },
+    "ICON_ALARM" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Budzik"
+          }
+        }
+      }
+    },
+    "ICON_APPLE_LOGO" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Logo Apple"
+          }
+        }
+      }
+    },
+    "ICON_APPLETV" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "AppleTV"
+          }
+        }
+      }
+    },
+    "ICON_APPLEWATCH" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Apple Watch"
+          }
+        }
+      }
+    },
+    "ICON_ATOM" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Atom"
+          }
+        }
+      }
+    },
+    "ICON_BACKPACK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Plecak"
+          }
+        }
+      }
+    },
+    "ICON_BAG" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Torba"
+          }
+        }
+      }
+    },
+    "ICON_BALLON" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Balon"
+          }
+        }
+      }
+    },
+    "ICON_BASKET" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koszyk"
+          }
+        }
+      }
+    },
+    "ICON_BASKETBALL" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piłka do koszykówki"
+          }
+        }
+      }
+    },
+    "ICON_BATTERY_100PERCENT" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Bateria"
+          }
+        }
+      }
+    },
+    "ICON_BED" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Łóżko"
+          }
+        }
+      }
+    },
+    "ICON_BELL" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dzwonek"
+          }
+        }
+      }
+    },
+    "ICON_BICYCLE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Rower"
+          }
+        }
+      }
+    },
+    "ICON_BINOCULAR" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lornetka"
+          }
+        }
+      }
+    },
+    "ICON_BOOK_CLOSED" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zamknięta książka"
+          }
+        }
+      }
+    },
+    "ICON_BOOKMARK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zakładka"
+          }
+        }
+      }
+    },
+    "ICON_BOOKS_VERTICAL" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Książki"
+          }
+        }
+      }
+    },
+    "ICON_BRAIN" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mózg"
+          }
+        }
+      }
+    },
+    "ICON_BRUSH" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pędzel"
+          }
+        }
+      }
+    },
+    "ICON_CAMERA" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Aparat"
+          }
+        }
+      }
+    },
+    "ICON_CAR" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Samochód"
+          }
+        }
+      }
+    },
+    "ICON_CARROT" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Marchewka"
+          }
+        }
+      }
+    },
+    "ICON_CART" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koszyk"
+          }
+        }
+      }
+    },
+    "ICON_CLOCK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zegar"
+          }
+        }
+      }
+    },
+    "ICON_CLOUD" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Chmura"
+          }
+        }
+      }
+    },
+    "ICON_CREDITCARD" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Karta kredytowa"
+          }
+        }
+      }
+    },
+    "ICON_CROSS" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Krzyżyk"
+          }
+        }
+      }
+    },
+    "ICON_CUP_AND_SAUCER" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filiżanka"
+          }
+        }
+      }
+    },
+    "ICON_DICE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kostka"
+          }
+        }
+      }
+    },
+    "ICON_DOC" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dokument"
+          }
+        }
+      }
+    },
+    "ICON_DUMBBELL" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Hantla"
+          }
+        }
+      }
+    },
+    "ICON_ENVELOPE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koperta"
+          }
+        }
+      }
+    },
+    "ICON_EV_CHARGER" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ładowarka"
+          }
+        }
+      }
+    },
+    "ICON_EXTERNAL_DRIVE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dysk"
+          }
+        }
+      }
+    },
+    "ICON_EYEBROW" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Makijaż"
+          }
+        }
+      }
+    },
+    "ICON_EYEGLASSES" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Okulary"
+          }
+        }
+      }
+    },
+    "ICON_EYES" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Oczy"
+          }
+        }
+      }
+    },
+    "ICON_FILM" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Taśma filmowa"
+          }
+        }
+      }
+    },
+    "ICON_FLAG" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flaga"
+          }
+        }
+      }
+    },
+    "ICON_FLAG_CHECKERED" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Flaga mety"
+          }
+        }
+      }
+    },
+    "ICON_FLASK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kolba"
+          }
+        }
+      }
+    },
+    "ICON_FLOWER" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kwiat"
+          }
+        }
+      }
+    },
+    "ICON_FORK_AND_KNIFE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Widelec i nóż"
+          }
+        }
+      }
+    },
+    "ICON_FUELPUMP" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Dystrybutor"
+          }
+        }
+      }
+    },
+    "ICON_FUNCTION" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Funkcja"
+          }
+        }
+      }
+    },
+    "ICON_GAME_CONTROLLER" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kontroler do gier"
+          }
+        }
+      }
+    },
+    "ICON_GIFT" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Prezent"
+          }
+        }
+      }
+    },
+    "ICON_GLOBE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Glob"
+          }
+        }
+      }
+    },
+    "ICON_GLOBEDESK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Globus"
+          }
+        }
+      }
+    },
+    "ICON_GRADUATION_CAP" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Czapka dyplomowa"
+          }
+        }
+      }
+    },
+    "ICON_HAMMER" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Młotek"
+          }
+        }
+      }
+    },
+    "ICON_HANGER" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wieszak"
+          }
+        }
+      }
+    },
+    "ICON_HEADPHONES" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Słuchawki"
+          }
+        }
+      }
+    },
+    "ICON_HEART" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Serce"
+          }
+        }
+      }
+    },
+    "ICON_IPHONE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "iPhone"
+          }
+        }
+      }
+    },
+    "ICON_KEY" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klucz"
+          }
+        }
+      }
+    },
+    "ICON_LOCATION" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Lokalizacja"
+          }
+        }
+      }
+    },
+    "ICON_LOCK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kłódka"
+          }
+        }
+      }
+    },
+    "ICON_MACBOOK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "MacBook"
+          }
+        }
+      }
+    },
+    "ICON_MAGAZINE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Magazyn"
+          }
+        }
+      }
+    },
+    "ICON_MAP" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mapa"
+          }
+        }
+      }
+    },
+    "ICON_MIC" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Mikrofon"
+          }
+        }
+      }
+    },
+    "ICON_MOON" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Księżyc"
+          }
+        }
+      }
+    },
+    "ICON_MOUTH" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Usta"
+          }
+        }
+      }
+    },
+    "ICON_MOVIE_CLAPPER" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Klaps filmowy"
+          }
+        }
+      }
+    },
+    "ICON_MUG" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filiżanka"
+          }
+        }
+      }
+    },
+    "ICON_NEWSPAPER" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gazeta"
+          }
+        }
+      }
+    },
+    "ICON_PAINT_BRUSH" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pędzel do farby"
+          }
+        }
+      }
+    },
+    "ICON_PAINT_PALETTE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Paleta"
+          }
+        }
+      }
+    },
+    "ICON_PAPERCLIP" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Spinacz"
+          }
+        }
+      }
+    },
+    "ICON_PARTY_POPPER" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Party popper"
+          }
+        }
+      }
+    },
+    "ICON_PAWPRINT" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Odcisk łapy"
+          }
+        }
+      }
+    },
+    "ICON_PEOPLE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ludzie"
+          }
+        }
+      }
+    },
+    "ICON_PERSON" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Osoba"
+          }
+        }
+      }
+    },
+    "ICON_PHONE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Telefon"
+          }
+        }
+      }
+    },
+    "ICON_PIANO" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pianino"
+          }
+        }
+      }
+    },
+    "ICON_PILL" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tabletka"
+          }
+        }
+      }
+    },
+    "ICON_POPCORN" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Popcorn"
+          }
+        }
+      }
+    },
+    "ICON_POWERPLUG" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wtyczka"
+          }
+        }
+      }
+    },
+    "ICON_RAINBOW" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tęcza"
+          }
+        }
+      }
+    },
+    "ICON_REMOTE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pilot"
+          }
+        }
+      }
+    },
+    "ICON_SHOE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "But"
+          }
+        }
+      }
+    },
+    "ICON_SOCCER_BALL" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Piłka nożna"
+          }
+        }
+      }
+    },
+    "ICON_SPARKLES" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Gwiazdy"
+          }
+        }
+      }
+    },
+    "ICON_SPIGOT" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Kran"
+          }
+        }
+      }
+    },
+    "ICON_SQUARE_ROOT" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pierwiastek"
+          }
+        }
+      }
+    },
+    "ICON_STETHOSCOPE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Stetoskop"
+          }
+        }
+      }
+    },
+    "ICON_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Ikona"
+          }
+        }
+      }
+    },
+    "ICON_STUDENT_DESK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Biurko"
+          }
+        }
+      }
+    },
+    "ICON_SUITCASE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Walizka"
+          }
+        }
+      }
+    },
+    "ICON_SUN" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Słońce"
+          }
+        }
+      }
+    },
+    "ICON_SYRINGE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Strzykawka"
+          }
+        }
+      }
+    },
+    "ICON_TAG" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tag"
+          }
+        }
+      }
+    },
+    "ICON_TAKEOUT" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Na wynos"
+          }
+        }
+      }
+    },
+    "ICON_TEDDYBEAR" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Miś"
+          }
+        }
+      }
+    },
+    "ICON_TEXT_BOOK" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zeszyt"
+          }
+        }
+      }
+    },
+    "ICON_THEATER_MASKS" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Teatr"
+          }
+        }
+      }
+    },
+    "ICON_TOILET" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Toaleta"
+          }
+        }
+      }
+    },
+    "ICON_TRAM" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Tramwaj"
+          }
+        }
+      }
+    },
+    "ICON_TREE" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Drzewo"
+          }
+        }
+      }
+    },
+    "ICON_TROPHY" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Trofeum"
+          }
+        }
+      }
+    },
+    "ICON_TSHIRT" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Koszulka"
+          }
+        }
+      }
+    },
+    "ICON_VIDEO" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wideo"
+          }
+        }
+      }
+    },
+    "ICON_WAND" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Różdżka"
+          }
+        }
+      }
+    },
     "INFLUENCE_STRING" : {
       "localizations" : {
         "pl" : {
@@ -1233,7 +2313,7 @@
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
-            "value" : "Używaj biometryki"
+            "value" : "Używaj biometrii"
           }
         }
       }

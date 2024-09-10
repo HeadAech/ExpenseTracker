@@ -24,7 +24,9 @@ struct IconPickerView: View {
             return Icon.allCases
         }
         
-        return icons.filter {$0.rawValue.lowercased().contains(searchText.lowercased())}
+        return icons.filter {
+            String(localized: $0.localized).lowercased().contains(searchText.lowercased())
+        }
     }
     
     var body: some View {
@@ -36,9 +38,9 @@ struct IconPickerView: View {
                 ScrollView{
                     LazyVGrid(columns: columns) {
                         
-                        ForEach(filteredIcons, id: \.self) {icon in
+                        ForEach(filteredIcons.sorted(by: {String(localized: $0.localized).lowercased() < String(localized: $1.localized).lowercased()}), id: \.self) {icon in
                             
-                            iconView(name: icon.rawValue)
+                            iconView(icon: icon)
                             
                         }
                         
@@ -50,13 +52,8 @@ struct IconPickerView: View {
             }.padding(15)
             
                 .toolbar {
-                    ToolbarItem(placement: .cancellationAction) {
-                        Button {
-                            dismiss()
-                        } label: {
-                            Text("CANCEL_STRING")
-                        }
-
+                    ToolbarItem(placement: .confirmationAction) {
+                        closeButton
                     }
                 }
         }
@@ -64,27 +61,48 @@ struct IconPickerView: View {
         .presentationBackground(.thinMaterial)
         
     }
-
-    
-    func iconView(name: String) -> some View {
-        ZStack{
-            RoundedRectangle(cornerRadius: 5)
-                .frame(width:70, height: 70)
-                .background(.thickMaterial)
-                .opacity(name == chosenIcon ? 0.5 : 0.13)
-            Button {
-                chosenIcon = name
+    private var closeButton: some View {
+        Button {
+            withAnimation {
                 dismiss()
-            } label: {
-                Image(systemName: name)
-                    .font(.system(size: 34))
-                    .padding(.vertical, 10)
-                    .padding(.horizontal, 10)
-                    
             }
-            .buttonStyle(.plain)
-            .frame(width: 80, height: 80)
+        } label: {
+            Image(systemName: "xmark")
+                .font(.headline)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
+        .padding(.vertical, 5)
+    }
+    
+    func iconView(icon: Icon) -> some View {
+        VStack {
+            let name = icon.rawValue
             
+            ZStack{
+                RoundedRectangle(cornerRadius: 5)
+                    .frame(width:70, height: 70)
+                    .background(.thickMaterial)
+                    .opacity(name == chosenIcon ? 0.5 : 0.13)
+                Button {
+                    chosenIcon = name
+                    dismiss()
+                } label: {
+                    Image(systemName: name)
+                        .font(.system(size: 34))
+                        .padding(.vertical, 10)
+                        .padding(.horizontal, 10)
+                    
+                }
+                .buttonStyle(.plain)
+                .frame(width: 80, height: 80)
+                
+            }
+            Text(icon.localized)
+                .font(.footnote)
+                .multilineTextAlignment(.center)
+                .truncationMode(.tail)
+                .lineLimit(1)
         }
     }
 }
