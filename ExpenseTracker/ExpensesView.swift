@@ -47,8 +47,10 @@ struct LastExpensesView: View {
         .offset(y: -25)
         .animation(.smooth, value: expenses)
         .sheet(item: $expenseToEdit) {expense in
-            NewExpenseSheet(expenseToEdit: expense)
-                .presentationDetents([.medium])
+//            NewExpenseSheet(expenseToEdit: expense)
+//                .presentationDetents([.medium])
+            NewExpenseView(expenseToEdit: expense)
+                .presentationDetents([.large])
         }
         
         
@@ -341,8 +343,10 @@ struct ExpenseListItem: View {
         }
 
         .sheet(item: $expenseToEdit) {expense in
-            NewExpenseSheet(expenseToEdit: expense)
-                .presentationDetents([.medium])
+//            NewExpenseSheet(expenseToEdit: expense)
+//                .presentationDetents([.medium])
+            NewExpenseView(expenseToEdit: expense)
+                .presentationDetents([.large])
         }
     }
 }
@@ -362,7 +366,7 @@ struct ExpenseDetailsView: View {
     @State private var influenceSelection: InfluenceExpenseRange = .TODAY
     @State private var predicate: Predicate<Expense> = .false
     
-    func tagBox(tag: Tag) -> some View{
+    private func tagBox(tag: Tag) -> some View{
         let name: String = tag.name
         let color: Color = Color(hex: tag.color) ?? .secondary
         let icon: String = tag.icon
@@ -593,7 +597,9 @@ struct ExpenseDetailsView: View {
         }
         
         .sheet(isPresented: $isInEdit) {
-            NewExpenseSheet(expenseToEdit: expense)
+//            NewExpenseSheet(expenseToEdit: expense)
+            NewExpenseView(expenseToEdit: expense)
+                .presentationDetents([.large])
         }
         
         .alert("DELETE_ALERT_TITLE", isPresented: $isDeleteAlertPresented) {
@@ -611,8 +617,6 @@ struct ExpenseDetailsView: View {
 struct NewExpenseSheet: View {
     @Environment(\.dismiss) private var dismiss
     @Environment(\.modelContext) private var modelContext
-    
-    @Query(sort: \Tag.name) private var tags: [Tag]
     
     var expenseToEdit: Expense?
     

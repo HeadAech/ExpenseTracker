@@ -128,3 +128,13 @@ extension UIImage {
         return jpegData(compressionQuality: jpegQuality.rawValue)
     }
 }
+
+extension View {
+    func underlineTextField(color: Color) -> some View {
+        self
+            .padding(.vertical, 15)
+            .overlay(Rectangle().frame(height: 2).padding(.top, 45).foregroundColor(color.opacity(0.2)))
+            
+            .padding(10)
+    }
+}

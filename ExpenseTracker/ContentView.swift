@@ -179,8 +179,12 @@ struct ContentView: View {
         
         .sheet(isPresented: $newExpenseSheetPresented) {
             
-            NewExpenseSheet()
-                .presentationDetents([.medium, .large])
+//            Old UI
+//            NewExpenseSheet()
+//                .presentationDetents([.medium, .large])
+            
+            NewExpenseView()
+                .presentationDetents([.large])
         }
         
         .sheet(isPresented: $settingsSheetPresented){
