@@ -16,6 +16,9 @@ struct NewExpenseView: View {
     
     var expenseToEdit: Expense?
     
+    
+    @FocusState private var amountFocused: Bool
+    
 //    covers variables
     @State private var showCameraPicker: Bool = false
     @State private var isTagPickerPresented: Bool = false
@@ -40,7 +43,7 @@ struct NewExpenseView: View {
 
     var body: some View {
         NavigationStack {
-            ScrollView{
+//            ScrollView{
                 VStack {
                     
                     expenseDetails
@@ -55,13 +58,13 @@ struct NewExpenseView: View {
 //                    }.padding(.top, 10)
 //                        .buttonStyle(.bordered)
                     
-                    numericPad
-                        .padding(.top, 20)
+//                    numericPad
+//                        .padding(.top, 20)
                     
                     Spacer()
                     
                 }
-            }
+//            }
             
             .toolbar {
                 
@@ -79,7 +82,7 @@ struct NewExpenseView: View {
                 if expenseToEdit != nil {
                     name = expenseToEdit!.name
                     let parts = String(expenseToEdit!.value).split(separator: ".")
-                    print(parts)
+                    
                     if parts[1].count == 1 {
                         updateAmount(from: String(expenseToEdit!.value * 10))
                     }else{
@@ -182,112 +185,226 @@ struct NewExpenseView: View {
     private var expenseDetails: some View {
         
         VStack{
+            
+            TextField("", text: $amountString).opacity(0).frame(height: 0).focused($amountFocused)
+            
             HStack{
                 
-                photoButton
+//                photoButton
+                dateButton
+                    .popover(isPresented: $datePopoverPresented, arrowEdge: .top) {
+                        DatePicker("", selection: $date, in: ...midnight)
+                            .datePickerStyle(.graphical)
+                            .frame(minWidth: 300)
+//                        Text("Hi")
+                            .presentationCompactAdaptation(.popover)
+                    }
                 
                 Spacer()
+                
                 
                 amountView
                     .onChange(of: amountString) { oldValue, newValue in
                         updateAmount(from: newValue)
                     }
+                    .onTapGesture {
+                        withAnimation{
+                            amountFocused = true
+                        }
+                    }
+                    .onAppear {
+                        withAnimation {
+                            amountFocused = true
+                        }
+                        
+                    }
+                    
                 
-                Spacer()
+//                Spacer()
                 
-                tagButton
+//                tagButton
                 
             }.padding(.horizontal, 20)
             
-            HStack(alignment: .center){
-                Form{
+            Form{
+                HStack{
+                    Text("NAME_STRING")
+                    
+                    Spacer()
+                    
                     TextField("NAME_STRING", text: $name, prompt: Text("NAME_STRING"))
-                        .multilineTextAlignment(.center)
+                        .multilineTextAlignment(.trailing)
                         .textFieldStyle(.plain)
                         .font(.headline)
                         .onChange(of: name) { oldValue, newValue in
-                            limitCharacters(text: oldValue, maxLength: 30)
+                            limitCharacters(text: oldValue, maxLength: 25)
                         }
                     
                 }
-                .scrollContentBackground(.hidden)
-                .scrollDisabled(true)
-                .padding(.top, -15)
-                .frame(height: 70)
+                
+                Section("TAG_STRING") {
+                    
+                    HStack {
+                        tagButton
+                    }.contentShape(Rectangle())
+                    
+                }
+                
+                Section("PHOTO_STRING") {
+                    
+                    HStack {
+                        photoButton
+                    }.contentShape(Rectangle())
+                    
+                }
+                
             }
+            .scrollContentBackground(.hidden)
+            .padding(.top, -15)
             
-            HStack(alignment: .center){
-                Spacer()
-                DatePicker("", selection: $date, in: ...midnight)
-                    .labelsHidden()
-                Spacer()
-            }
-            .padding(5)
             
         }
+    }
+    
+    @State private var datePopoverPresented: Bool = false
+    
+    private var dateButton: some View {
+        Button {
+            datePopoverPresented.toggle()
+        } label: {
+            Image(systemName: "calendar.badge.clock")
+                .font(.title)
+                .padding(5)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
     }
     
     private var tagButton: some View {
         Button {
             isTagPickerPresented.toggle()
         } label: {
-            if tag != nil {
-                Image(systemName: tag!.icon)
-                    .font(.title2)
-                    .padding(5)
-            } else {
-                Image(systemName: "tag.fill")
-                    .font(.title2)
-                    .padding(5)
+            HStack {
+                
+                if tag == nil {
+                    Label("CHOOSE_TAG_STRING", systemImage: "tag.fill")
+                        .padding(.vertical, 10)
+                } else {
+                    HStack {
+                        
+                        iconThumbnail(color: Color(hex: tag!.color) ?? .red, icon: tag!.icon)
+                        
+                        Text(tag!.name)
+                            .foregroundStyle(Color.primary)
+                            .lineLimit(1)
+                            .truncationMode(.tail)
+                            .padding(.leading, 5)
+                        
+                        
+                        
+                    }.padding(.vertical, 5)
+                }
+                Spacer()
+                
+                Image(systemName: "chevron.forward")
+                
+                if tag != nil {
+                    clearTagButton
+                        .padding(.trailing, -5)
+                }
             }
         }
-        .buttonStyle(.bordered)
-        .clipShape(Circle())
         
     }
     
+    func iconThumbnail(color: Color, icon: String) -> some View {
+        ZStack{
+            Circle()
+                .fill(color.gradient)
+                .frame(width: 40, height: 40)
+            
+            Image(systemName: icon)
+                .resizable()
+                .scaledToFit()
+                .padding(20)
+                .frame(width: 60, height: 60)
+                .foregroundColor(color.foregroundColorForBackground())
+        }.padding(-10)
+    }
     
     private var photoButton: some View {
-        Menu{
-            if selectedPhotoData != nil {
-                Button{
-                    isImagePreviewPresented.toggle()
-                } label: {
-                    Label("PREVIEW_STRING", systemImage: "eye")
-                }
-                
-                Button(role: .destructive){
-                    withAnimation{
-                        selectedPhoto = nil
-                        selectedPhotoData = nil
-                        
+        HStack {
+            Menu{
+                if selectedPhotoData != nil {
+                    Button{
+                        isImagePreviewPresented.toggle()
+                    } label: {
+                        Label("PREVIEW_STRING", systemImage: "eye")
                     }
-                } label: {
-                    Label("DELETE_PHOTO_STRING", systemImage: "trash")
-                        .foregroundStyle(.red)
+                    
+                    Button(role: .destructive){
+                        withAnimation{
+                            selectedPhoto = nil
+                            selectedPhotoData = nil
+                            
+                        }
+                    } label: {
+                        Label("DELETE_PHOTO_STRING", systemImage: "trash")
+                            .foregroundStyle(.red)
+                    }
+                    
+                    Divider()
                 }
                 
-                Divider()
+                Button {
+                    showPhotosPicker.toggle()
+                } label: {
+                    Label("CHOOSE_PHOTO_STRING", systemImage: "photo")
+                }
+                
+                Button {
+                    showCameraPicker.toggle()
+                } label: {
+                    Label("TAKE_PHOTO_STRING", systemImage: "camera.fill")
+                }
+            } label: {
+                HStack{
+                    if selectedPhotoData == nil {
+                        Label("ADD_PHOTO_MORE_STRING", systemImage: "photo.badge.plus")
+                    } else {
+                        HStack {
+                            if let uiImage = UIImage(data: selectedPhotoData!) {
+                                Image(uiImage: uiImage)
+                                    .resizable()
+                                    .scaledToFill()
+                                    .frame(width: 40, height: 40, alignment: .center)
+                                    .clipShape(RoundedRectangle(cornerRadius: 5, style: .continuous))
+                                    .padding(.vertical, -5)
+                            }
+                            
+                            Text("PHOTO_STRING")
+                                .padding(.leading, 5)
+                                .foregroundStyle(Color.primary)
+                        }
+                    }
+                    
+                    
+                    Spacer()
+                    
+                    Image(systemName: "ellipsis.circle.fill")
+                    
+                    
+                }
+                .padding(.vertical, 10)
             }
             
-            Button {
-                showPhotosPicker.toggle()
-            } label: {
-                Label("CHOOSE_PHOTO_STRING", systemImage: "photo")
+            if selectedPhotoData != nil {
+                clearPhotoButton
+                    .zIndex(10)
+                    .padding(.trailing, -5)
             }
             
-            Button {
-                showCameraPicker.toggle()
-            } label: {
-                Label("TAKE_PHOTO_STRING", systemImage: "camera.fill")
-            }
-        } label: {
-            Image(systemName: selectedPhotoData == nil ? "photo.badge.plus" : "photo.badge.checkmark")
-                .font(.title2)
-                .padding(5)
         }
-        .buttonStyle(.bordered)
-        .clipShape(Circle())
     }
     
     private var amountView: some View {
@@ -300,7 +417,39 @@ struct NewExpenseView: View {
             .multilineTextAlignment(.center)
             .lineLimit(2)
             .truncationMode(.tail)
+//            .underlineTextField(color: .accentColor, isActive: amountFocused)
+            .foregroundStyle(amountFocused ? Color.accentColor : Color.primary)
+            .animation(.spring(duration: 0.2), value: amountFocused)
         
+    }
+    
+    private var clearTagButton: some View {
+        Button(role: .destructive) {
+            withAnimation {
+                tag = nil
+            }
+        } label: {
+            Image(systemName: "xmark")
+                .font(.headline)
+                .foregroundStyle(Color.red)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
+    }
+    
+    private var clearPhotoButton: some View {
+        Button(role: .destructive) {
+            withAnimation {
+                selectedPhoto = nil
+                selectedPhotoData = nil
+            }
+        } label: {
+            Image(systemName: "xmark")
+                .font(.headline)
+                .foregroundStyle(Color.red)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
     }
     
     private var closeButton: some View {
@@ -387,12 +536,9 @@ struct NewExpenseView: View {
             expenseToEdit!.name = name
             expenseToEdit!.date = date
             expenseToEdit!.value = amount
-            if selectedPhotoData != nil {
-                expenseToEdit!.image = selectedPhotoData
-            }
-            if tag != nil {
-                expenseToEdit!.tag = tag
-            }
+            expenseToEdit!.image = selectedPhotoData
+            expenseToEdit!.tag = tag
+            
             withAnimation{
 //                                modelContext.insert(expenseToEdit!)
                 dismiss()

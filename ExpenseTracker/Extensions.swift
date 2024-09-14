@@ -130,10 +130,10 @@ extension UIImage {
 }
 
 extension View {
-    func underlineTextField(color: Color) -> some View {
+    func underlineTextField(color: Color, isActive: Bool) -> some View {
         self
             .padding(.vertical, 15)
-            .overlay(Rectangle().frame(height: 2).padding(.top, 45).foregroundColor(color.opacity(0.2)))
+            .overlay(Rectangle().frame(height: 2).padding(.top, 45).foregroundColor(color.opacity(isActive ? 0.8 : 0)))
             
             .padding(10)
     }
