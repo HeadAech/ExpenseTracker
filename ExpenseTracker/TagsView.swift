@@ -223,6 +223,7 @@ struct TagPickerView: View {
         .padding(.horizontal, 10)
     }
     
+    
     var body: some View {
         NavigationStack {
             
@@ -436,6 +437,31 @@ struct NewTagView: View {
         }
     }
     
+    private var closeButton: some View {
+        Button {
+            dismiss()
+        } label: {
+            Image(systemName: "xmark")
+                .font(.headline)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
+        .padding()
+    }
+    
+    private var saveButton: some View {
+        Button {
+//            Save logic
+            save()
+        } label: {
+            Image(systemName: "checkmark")
+                .font(.headline)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
+        .padding()
+    }
+    
     var body: some View {
         NavigationStack {
             
@@ -469,19 +495,11 @@ struct NewTagView: View {
             .navigationBarTitleDisplayMode(.inline)
             .toolbar{
                 ToolbarItem(placement: .cancellationAction) {
-                    Button{
-                        dismiss()
-                    } label: {
-                        Text("CANCEL_STRING")
-                    }
+                    closeButton
                 }
                 
                 ToolbarItem(placement: .confirmationAction) {
-                    Button{
-                        save()
-                    } label: {
-                        Text("SAVE_STRING")
-                    }
+                    saveButton
                 }
             }
         }
