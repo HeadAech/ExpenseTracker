@@ -185,8 +185,9 @@ struct NewExpenseView: View {
     private var expenseDetails: some View {
         
         VStack{
-            
+//            hidden textfield to input amount
             TextField("", text: $amountString).opacity(0).frame(height: 0).focused($amountFocused)
+                .keyboardType(.decimalPad)
             
             HStack{
                 
