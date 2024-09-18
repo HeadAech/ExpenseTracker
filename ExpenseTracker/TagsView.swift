@@ -34,7 +34,7 @@ struct TagsView: View {
         }
         .buttonStyle(.bordered)
         .clipShape(Circle())
-        .padding(.horizontal, 10)
+        .padding(10)
     }
     
     var body: some View {
@@ -109,8 +109,7 @@ struct TagsView: View {
                 showingNoTagsView = tags.isEmpty
             }
         })
-        .presentationBackground(.thinMaterial)
-        
+
         .sheet(isPresented: $isNewTagViewPresented) {
             NewTagView()
         }
@@ -220,7 +219,7 @@ struct TagPickerView: View {
         }
         .buttonStyle(.bordered)
         .clipShape(Circle())
-        .padding(.horizontal, 10)
+        .padding(10)
     }
     
     
@@ -320,7 +319,7 @@ struct TagPickerView: View {
                 showingNoTagsView = tags.isEmpty
             }
         })
-        .presentationBackground(.thinMaterial)
+//        .presentationBackground(.thinMaterial)
         
         .sheet(isPresented: $isNewTagViewPresented) {
             NewTagView()
@@ -482,6 +481,9 @@ struct NewTagView: View {
                     Text("NAME_STRING")
                     TextField("NAME_STRING", text: $name)
                         .multilineTextAlignment(.trailing)
+                        .onChange(of: name) { old, new in
+                            limitCharacters(text: old, maxLength: 25)
+                        }
                 }
                 
                 HStack {
@@ -515,7 +517,13 @@ struct NewTagView: View {
         }
         
         .presentationDetents([.medium])
-        .presentationBackground(.thinMaterial)
+//        .presentationBackground(.thinMaterial)
+    }
+    
+    private func limitCharacters(text: String, maxLength: Int) {
+        if name.count > maxLength {
+            name = text
+        }
     }
     
     private func save() {

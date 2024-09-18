@@ -153,9 +153,7 @@ struct AllExpensesView: View {
                         .font(.largeTitle).bold()
                     Spacer()
                     if !showingNoExpensesView {
-                        EditButton()
-                            .padding(.horizontal, 10)
-                        
+
                         Button {
                             withAnimation{
                                 showingSearchBar.toggle()
@@ -869,7 +867,7 @@ struct NewExpenseSheet: View {
             }
         }
         
-        .fullScreenCover(isPresented: $isTagPickerPresented) {
+        .sheet(isPresented: $isTagPickerPresented) {
             TagPickerView(selectedTag: $tag)
         }
         

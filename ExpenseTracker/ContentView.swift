@@ -16,6 +16,8 @@ enum Pages {
 struct ContentView: View {
     @Namespace private var namespace
     
+    @Environment(\.colorScheme) var colorScheme
+    
     @Environment(\.modelContext)  var modelContext
     @Query(sort: \Expense.date, order: .reverse)  var expenses: [Expense]
     
@@ -118,8 +120,7 @@ struct ContentView: View {
                         .transition(.blurReplace)
                         .animation(.smooth, value: page)
                             .tabViewStyle(.page(indexDisplayMode: .never))
-                            .frame(height: .infinity)
-                            .indexViewStyle(.page(backgroundDisplayMode: .always))
+//                            .indexViewStyle(.page(backgroundDisplayMode: .always))
                             
 //                    }
 
@@ -129,9 +130,22 @@ struct ContentView: View {
 //                END ZSTACK
             }
             
+            .ignoresSafeArea(edges: .bottom)
+            
+            
             .safeAreaInset(edge: .bottom) {
                 //            NAVBAR ITEMS
                 ZStack(alignment: .bottom){
+                    VStack {
+                        Spacer()
+                        let cutoffColor = colorScheme == .dark ? Color.black : Color.white
+                        LinearGradient(gradient: Gradient(colors: [cutoffColor.opacity(0), cutoffColor.opacity(0.9)]),
+                                                       startPoint: .top,
+                                                       endPoint: .bottom)
+                                            .frame(height: 150)
+                                            .blur(radius: 5)
+                    }.offset(y: 40)
+                    
                     HStack{
                         navBarItem(name: "STATISTICS_STRING", icon: "chart.bar.xaxis", tab: .stats)
                         navBarItem(name: "HOME_STRING", icon: "house.fill", tab: .home)
@@ -143,10 +157,11 @@ struct ContentView: View {
                             .background(.ultraThinMaterial)
                             .clipShape(Capsule())
                     )
+                    
+                    .ignoresSafeArea(.keyboard)
                 }
                 .ignoresSafeArea(.keyboard)
-            }.ignoresSafeArea(.keyboard)
-            
+            }
             
             .toolbar{
                 ToolbarItemGroup(placement: .topBarLeading) {
@@ -177,6 +192,11 @@ struct ContentView: View {
             }
         }
         
+        .sheet(isPresented: $tagsViewPresented) {
+            TagsView()
+                .presentationBackground(.thinMaterial)
+        }
+        
         .sheet(isPresented: $newExpenseSheetPresented) {
             
 //            Old UI
@@ -194,13 +214,10 @@ struct ContentView: View {
                 .presentationBackground(.thinMaterial)
         }
         
-        .fullScreenCover(isPresented: $tagsViewPresented) {
-            TagsView()
-        }
         
 //        .tint(Colors().getColor(for: gradientColorIndex))
         .animation(.easeInOut, value: gradientColorIndex)
-
+        
     }
     
     var homeView: some View {
@@ -228,31 +245,31 @@ struct ContentView: View {
                             Label("NO_EXPENSES_STRING", systemImage: "dollarsign.square.fill")
                         }, description: {
                             Text("NO_EXPENSES_DESCRIPTION")
-                        }, actions: {
-                            Button("ADD_STRING", action: {
-                                newExpenseSheetPresented.toggle()
-                            })
                         }).animation(.easeInOut, value: showingNoExpensesView)
-                            .offset(y:15)
+                            .frame(minWidth: 250)
                     }
                 }
-                .frame(width: 350, height: 250)
+                .padding(.horizontal, 20)
+                .frame(minHeight: 250)
                 .onTapGesture {
                     withAnimation {
                         page = .history
                     }
                 }
-                
-                //    Charts
-                LazyHStack {
-                    
+                let columns = [
+                        GridItem(.flexible()),
+                        GridItem(.flexible())
+                    ]
+                LazyVGrid(columns: columns, spacing: 8){
+                    //    Charts
+
                     GroupBox{
                         LastAndCurrentMonthExpensesChart()
                         
                     } label: {
                         Label("COMPARISON_STRING", systemImage: "chart.bar.xaxis")
                     }
-                    .frame(width: 172, height: 200)
+                    .frame(minWidth: 177, maxWidth: 177, minHeight: 200)
                     .onTapGesture {
                         withAnimation{
                             page = .stats
@@ -264,11 +281,39 @@ struct ContentView: View {
                     } label: {
                         Label("BUDGET_STRING", systemImage: "dollarsign")
                     }
-                    .frame(width: 172, height: 200)
-                    
-                }
+                    .frame(minWidth: 177, maxWidth: 177, minHeight: 200)
+                   
+                }.padding(.horizontal, 20)
                 
+                
+                Section {
+                    
+                    GroupBox{
+                        MostExpensiveCategoryView(expenses: expenses)
+                            .frame(minHeight: 150)
+                    } label: {
+                        Label("MOST_EXPENSIVE_STRING", systemImage: "banknote.fill")
+                    }
+                    .frame(minWidth: 354, maxWidth: 354, minHeight: 200)
+                    
+//                        GroupBox{
+//                            BudgetView()
+//                        } label: {
+//                            Label("BUDGET_STRING", systemImage: "dollarsign")
+//                        }
+//                        .frame(minWidth: 177, maxWidth: 177, minHeight: 200)
+                    
+                } header: {
+                    HStack {
+                        Image(systemName: "chevron.compact.down")
+                            .foregroundStyle(.secondary)
+                    }.padding(.horizontal, 23)
+                        .padding(.vertical, 10)
+                }
             }
+            
+            Spacer()
+                .padding(.top, 80)
         }
         .padding(.top, 70)
         .onChange(of: expenses.isEmpty, { oldValue, newValue in
@@ -283,7 +328,6 @@ struct ContentView: View {
         }
         .transition(.blurReplace)
         .animation(.easeInOut, value: page)
-        
         
     }
     

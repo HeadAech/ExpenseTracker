@@ -117,8 +117,9 @@ struct NewExpenseView: View {
             }
         }
         
-        .fullScreenCover(isPresented: $isTagPickerPresented) {
+        .sheet(isPresented: $isTagPickerPresented) {
             TagPickerView(selectedTag: $tag)
+                .presentationDetents([.medium, .large])
         }
         
         

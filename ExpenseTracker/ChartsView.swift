@@ -735,3 +735,73 @@ struct InfluenceExpenseChart: View {
         }
     }
 }
+
+struct MostPaidCategoryChart: View {
+    @Environment(\.modelContext) private var modelContext
+    
+    var expenses: [Expense]?
+    var tag: Tag
+    
+    @Query private var tags: [Tag]
+    
+    @State private var summedAmount: Double = 0
+    private var totalAmount: Double {
+        expenses!.reduce(0) {$0 + $1.value}
+    }
+    
+    @State private var totalAmountForUntagged: Double = 0
+    
+    var body: some View {
+        Chart {
+
+            ForEach(tags) {t in
+                let amount = totalAmountForTag(tag: t)
+                let color = Color(hex: t.color) ?? .red
+                SectorMark(angle: .value(t.name, amount), angularInset: 2.0)
+                    .foregroundStyle(color.gradient.opacity(t == tag ? 1.0 : 0.3))
+            }
+            
+            SectorMark(angle: .value("OTHER_STRING", totalAmountForUntagged), angularInset: 2.0)
+                .foregroundStyle(Color.secondary.gradient.opacity(0.3))
+        }
+        .animation(.smooth(duration: 0.6), value: expenses?.count)
+        .onAppear {
+            summedAmount = totalAmountForTag(tag: tag)
+            totalAmountForUntagged = getTotalAmountForUntagged()
+        }
+        .onChange(of: expenses) { old, new in
+            summedAmount = totalAmountForTag(tag: tag)
+            totalAmountForUntagged = getTotalAmountForUntagged()
+        }
+        .onChange(of: tags) { old, new in
+            summedAmount = totalAmountForTag(tag: tag)
+            totalAmountForUntagged = getTotalAmountForUntagged()
+        }
+        
+
+    }
+    
+    func getTotalAmountForUntagged() -> Double {
+        var e: [Expense] = []
+        e = expenses!.filter {expense in
+            expense.tag == nil
+        }
+        
+        return e.reduce(0) {$0 + $1.value}
+    }
+    
+    // Function to fetch all expenses of a specific tag and sum their amountPaid values
+    func totalAmountForTag(tag: Tag) -> Double {
+        var e: [Expense] = []
+        e = expenses!.filter {expense in
+            if let t = expense.tag {
+                return t == tag
+            } else {
+                return false
+            }
+        }
+        
+        return e.reduce(0) {$0 + $1.value}
+        
+    }
+}

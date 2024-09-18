@@ -3282,6 +3282,27 @@
         }
       }
     },
+    "MORE_STRING" : {
+      "extractionState" : "stale",
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Więcej…"
+          }
+        }
+      }
+    },
+    "MOST_EXPENSIVE_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Najdroższa kategoria"
+          }
+        }
+      }
+    },
     "Name" : {
       "localizations" : {
         "en" : {
@@ -3583,6 +3604,9 @@
           }
         }
       }
+    },
+    "OTHER_STRING" : {
+
     },
     "OTHERS_TOTAL_STRING" : {
       "localizations" : {
@@ -4240,6 +4264,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Widok"
+          }
+        }
+      }
+    },
+    "YOU_SPEND_THE_MOST_IN_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wydajesz najwięcej w kategorii"
           }
         }
       }
