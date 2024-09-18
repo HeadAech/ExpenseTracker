@@ -16,36 +16,28 @@ struct LastExpensesView: View {
     
     @State private var expenseToEdit: Expense?
     
+    @State private var chosenExpense: Expense?
+    
     var body: some View {
-        List{
-//            Testing
-//            LastExpenseItem(expense: Expense(name: "Wydatek", date: .now, value: 10000))
-            ForEach(expenses.prefix(3)){ expense in
-                LastExpenseItem(expense: expense)
-                    .contextMenu{
-                        Button{
-                            expenseToEdit = expense
-                        } label: {
-                            Label("EDIT_STRING", systemImage: "pencil")
-                        }
-                        
-                        Button(role: .destructive){
-                            withAnimation {
-                                modelContext.delete(expense)
-                            }
-                        } label: {
-                            Label("DELETE_STRING", systemImage: "trash")
-                        }
+        
+            VStack{
+                //            Testing
+                //            LastExpenseItem(expense: Expense(name: "Wydatek", date: .now, value: 10000))
+                ForEach(expenses.prefix(5)){ expense in
+                    Button {
+                        chosenExpense = expense
+                    } label: {
+                        ExpenseListItem(expense: expense)
+                            .contentShape(Rectangle())
                     }
+                    .buttonStyle(.plain)
+                    .padding(.horizontal, 5)
+                    .padding(.top, 5)
+                }
+                
             }
-            .onDelete(perform: deleteItems)
-            
-        }
-        .padding(-10)
-        .scrollDisabled(true)
-        .scrollContentBackground(.hidden)
-        .offset(y: -25)
-        .animation(.smooth, value: expenses)
+            .animation(.smooth, value: expenses)
+        
         .sheet(item: $expenseToEdit) {expense in
 //            NewExpenseSheet(expenseToEdit: expense)
 //                .presentationDetents([.medium])
@@ -53,7 +45,9 @@ struct LastExpensesView: View {
                 .presentationDetents([.large])
         }
         
-        
+        .fullScreenCover(item: $chosenExpense) {expense in
+            ExpenseDetailsView(expense: expense)
+        }
     }
     
     private func deleteItems(offsets: IndexSet) {

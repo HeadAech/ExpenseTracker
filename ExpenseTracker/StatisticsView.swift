@@ -22,7 +22,7 @@ struct StatisticsView: View {
     @State private var chosenStatsView: StatisticsViewType = .last7DaysExpenses
     
     @State private var dateFrom: Date = Calendar.current.date(byAdding: .day, value: -3, to: .now)!
-
+    
     
     @State private var dateTo: Date = Calendar.current.date(byAdding: .day, value: 1, to: .now)!
     
@@ -42,7 +42,8 @@ struct StatisticsView: View {
     
     var body: some View {
         
-        LazyVStack{
+        
+        VStack{
             HStack{
                 Text("STATISTICS_STRING")
                     .font(.largeTitle)
@@ -53,9 +54,8 @@ struct StatisticsView: View {
                     Text("DATE_RANGE_STRING").tag(StatisticsViewType.dateRangeExpenses)
                 }
             }
-                .padding(.horizontal, 0)
-                .padding(.vertical, -2)
-
+            .padding(.horizontal, 0)
+            
             
             if chosenStatsView == .dateRangeExpenses {
                 HStack{
@@ -77,15 +77,16 @@ struct StatisticsView: View {
                 .padding(.top, 5)
                 .padding(.bottom, 5)
             }
+//            Spacer()
             
             GroupBox{
                 
                 switch chosenStatsView {
-                    case .last7DaysExpenses: LastWeekExpensesChart()
-                            .padding(.top, 20)
-                            .transition(.blurReplace)
-                            .animation(.easeInOut, value: chosenStatsView)
-                    case .dateRangeExpenses: DateRangeExpensesChart(predicate: predicate)
+                case .last7DaysExpenses: LastWeekExpensesChart()
+                        .padding(.top, 20)
+                        .transition(.blurReplace)
+                        .animation(.easeInOut, value: chosenStatsView)
+                case .dateRangeExpenses: DateRangeExpensesChart(predicate: predicate)
                         .transition(.blurReplace)
                         .animation(.easeInOut, value: chosenStatsView)
                         .onAppear{
@@ -96,18 +97,16 @@ struct StatisticsView: View {
             }
             .frame(height: 370)
             
-            
+            Spacer()
             
             
         }
-        .offset(y: -20)
+        .padding(.top, 30)
         .padding(.horizontal, 20)
         .onChange(of: expenses) { oldV, newV in
             predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
         }
-        .frame(alignment: .top)
-        .frame(height: UIScreen.screenHeight/2)
-     
+        
         
         
     }

@@ -805,3 +805,65 @@ struct MostPaidCategoryChart: View {
         
     }
 }
+
+struct LastTenExpensesChart: View {
+    
+    var expenses: [Expense]
+    @AppStorage("settings:gradientColorIndex") var gradientColorIndex: Int = 0
+    
+    private var filtered: [Expense] {
+        return Array(expenses.prefix(11))
+        
+//        var e: [Expense] = []
+//        
+//        for _ in 0..<10 {
+//            let x = Expense()
+//            x.mock()
+//            e.append(x)
+//        }
+//        return e
+    }
+    
+    var body: some View {
+        let tintColor = Colors().getColor(for: gradientColorIndex)
+        
+        let gradient = LinearGradient(
+            gradient: Gradient (
+                colors: [
+                    tintColor.opacity(0.5),
+                    tintColor.opacity(0.2),
+                    tintColor.opacity(0.05),
+                ]
+            ),
+            startPoint: .top,
+            endPoint: .bottom)
+        
+        Chart {
+            ForEach(filtered) {expense in
+                LineMark(x: .value("INDEX", 10 - (filtered.firstIndex(of: expense) ?? 0)),
+                         y: .value("PAID_STRING", expense.value)
+                )
+                .foregroundStyle(tintColor.opacity(0.85).gradient)
+                .interpolationMethod(.catmullRom)
+                .shadow(radius: 5)
+                .symbol{
+                    Circle()
+                        .fill(tintColor.gradient)
+                        .frame(width: 7, height: 7)
+                }
+                
+                
+                AreaMark(x: .value("INDEX", 10 - (filtered.firstIndex(of: expense) ?? 0)),
+                         y: .value("PAID_STRING", expense.value)
+                )
+                .interpolationMethod(.catmullRom)
+                .foregroundStyle(gradient)
+            }
+            
+        }
+        .animation(.smooth(duration: 0.6), value: filtered)
+        .chartXAxis(.hidden)
+        .chartYAxis(.hidden)
+        
+    }
+}

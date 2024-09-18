@@ -18,6 +18,8 @@ struct ContentView: View {
     
     @Environment(\.colorScheme) var colorScheme
     
+    @State var isSearching: Bool = false
+    
     @Environment(\.modelContext)  var modelContext
     @Query(sort: \Expense.date, order: .reverse)  var expenses: [Expense]
     
@@ -69,6 +71,7 @@ struct ContentView: View {
                     .animation(.easeInOut, value: gradientColorIndex)
                 
                 VStack{
+                    
                     VStack{
                         HStack{
                             
@@ -87,10 +90,18 @@ struct ContentView: View {
                             .contentTransition(.numericText())
                             .animation(.easeInOut, value: isSummingDaily)
                         
+                        
+                        
+                        
+                        LastTenExpensesChart(expenses: expenses)
+                            .frame(height: 40)
+                            .padding(.horizontal, 5)
+                            .padding(.bottom, -30)
+                            
                     }
                     .ignoresSafeArea(.keyboard)
                     .offset(y: 10)
-                    
+                
                     
 
                         TabView(selection: $page) {
@@ -109,7 +120,7 @@ struct ContentView: View {
                                 }
                                 .tag(Pages.home)
                             
-                            AllExpensesView()
+                            HistoryPage()
                                 .tabItem {
                                     Label("HISTORY_STRING", systemImage: "clock.arrow.circlepath")
                                         .labelStyle(VerticalLabelStyle())
@@ -215,7 +226,7 @@ struct ContentView: View {
         }
         
         
-//        .tint(Colors().getColor(for: gradientColorIndex))
+        .tint(Colors().getColor(for: gradientColorIndex))
         .animation(.easeInOut, value: gradientColorIndex)
         
     }
@@ -224,38 +235,7 @@ struct ContentView: View {
         ScrollView {
             VStack{
                 
-                GroupBox{
-                    LastExpensesView()
-                    
-                    if !expenses.isEmpty{
-                        Button{
-                            withAnimation{
-                                page = .history
-                            }
-                        } label: {
-                            Label("SHOW_ALL_STRING", systemImage: "dollarsign.arrow.circlepath")
-                        }
-                    }
-                } label: {
-                    Label("RECENT_STRING", systemImage: "clock.arrow.circlepath")
-                }
-                .overlay{
-                    if showingNoExpensesView{
-                        ContentUnavailableView(label: {
-                            Label("NO_EXPENSES_STRING", systemImage: "dollarsign.square.fill")
-                        }, description: {
-                            Text("NO_EXPENSES_DESCRIPTION")
-                        }).animation(.easeInOut, value: showingNoExpensesView)
-                            .frame(minWidth: 250)
-                    }
-                }
-                .padding(.horizontal, 20)
-                .frame(minHeight: 250)
-                .onTapGesture {
-                    withAnimation {
-                        page = .history
-                    }
-                }
+                
                 let columns = [
                         GridItem(.flexible()),
                         GridItem(.flexible())

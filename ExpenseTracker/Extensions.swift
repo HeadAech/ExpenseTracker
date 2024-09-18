@@ -138,3 +138,14 @@ extension View {
             .padding(10)
     }
 }
+
+extension View {
+    // Helper function to conditionally apply a modifier
+    @ViewBuilder func `if`<Content: View>(_ condition: Bool, apply: (Self) -> Content) -> some View {
+        if condition {
+            apply(self)
+        } else {
+            self
+        }
+    }
+}
