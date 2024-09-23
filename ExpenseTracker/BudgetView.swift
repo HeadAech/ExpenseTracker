@@ -87,31 +87,59 @@ struct ChangeBudgetView: View {
     
     @AppStorage("settings:monthlyBudget") private var monthlyBudget: Double = 100.0
     
-    @State private var budget: String = "0,00"
+    
+    @State private var amount: Double = 0
+    @State private var amountString: String = "0"
     @FocusState private var budgetFocused: Bool
     
+    @State private var isErrorAlertPresent: Bool = false
+    @State private var errorAlertMessage: LocalizedStringResource = Error.AMOUNT_LESS_THAN_ZERO.title
+    
+    var clearButton: some View {
+        Button(role: .destructive) {
+            amountString = "0"
+        } label: {
+            Label("CLEAR_STRING", systemImage: "clear.fill")
+        }
+        .buttonStyle(.bordered)
+    }
     
     var body: some View {
         NavigationStack{
-            Form{
-                HStack{
-                    Text("BUDGET_STRING")
-                    TextField("BUDGET_STRING", text: $budget)
-                        .keyboardType(.decimalPad)
-                        .multilineTextAlignment(.trailing)
-                        .onChange(of: budget) { oldValue, newValue in
-                            updateAmount(from: newValue)
+            TextField("", text: $amountString).opacity(0).frame(height: 0).focused($budgetFocused)
+                .keyboardType(.decimalPad)
+            
+            VStack {
+                
+                amountView
+                    .onChange(of: amountString) { oldValue, newValue in
+                        updateAmount(from: newValue)
+                    }
+                    .onTapGesture {
+                        withAnimation{
+                            budgetFocused = true
                         }
-                        .focused($budgetFocused)
-                    Text(Locale.current.currency?.identifier ?? "USD")
+                    }
+                    .onAppear {
+                        withAnimation {
+                            let parts = String(monthlyBudget).split(separator: ".")
+                            
+                            if parts[1].count == 1 {
+                                updateAmount(from: String(monthlyBudget * 10))
+                            }else{
+                                updateAmount(from: String(monthlyBudget))
+                            }
+                            
+                            budgetFocused = true
+                        }
                         
-                }
-                .onAppear{
-                    budget = String(monthlyBudget * 10)
-                    budgetFocused.toggle()
-                }
+                    }
+                
+                clearButton
+                
+                Spacer()
+                
             }
-            .scrollContentBackground(.hidden)
             
             .navigationTitle("CHANGE_MONTHLY_BUDGET_STRING")
             .navigationBarTitleDisplayMode(.inline)
@@ -126,8 +154,12 @@ struct ChangeBudgetView: View {
                 
                 ToolbarItem(placement: .topBarTrailing) {
                     Button {
-                        monthlyBudget = Double(budget.replacingOccurrences(of: ",", with: ".")) ?? 0
-                        UserDefaults.standard.set(monthlyBudget, forKey: "settings:monthlyBudget")
+                        if amount <= 0 {
+                            errorAlertMessage = Error.AMOUNT_LESS_THAN_ZERO.title
+                            isErrorAlertPresent.toggle()
+                            return
+                        }
+                        UserDefaults.standard.set(amount, forKey: "settings:monthlyBudget")
                         dismiss()
                     } label: {
                         Text("DONE_STRING")
@@ -135,7 +167,28 @@ struct ChangeBudgetView: View {
                 }
             }
         }
+        .alert(Text(errorAlertMessage), isPresented: $isErrorAlertPresent){
+            Button("OK", role: .cancel) { }
+        }
+        
         .presentationBackground(.thinMaterial)
+        
+    }
+    
+    private var amountView: some View {
+        
+        Text(amount, format: .currency(code: Locale.current.currency?.identifier ?? "USD"))
+            .font(.largeTitle)
+            .bold()
+            .contentTransition(.numericText())
+            .animation(.smooth(), value: amount)
+            .multilineTextAlignment(.center)
+            .lineLimit(2)
+            .truncationMode(.tail)
+//            .underlineTextField(color: .accentColor, isActive: amountFocused)
+            .foregroundStyle(budgetFocused ? Color.accentColor : Color.primary)
+            .animation(.spring(duration: 0.2), value: budgetFocused)
+        
     }
     
     // Updates the amount by building up from the input string
@@ -145,21 +198,15 @@ struct ChangeBudgetView: View {
         
         if let numericValue = Int(filtered) {
             // Update amount as an integer to shift the decimal place
-            budget = String(numericValue)
-            budget = formattedAmount()
+            amountString = String(numericValue)
         } else {
-            budget = "0,00"
+            amountString = "0.00"
         }
+        
+        amount = (Double(amountString) ?? 0.0) / 100
     }
     
-    // Converts the current amount to a formatted string with 2 decimal places
-    private func formattedAmount() -> String {
-        if let value = Double(budget) {
-            return String(format: "%.2f", value / 100).replacingOccurrences(of: ".", with: ",")
-            
-        }
-        return "0,00"
-    }
+    
 }
 
 #Preview {

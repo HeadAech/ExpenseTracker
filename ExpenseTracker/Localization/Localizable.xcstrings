@@ -340,6 +340,16 @@
         }
       }
     },
+    "CLEAR_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wyczyść"
+          }
+        }
+      }
+    },
     "COLOR_STRING" : {
       "localizations" : {
         "en" : {
@@ -539,6 +549,7 @@
       }
     },
     "DELETE_PIN_STRING" : {
+      "extractionState" : "stale",
       "localizations" : {
         "en" : {
           "stringUnit" : {
@@ -720,6 +731,16 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wydatek"
+          }
+        }
+      }
+    },
+    "FILTER_STRING" : {
+      "localizations" : {
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filtruj"
           }
         }
       }

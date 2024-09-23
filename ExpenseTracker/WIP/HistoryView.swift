@@ -51,6 +51,7 @@ struct HistoryPage: View {
                     }
                 } label: {
                     Label("RECENT_STRING", systemImage: "clock.arrow.circlepath")
+                        .foregroundStyle(.secondary)
                 }
                          
                 .padding(.horizontal, 20)
@@ -75,6 +76,7 @@ struct HistoryPage: View {
         .sheet(isPresented: $isHistorySheetPresented) {
             HistoryView()
                 .presentationDetents([.large, .medium])
+                .presentationDragIndicator(.hidden)
         }
     }
     
@@ -100,6 +102,31 @@ struct HistoryView: View {
     @State private var showingNoExpensesView: Bool = false
     
     @State private var currentPage: Int = 0
+
+    @State private var allTokens: [Tag] = []
+    
+    @State private var currentTokens: [Tag] = []
+    
+    @State private var filterTag: Tag?
+    
+    var suggestedTokens: [Tag] {
+        if searchText.starts(with: "#") {
+            return allTokens
+        } else {
+            return []
+        }
+    }
+    
+    var groupedByDate: [Date: [Expense]] {
+//        Dictionary(grouping: expenses, by: {$0.date})
+        Dictionary(grouping: expenses, by: { expense in
+                Calendar.current.startOfDay(for: expense.date)
+            })
+    }
+    
+    var headers: [Date] {
+        groupedByDate.map({ $0.key }).sorted().reversed()
+    }
     
     private var expensesCount: Int {
         let fetchDescriptor = FetchDescriptor<Expense>()
@@ -149,44 +176,137 @@ struct HistoryView: View {
         .padding()
     }
     
+    func row(expense: Expense) -> some View {
+//        Button {
+//            chosenExpense = expense
+//        } label: {
+//            ExpenseListItem(expense: expense)
+//                .contentShape(Rectangle())
+//        }
+//        .contentShape(Rectangle())
+//        .buttonStyle(.plain)
+        NavigationLink(destination: {
+            ExpenseDetailsView(expense: expense, sheetDisplayMode: false)
+        }, label: {
+            ExpenseListItem(expense: expense)
+        })
+        .onAppear {
+            performFetchIfNecessary(item: expense)
+        }
+    }
+    
+    private func tagBox(tag: Tag) -> some View{
+        let name: String = tag.name
+        let color: Color = Color(hex: tag.color) ?? .secondary
+        let icon: String = tag.icon
+        
+        return VStack{
+            
+            HStack(alignment: .center) {
+                Image(systemName: icon)
+                    .font(.caption)
+                
+                if name == "" {
+                    Text("UNTAGGED_STRING")
+                        .font(.caption)
+                        .foregroundColor(color.foregroundColorForBackground())
+                } else {
+                    Text(name)
+                        .font(.caption)
+                        .foregroundColor(color.foregroundColorForBackground())
+                }
+            }.padding(5)
+            
+        }.background(
+            RoundedRectangle(cornerRadius: 3)
+                .fill(color)
+                .opacity(filterTag == tag ? 0.8 : 0.2)
+            )
+
+    }
     
     var body: some View {
         
         NavigationStack {
             
             List{
-                ForEach(searchText.isEmpty ? expenses : filteredExpenses) { expense in
-                    Button {
-                        chosenExpense = expense
-                    } label: {
-                        ExpenseListItem(expense: expense)
-                            .contentShape(Rectangle())
-                    }
-                    .contentShape(Rectangle())
-                    .buttonStyle(.plain)
-                    .onAppear {
-                        performFetchIfNecessary(item: expense)
-                    }
-                    
-                }
-                .onDelete(perform: deleteItems)
-                .ignoresSafeArea(.keyboard)
                 
+                if isSearchBarPresented {
+                    Section {
+                        ScrollView(.horizontal) {
+                            HStack {
+                                ForEach(allTokens) {token in
+                                    Button {
+                                        if filterTag == token {
+                                            filterTag = nil
+                                        } else {
+                                            filterTag = token
+                                        }
+                                    } label: {
+                                        tagBox(tag: token)
+                                    }
+                                    .buttonStyle(.plain)
+                                }
+                            }
+                        }
+                        .contentMargins(9, for: .scrollContent)
+                        .scrollTargetBehavior(.viewAligned)
+                    } header : {
+                        Label("FILTER_STRING", systemImage: "line.3.horizontal.decrease.circle")
+                    }
+                }
+                
+                if searchText.isEmpty && filterTag == nil {
+                    ForEach(headers, id: \.self) {header in
+                        
+                        Section {
+                            ForEach(groupedByDate[header]!) { expense in
+                                row(expense: expense)
+                            }
+                            .onDelete(perform: deleteItems)
+                            .ignoresSafeArea(.keyboard)
+                        } header: {
+                            if header >= Calendar.current.startOfDay(for: .now) {
+                                Text("TODAY_STRING")
+                            } else {
+                                Text(header, style: .date)
+                            }
+                        }
+                        
+                    }
+                } else {
+                    ForEach(searchText.isEmpty && filterTag == nil ? expenses : filteredExpenses) { expense in
+                        
+                        row(expense: expense)
+                        
+                    }
+                    .onDelete(perform: deleteItems)
+                    .ignoresSafeArea(.keyboard)
+
+                }
             }
             .ignoresSafeArea(.keyboard)
-            .safeAreaPadding(EdgeInsets(top: 0, leading: 0, bottom: 50, trailing: 0))
+            .ignoresSafeArea(edges: .bottom)
             .scrollContentBackground(.hidden)
 //            .if(isSearchBarPresented){view in
 //                view.searchable(text: $searchText, isPresented: $isSearchBarPresented)
 //            }
-            .searchable(text: $searchText, isPresented: $isSearchBarPresented, placement: .navigationBarDrawer)
+            
+            .searchable(text: $searchText, isPresented: $isSearchBarPresented)
+            
             .scrollDismissesKeyboard(.immediately)
             .onChange(of: searchText) { oldValue, newValue in
-                filteredExpenses = filterSearchResults(text: searchText)
+                filterResults()
             }
             .onChange(of: expenses) { oldValue, newValue in
-                filteredExpenses = filterSearchResults(text: searchText)
+                filterResults()
             }
+            .onChange(of: filterTag) { oldValue, newValue in
+                filterResults()
+            }
+            .onChange(of: isSearchBarPresented, { oldV, newV in
+                filterTag = nil
+            })
             .overlay {
                 if showingNoExpensesView{
                     ContentUnavailableView(label: {
@@ -197,7 +317,7 @@ struct HistoryView: View {
                         .offset(y:-15)
                 }
                 
-                if !showingNoExpensesView && !searchText.isEmpty && filteredExpenses.isEmpty{
+                if !showingNoExpensesView && filteredExpenses.isEmpty{
                     ContentUnavailableView(label: {
                         Label("NO_EXPENSES_STRING", systemImage: "dollarsign.square.fill")
                     }, description: {
@@ -207,12 +327,10 @@ struct HistoryView: View {
                         .animation(.easeInOut, value: filteredExpenses.isEmpty)
                 }
             }
-            
 //
 //            .navigationTitle("HISTORY_STRING")
 //            .navigationBarTitleDisplayMode(.large)
-//            
-            Spacer()
+//
             
                 
             .toolbar {
@@ -226,7 +344,7 @@ struct HistoryView: View {
             }
             
             .navigationTitle("HISTORY_STRING")
-            .navigationBarTitleDisplayMode(.large)
+            .navigationBarTitleDisplayMode(.inline)
             
         }
         .onAppear {
@@ -235,6 +353,8 @@ struct HistoryView: View {
             }
             currentPage = 0
             performFetch()
+            fetchTags()
+            print(self.allTokens)
         }
         .onChange(of: expensesCount, { oldV, newV in
             currentPage = 0
@@ -250,9 +370,9 @@ struct HistoryView: View {
                 isSearchBarPresented = false
 //            }
         }
-        .fullScreenCover(item: $chosenExpense) {expense in
-            ExpenseDetailsView(expense: expense)
-        }
+//        .fullScreenCover(item: $chosenExpense) {expense in
+//            ExpenseDetailsView(expense: expense)
+//        }
         
     }
     
@@ -272,6 +392,15 @@ struct HistoryView: View {
         .padding(.top, 30)
         .padding(.bottom, -5)
         .animation(.spring(), value: isSearchBarPresented)
+    }
+    
+    private func fetchTags() {
+        let fetchDescriptor = FetchDescriptor<Tag>()
+        do {
+            self.allTokens = try modelContext.fetch(fetchDescriptor)
+        } catch {
+            print(error)
+        }
     }
     
     private func performFetch(currentPage: Int = 0) {
@@ -308,19 +437,31 @@ struct HistoryView: View {
     }
     
     func filterSearchResults(text: String) -> [Expense] {
-        if text.isEmpty{
-            return expenses
-        }
-        
 //        return expenses.filter { $0.name.lowercased().localizedStandardContains(text.lowercased()) }
         var fetchDescriptor = FetchDescriptor<Expense>()
-        fetchDescriptor.predicate = #Predicate {
-            $0.name.localizedStandardContains(text)
+        
+        if !text.isEmpty{
+            fetchDescriptor.predicate = #Predicate {
+                return $0.name.localizedStandardContains(text)
+            }
         }
+        
         fetchDescriptor.sortBy = [.init(\.date, order: .reverse)]
         
         do {
-            return try modelContext.fetch(fetchDescriptor)
+            let e = try modelContext.fetch(fetchDescriptor)
+            
+            if filterTag != nil {
+                return e.filter {e in
+                    if e.tag != nil {
+                        return e.tag == filterTag
+                    }
+                    return false
+                }
+            
+            } else {
+                return e
+            }
         } catch {
             print(error)
             return expenses
@@ -334,6 +475,11 @@ struct HistoryView: View {
                 modelContext.delete(expenses[index])
             }
         }
+    }
+    
+    private func filterResults() {
+        filteredExpenses = filterSearchResults(text: searchText)
+        print(filteredExpenses.count)
     }
 }
 

@@ -56,50 +56,51 @@ struct StatisticsView: View {
             }
             .padding(.horizontal, 0)
             
-            
-            if chosenStatsView == .dateRangeExpenses {
-                HStack{
+            ScrollView {
+                
+                if chosenStatsView == .dateRangeExpenses {
+                    HStack{
+                        
+                        DatePicker("", selection: $dateFrom, in: ...(Calendar.current.date(byAdding: .day, value: -1, to: dateTo) ?? .now), displayedComponents: [.date])
+                            .onChange(of: dateFrom) { oldValue, newValue in
+                                dateFrom = Calendar.current.startOfDay(for: newValue)
+                                predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
+                            }.labelsHidden()
+                        
+                        Image(systemName: "arrow.right")
+                        
+                        DatePicker("", selection: $dateTo, in: dateFrom...midnight , displayedComponents: [.date])
+                            .onChange(of: dateTo) { oldValue, newValue in
+                                predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
+                            }.labelsHidden()
+                        
+                    }
+                    .padding(.top, 5)
+                    .padding(.bottom, 5)
+                }
+                //            Spacer()
+                
+                GroupBox{
                     
-                    DatePicker("", selection: $dateFrom, in: ...(Calendar.current.date(byAdding: .day, value: -1, to: dateTo) ?? .now), displayedComponents: [.date])
-                        .onChange(of: dateFrom) { oldValue, newValue in
-                            dateFrom = Calendar.current.startOfDay(for: newValue)
-                            predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
-                        }.labelsHidden()
-                    
-                    Image(systemName: "arrow.right")
-                    
-                    DatePicker("", selection: $dateTo, in: dateFrom...midnight , displayedComponents: [.date])
-                        .onChange(of: dateTo) { oldValue, newValue in
-                            predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
-                        }.labelsHidden()
+                    switch chosenStatsView {
+                    case .last7DaysExpenses: LastWeekExpensesChart()
+                            .padding(.top, 20)
+                            .transition(.blurReplace)
+                            .animation(.easeInOut, value: chosenStatsView)
+                    case .dateRangeExpenses: DateRangeExpensesChart(predicate: predicate)
+                            .transition(.blurReplace)
+                            .animation(.easeInOut, value: chosenStatsView)
+                            .onAppear{
+                                predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
+                            }
+                    }
                     
                 }
-                .padding(.top, 5)
-                .padding(.bottom, 5)
-            }
-//            Spacer()
-            
-            GroupBox{
+                .frame(height: 370)
                 
-                switch chosenStatsView {
-                case .last7DaysExpenses: LastWeekExpensesChart()
-                        .padding(.top, 20)
-                        .transition(.blurReplace)
-                        .animation(.easeInOut, value: chosenStatsView)
-                case .dateRangeExpenses: DateRangeExpensesChart(predicate: predicate)
-                        .transition(.blurReplace)
-                        .animation(.easeInOut, value: chosenStatsView)
-                        .onAppear{
-                            predicate = Expense.expensesBetweenPredicate(from: dateFrom, to: dateTo)
-                        }
-                }
+                Spacer()
                 
             }
-            .frame(height: 370)
-            
-            Spacer()
-            
-            
         }
         .padding(.top, 30)
         .padding(.horizontal, 20)

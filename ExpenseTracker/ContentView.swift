@@ -92,11 +92,11 @@ struct ContentView: View {
                         
                         
                         
-                        
-                        LastTenExpensesChart(expenses: expenses)
-                            .frame(height: 40)
-                            .padding(.horizontal, 5)
-                            .padding(.bottom, -30)
+//                        
+//                        LastTenExpensesChart(expenses: expenses)
+//                            .frame(height: 40)
+//                            .padding(.horizontal, 5)
+//                            .padding(.bottom, -30)
                             
                     }
                     .ignoresSafeArea(.keyboard)
@@ -248,8 +248,9 @@ struct ContentView: View {
                         
                     } label: {
                         Label("COMPARISON_STRING", systemImage: "chart.bar.xaxis")
+                            .foregroundStyle(.secondary)
                     }
-                    .frame(minWidth: 177, maxWidth: 177, minHeight: 200)
+                    .frame(minHeight: 200)
                     .onTapGesture {
                         withAnimation{
                             page = .stats
@@ -260,8 +261,9 @@ struct ContentView: View {
                         BudgetView()
                     } label: {
                         Label("BUDGET_STRING", systemImage: "dollarsign")
+                            .foregroundStyle(.secondary)
                     }
-                    .frame(minWidth: 177, maxWidth: 177, minHeight: 200)
+                    .frame(minHeight: 200)
                    
                 }.padding(.horizontal, 20)
                 
@@ -273,8 +275,10 @@ struct ContentView: View {
                             .frame(minHeight: 150)
                     } label: {
                         Label("MOST_EXPENSIVE_STRING", systemImage: "banknote.fill")
+                            .foregroundStyle(.secondary)
                     }
-                    .frame(minWidth: 354, maxWidth: 354, minHeight: 200)
+                    .frame(minHeight: 200)
+                    .padding(.horizontal, 20)
                     
 //                        GroupBox{
 //                            BudgetView()

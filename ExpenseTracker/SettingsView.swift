@@ -98,15 +98,15 @@ struct SettingsView: View {
                     
                     if isLockingAccess {
                         
-                        Button(role: .destructive) {
-                            deletePin()
-                        } label: {
-                            Label {
-                                Text("DELETE_PIN_STRING")
-                            } icon: {
-                                Image(systemName: "trash.fill")
-                            }.foregroundStyle(.red)
-                        }
+//                        Button(role: .destructive) {
+//                            deletePin()
+//                        } label: {
+//                            Label {
+//                                Text("DELETE_PIN_STRING")
+//                            } icon: {
+//                                Image(systemName: "trash.fill")
+//                            }.foregroundStyle(.red)
+//                        }
                         
                         Toggle(isOn: $isUsingFaceID) {
                             

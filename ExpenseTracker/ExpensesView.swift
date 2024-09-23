@@ -47,6 +47,7 @@ struct LastExpensesView: View {
         
         .fullScreenCover(item: $chosenExpense) {expense in
             ExpenseDetailsView(expense: expense)
+                .presentationBackground(.thinMaterial)
         }
     }
     
@@ -314,8 +315,6 @@ struct ExpenseListItem: View {
                 .lineLimit(2)
                 .truncationMode(.tail)
             
-
-            Image(systemName: "chevron.right")
             
         }
         .contextMenu{
@@ -348,6 +347,8 @@ struct ExpenseDetailsView: View {
     @Environment(\.dismiss) private var dismiss
     
     var expense: Expense
+    
+    var sheetDisplayMode: Bool = true
     
     @State private var isImagePreviewPresented: Bool = false
     
@@ -463,10 +464,12 @@ struct ExpenseDetailsView: View {
         let amount = expense.value
         
         VStack{
-            HStack {
-                Spacer()
-                
-                closeButton
+            if sheetDisplayMode{
+                HStack {
+                    Spacer()
+                    
+                    closeButton
+                }
             }
             
             HStack{
@@ -580,7 +583,6 @@ struct ExpenseDetailsView: View {
             
         }
         .padding(.horizontal, 20)
-        .presentationBackground(.thinMaterial)
         
         .fullScreenCover(isPresented: $isImagePreviewPresented) {
             if let selectedPhotoData = expense.image, let image = Image(data: selectedPhotoData) {
