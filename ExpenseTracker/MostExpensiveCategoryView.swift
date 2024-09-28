@@ -40,7 +40,7 @@ struct MostExpensiveCategoryView: View {
                 
                 
                 VStack(alignment: .leading) {
-                    Text("YOU_SPEND_THE_MOST_IN_STRING")
+                    Text("YOU_SPEND_THE_MOST_THIS_MONTH_IN_STRING")
                         .foregroundStyle(Color.secondary)
                         .font(.subheadline)
                     
@@ -87,7 +87,23 @@ struct MostExpensiveCategoryView: View {
     // Function to fetch all expenses and compute the most paid tag
     func getMostPaidTag(context: ModelContext) -> Tag? {
         // Fetch all expenses from the database
-        let request = FetchDescriptor<Expense>()
+        var request = FetchDescriptor<Expense>()
+        
+        // Get the current date
+        let calendar = Calendar.current
+        let now = Date()
+        
+        // Compute the start of the current month (e.g., 1st September)
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!
+        
+        // Compute the end of the current month (e.g., 30th September)
+        let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
+
+        request.predicate = #Predicate<Expense> { expense in
+            expense.date >= startOfMonth && expense.date <= endOfMonth
+        }
+
+        
         let expenses: [Expense]
         
         do {

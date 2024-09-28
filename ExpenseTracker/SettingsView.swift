@@ -19,6 +19,8 @@ struct SettingsView: View {
     @AppStorage("settings:isSummingDaily") private var isSummingDaily: Bool = true
     @AppStorage("settings:gradientColorIndex") private var gradientColorIndex: Int = 0
     
+    @AppStorage("settings:selectingTagDismisses") private var selectingTagDismissesSetting: Bool = true
+    
     @AppStorage("settings:lockAccess") private var lockAccess: Bool = false
     @AppStorage("settings:useFaceID") private var useFaceID: Bool = false
     @AppStorage("settings:settingsAuthenticated") private var settingsAuthenticated: Bool = false
@@ -34,12 +36,17 @@ struct SettingsView: View {
     @State private var selectedSumming: Summing = .daily
     @State private var selectedGradientColor: Int = 0
     
+    @State private var selectingTagDismisses: Bool = false
+    
+    
     @State private var isLockingAccess: Bool = false
     @State private var isPinPadPresented: Bool = false
     
     @State private var pinAction: PinAction = .CONFIRM
     
     @State private var isUsingFaceID: Bool = false
+    
+    
     
     var body: some View {
         NavigationStack{
@@ -54,6 +61,14 @@ struct SettingsView: View {
                 .onAppear {
                     selectedSumming = isSummingDaily ? .daily : .monthly
                 }
+                
+                Toggle("SELECTING_TAG_DISMISSES_STRING", isOn: $selectingTagDismisses)
+                    .onAppear {
+                        selectingTagDismisses = selectingTagDismissesSetting
+                    }
+                    .onChange(of: selectingTagDismisses) { oldValue, newValue in
+                        UserDefaults.standard.set(selectingTagDismisses, forKey: "settings:selectingTagDismisses")
+                    }
                 
                 Section("THEME_STRING"){
                     Picker("GRADIENT_COLOR_STRING", selection: $selectedGradientColor) {

@@ -252,6 +252,22 @@
         }
       }
     },
+    "CHANGE_ICON_STRING" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Change icon"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Zmień ikonę"
+          }
+        }
+      }
+    },
     "CHANGE_MONTHLY_BUDGET_STRING" : {
       "localizations" : {
         "en" : {
@@ -342,6 +358,18 @@
     },
     "CLEAR_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Clear"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Limpiar"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -548,29 +576,6 @@
         }
       }
     },
-    "DELETE_PIN_STRING" : {
-      "extractionState" : "stale",
-      "localizations" : {
-        "en" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Delete PIN code"
-          }
-        },
-        "es" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Borrar pin"
-          }
-        },
-        "pl" : {
-          "stringUnit" : {
-            "state" : "translated",
-            "value" : "Usuń pin"
-          }
-        }
-      }
-    },
     "DELETE_STRING" : {
       "localizations" : {
         "en" : {
@@ -737,6 +742,12 @@
     },
     "FILTER_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Filter"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3188,7 +3199,26 @@
       }
     },
     "INDEX" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Index"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Índice"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Index"
+          }
+        }
+      }
     },
     "INFLUENCE_STRING" : {
       "localizations" : {
@@ -3309,6 +3339,18 @@
     "MORE_STRING" : {
       "extractionState" : "stale",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Morę…"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Leer más..."
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3319,6 +3361,18 @@
     },
     "MOST_EXPENSIVE_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Most expensive category"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Categoría más cara"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3630,7 +3684,26 @@
       }
     },
     "OTHER_STRING" : {
-
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Other"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Otros"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Pozostałe"
+          }
+        }
+      }
     },
     "OTHERS_TOTAL_STRING" : {
       "localizations" : {
@@ -3650,6 +3723,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Suma pozostałych wydatków"
+          }
+        }
+      }
+    },
+    "OUT_OF_BUDGET_STRING" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Out of budget"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Poza budżetem"
           }
         }
       }
@@ -3717,6 +3806,18 @@
     },
     "PREVIEW_STRING" : {
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Preview"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Previsualizar"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
@@ -3853,6 +3954,22 @@
           "stringUnit" : {
             "state" : "translated",
             "value" : "Szukaj"
+          }
+        }
+      }
+    },
+    "SELECTING_TAG_DISMISSES_STRING" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "needs_review",
+            "value" : "Selecting tag dismisses picker"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Wybór tagu zamyka selektor"
           }
         }
       }
@@ -4293,11 +4410,40 @@
       }
     },
     "YOU_SPEND_THE_MOST_IN_STRING" : {
+      "extractionState" : "stale",
       "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "You spend the most in"
+          }
+        },
         "pl" : {
           "stringUnit" : {
             "state" : "translated",
             "value" : "Wydajesz najwięcej w kategorii"
+          }
+        }
+      }
+    },
+    "YOU_SPEND_THE_MOST_THIS_MONTH_IN_STRING" : {
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "This month you spend the most in"
+          }
+        },
+        "es" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Este mes gastas más en la categoría de"
+          }
+        },
+        "pl" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "W tym miesiącu wydajesz najwięcej w kategorii"
           }
         }
       }

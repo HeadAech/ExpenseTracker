@@ -41,7 +41,20 @@ struct BudgetView: View {
 //            Text("Pozostało")
 //                .font(.caption)
             
+            if remainingBudget <= 0 {
+                Text("OUT_OF_BUDGET_STRING")
+                    .contentTransition(.numericText())
+                    .animation(.easeInOut, value: remainingBudget)
+                    .font(.caption2)
+                    .bold()
+                    .foregroundStyle(.red.opacity(0.6))
+                    .textCase(.uppercase)
+            }
+            
             if isShowingPieChart{
+                Text("REMAINING_STRING")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
                 BudgetUsageView()
                     .transition(.scale)
             }
@@ -210,5 +223,5 @@ struct ChangeBudgetView: View {
 }
 
 #Preview {
-    ChangeBudgetView()
+    BudgetView()
 }

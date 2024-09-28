@@ -96,6 +96,7 @@ struct StatisticsView: View {
                     }
                     
                 }
+                .padding(.top, chosenStatsView == .last7DaysExpenses ? 60 : 30)
                 .frame(height: 370)
                 
                 Spacer()

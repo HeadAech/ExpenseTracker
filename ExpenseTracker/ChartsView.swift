@@ -141,8 +141,8 @@ struct BudgetUsageView: View {
     
     var body: some View {
         Chart{
-            SectorMark(angle: .value("REMAINING_STRING", remainingBudget), angularInset: 1.0)
-            SectorMark(angle: .value("THIS_MONTH_STRING", currentMonthTotal), angularInset: 1.0)
+            SectorMark(angle: .value("REMAINING_STRING", remainingBudget), innerRadius: 30, angularInset: 2.0)
+            SectorMark(angle: .value("THIS_MONTH_STRING", currentMonthTotal), innerRadius: 30, angularInset: 2.0)
                 .foregroundStyle(.opacity(0.7))
         }
         .foregroundStyle(Colors().getColor(for: gradientColorIndex).gradient)
@@ -223,7 +223,7 @@ struct LastWeekExpensesChart: View {
                 if let currentActiveExpense,currentActiveExpense.id == expense.id {
                     
                     RuleMark(x: .value("DAY_STRING", expense.date, unit: .day))
-                        .annotation(position: .top) {
+                        .annotation(position: .automatic) {
                             GroupBox{
                                 HStack{
                                     Text("TOTAL_STRING")
@@ -239,8 +239,8 @@ struct LastWeekExpensesChart: View {
                                     Text(currentActiveExpense.date.formatted(.dateTime.month().day().year()))
                                 }
                             }
-                            .padding(.vertical, 10)
-                            .padding(.horizontal, 4)
+                            .padding(.vertical, 6)
+                            .padding(.horizontal, 2)
                         }
                         
                 }
@@ -671,23 +671,31 @@ struct InfluenceExpenseChart: View {
                 .padding()
                 .foregroundStyle(Color.accentColor.gradient)
                 .animation(.smooth(duration: 0.6), value: expenses)
-                
-                HStack {
-                    Image(systemName: "circle.fill")
-                        .foregroundStyle(.tint)
-                    Text("THIS_EXPENSE_STRING")
-                        .foregroundStyle(.secondary)
+
+                VStack {
+                    HStack {
+                        Image(systemName: "circle.fill")
+                            .foregroundStyle(.tint)
+                        Text("THIS_EXPENSE_STRING")
+                            .foregroundStyle(.secondary)
+                        
+                        Spacer()
+                    }
+                    .font(.caption2)
+                    
+                    HStack {
+                        Image(systemName: "circle.fill")
+                            .foregroundStyle(.tint)
+                            .opacity(0.6)
+                        Text("OTHER_EXPENSES_STRING")
+                            .foregroundStyle(.secondary)
+                        
+                        Spacer()
+                    }
+                    .font(.caption2)
+                    
                 }
-                .font(.caption2)
-                
-                HStack {
-                    Image(systemName: "circle.fill")
-                        .foregroundStyle(.tint)
-                        .opacity(0.6)
-                    Text("OTHER_EXPENSES_STRING")
-                        .foregroundStyle(.secondary)
-                }
-                .font(.caption2)
+
             }.opacity(showingNoDataView ? 0 : 1)
         }
         .onAppear {
@@ -781,10 +789,25 @@ struct MostPaidCategoryChart: View {
 
     }
     
+    
+    
     func getTotalAmountForUntagged() -> Double {
+        let calendar = Calendar.current
+        let now = Date()
+
+        // Compute the start of the current month (e.g., 1st September)
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!
+
+        // Compute the end of the current month (e.g., 30th September)
+        let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
+
+        
         var e: [Expense] = []
         e = expenses!.filter {expense in
-            expense.tag == nil
+            if expense.date >= startOfMonth && expense.date <= endOfMonth {
+                return expense.tag == nil
+            }
+            return false
         }
         
         return e.reduce(0) {$0 + $1.value}
@@ -792,13 +815,26 @@ struct MostPaidCategoryChart: View {
     
     // Function to fetch all expenses of a specific tag and sum their amountPaid values
     func totalAmountForTag(tag: Tag) -> Double {
+        let calendar = Calendar.current
+        let now = Date()
+
+        // Compute the start of the current month (e.g., 1st September)
+        let startOfMonth = calendar.date(from: calendar.dateComponents([.year, .month], from: now))!
+
+        // Compute the end of the current month (e.g., 30th September)
+        let endOfMonth = calendar.date(byAdding: DateComponents(month: 1, day: -1), to: startOfMonth)!
+
+        
         var e: [Expense] = []
         e = expenses!.filter {expense in
-            if let t = expense.tag {
-                return t == tag
-            } else {
-                return false
+            if expense.date >= startOfMonth && expense.date <= endOfMonth {
+                if let t = expense.tag {
+                    return t == tag
+                } else {
+                    return false
+                }
             }
+            return false
         }
         
         return e.reduce(0) {$0 + $1.value}

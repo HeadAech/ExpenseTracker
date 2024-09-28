@@ -204,23 +204,26 @@ struct HistoryView: View {
             
             HStack(alignment: .center) {
                 Image(systemName: icon)
-                    .font(.caption)
+                    .font(.subheadline)
+                    .foregroundColor(color.foregroundColorForBackground())
                 
                 if name == "" {
                     Text("UNTAGGED_STRING")
-                        .font(.caption)
+                        .font(.subheadline)
                         .foregroundColor(color.foregroundColorForBackground())
+                        .padding(.trailing, 3)
                 } else {
                     Text(name)
-                        .font(.caption)
+                        .font(.subheadline)
                         .foregroundColor(color.foregroundColorForBackground())
+                        .padding(.trailing, 3)
                 }
-            }.padding(5)
+            }.padding(7)
             
         }.background(
             RoundedRectangle(cornerRadius: 3)
                 .fill(color)
-                .opacity(filterTag == tag ? 0.8 : 0.2)
+                .opacity(filterTag == tag ? 0.85 : 0.3)
             )
 
     }
@@ -249,7 +252,8 @@ struct HistoryView: View {
                                 }
                             }
                         }
-                        .contentMargins(9, for: .scrollContent)
+                        .scrollIndicators(.hidden)
+                        .contentMargins(2, for: .scrollContent)
                         .scrollTargetBehavior(.viewAligned)
                     } header : {
                         Label("FILTER_STRING", systemImage: "line.3.horizontal.decrease.circle")

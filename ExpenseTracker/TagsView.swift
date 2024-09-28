@@ -13,7 +13,7 @@ struct TagsView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     
-    @Query private var tags: [Tag]
+    @Query(sort: \Tag.name) private var tags: [Tag]
     
     @Query private var expenses: [Expense]
     
@@ -197,7 +197,7 @@ struct TagPickerView: View {
     @Environment(\.modelContext) private var modelContext
     @Environment(\.dismiss) private var dismiss
     
-    @Query private var tags: [Tag]
+    @Query(sort: \Tag.name) private var tags: [Tag]
     @Query private var expenses: [Expense]
     
     @State private var showingNoTagsView: Bool = true
@@ -207,6 +207,17 @@ struct TagPickerView: View {
     @State private var tagToEdit: Tag?
     
     @Binding var selectedTag: Tag?
+    
+    @State private var searchText: String = ""
+    
+    @AppStorage("settings:selectingTagDismisses") private var selectingTagDismissesSetting: Bool = true
+    
+    private var filteredTags: [Tag] {
+        if searchText.isEmpty {
+            return tags
+        }
+        return tags.filter { $0.name.localizedCaseInsensitiveContains(searchText.localizedLowercase) }
+    }
     
     private var closeButton: some View {
         Button {
@@ -219,7 +230,20 @@ struct TagPickerView: View {
         }
         .buttonStyle(.bordered)
         .clipShape(Circle())
-        .padding(10)
+//        .padding(10)
+    }
+    
+    private var addTagButton: some View {
+        Button{
+            withAnimation {
+                isNewTagViewPresented.toggle()
+            }
+        } label: {
+            Image(systemName: "plus")
+                .font(.headline)
+        }
+        .buttonStyle(.bordered)
+        .clipShape(Circle())
     }
     
     
@@ -227,36 +251,11 @@ struct TagPickerView: View {
         NavigationStack {
             
             VStack {
-                HStack {
-                    Spacer()
-                    
-                    closeButton
-                    
-                }
-                
-                HStack{
-                    Text("TAGS_STRING")
-                        .font(.largeTitle).bold()
-                    
-                    Spacer()
-                    
-                    Button{
-                        withAnimation {
-                            isNewTagViewPresented.toggle()
-                        }
-                    } label: {
-                        HStack {
-                            Text("ADD_STRING")
-                            Image(systemName: "plus")
-                        }
-                    }.buttonStyle(.bordered)
-                }
-                .padding()
                 
                 List{
 //                    Test
 //                    tagItem(tag: Tag(name: "Test", color: "#ff0000", icon: "tag.fill"))
-                    ForEach(tags) {tag in
+                    ForEach(searchText.isEmpty ? tags : filteredTags) {tag in
                         
                         HStack{
                             tagItem(tag: tag)
@@ -280,16 +279,18 @@ struct TagPickerView: View {
                                     selectedTag = nil
                                 } else {
                                     selectedTag = tag
+                                    if selectingTagDismissesSetting {
+                                        dismiss()
+                                    }
                                 }
                             }
                         }
                     }
                 }
+                .searchable(text: $searchText, placement: .automatic)
                 .scrollContentBackground(.hidden)
                 .padding(-10)
-                
-                Spacer()
-                
+
                 
             }
             .padding(10)
@@ -305,7 +306,23 @@ struct TagPickerView: View {
     //                        .offset(y:15)
                 }
             }
-        
+            
+            
+            .navigationTitle("TAGS_STRING")
+            .navigationBarTitleDisplayMode(.inline)
+            
+            .toolbar {
+                
+                ToolbarItem(placement: .cancellationAction) {
+                    closeButton
+                }
+                
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    addTagButton
+                }
+                
+            }
+            
         }
         
         .onAppear {
@@ -472,7 +489,7 @@ struct NewTagView: View {
                 Button{
                     isIconPickerPresented.toggle()
                 } label: {
-                    Text("CHANGE_STRING")
+                    Text("CHANGE_ICON_STRING")
                 }
             }.offset(y:10)
             Form{
@@ -545,7 +562,8 @@ struct NewTagView: View {
 }
 
 #Preview {
-    TagsView()
+    @Previewable @State var selectedTag: Tag?
+    TagPickerView(selectedTag: $selectedTag)
         .modelContainer(for: Expense.self, inMemory: true)
         .modelContainer(for: Tag.self, inMemory: true)
 }
